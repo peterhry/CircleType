@@ -9,7 +9,7 @@
 *
 * Date: Sun Feb 17
 */
-$.fn.curveText = function(options) {
+$.fn.elipText = function(options) {
 
     var settings = {
         'radius' : 200,
