@@ -39,16 +39,10 @@ $.fn.elipText = function(options) {
             delta = (180 / Math.PI),
             ch = parseInt(elem.find('span').css('line-height'), 10);
 
-
         if (settings.dir===-1) {
             origin = 'center ' + (-settings.radius + ch) + 'px';
         } 
         
-        console.log(-settings.radius, -settings.radius + ch, ch)
-
-
-        elem.html(txt).lettering();
-
         elem.find('span').each(function () {
           var l = $(this);
           offset += l.outerWidth() / 2 / (settings.radius-ch) * delta;
