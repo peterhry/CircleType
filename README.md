@@ -1,4 +1,4 @@
 ElipText
 ========
 
-A jQuery plugin fro setting type on an ellipse.
+A jQuery plugin for setting type on an ellipse.
