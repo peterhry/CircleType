@@ -1,18 +1,17 @@
 /*global jQuery */
-/*!	
-* ElipText.JS 0.1
+/*!    
+* CircleType.JS 0.2
 *
 * Copyright 2013, Peter Hrynkow http://peterhrynkow.com
 * Released under the WTFPL license 
 * http://sam.zoy.org/wtfpl/
 *
 *
-* Date: Sun Feb 17
+* Date: Sun Feb 27
 */
-$.fn.elipText = function(options) {
+$.fn.circleType = function(options) {
 
     var settings = {
-        'radius' : 200,
         dir: 1
     };
 
@@ -21,58 +20,116 @@ $.fn.elipText = function(options) {
         return;
     }
 
-    
     return this.each(function () {
     
         if (options) { 
             $.extend(settings, options);
         }
-
-
-        var elem = $(this), 
-            txt = elem.html().replace(/\s/g, '&nbsp;');
-                
-        elem.html(txt).lettering();
-
-        var offset = 0,
-            origin = 'center ' + (settings.radius) + 'px',
+        var elem = this, 
             delta = (180 / Math.PI),
-            ch = parseInt(elem.find('span').css('line-height'), 10);
-
-        if (settings.dir===-1) {
-            origin = 'center ' + (-settings.radius + ch) + 'px';
-        } 
+            txt = elem.innerHTML.replace(/\s/g, '&nbsp;'),
+            letters;
         
-        elem.find('span').each(function () {
-          var l = $(this);
-          offset += l.outerWidth() / 2 / (settings.radius-ch) * delta;
-          l.data('rot', offset);                      
-          offset += l.outerWidth() / 2 / (settings.radius-ch) * delta;
-  
-        });
-        elem.find('span').each(function () {
-            var l = $(this),
-                r = (-offset * settings.dir / 2) + l.data('rot') * settings.dir,            
-                transform = 'rotate(' + r + 'deg)';
+        elem.innerHTML = txt
+        $(elem).lettering();
 
-            l.css({
-                top: 0,
-                left: '50%',
-                marginLeft: -l.width() / 2,
-                position: "absolute",
-                //
-                webkitTransform: transform,
-                MozTransform: transform,
-                oTransform: transform,
-                msTransform: transform,
-                transform: transform,
-                //
-                webkitTransformOrigin: origin,
-                MozTransformOrigin: origin,
-                oTransformOrigin: origin,
-                msTransformOrigin: origin,
-                transformOrigin: origin
+        elem.style.position =  'relative';
+
+        letters = elem.getElementsByTagName('span');
+                
+        var layout = function () {
+            
+            var tw = 0, 
+                i,
+                offset = 0,
+                ch = parseInt($(elem).css('line-height'), 10),
+                minRadius, 
+                origin, 
+                innerRadius,
+                l, style, r, transform,
+                bb,
+                yMax = Number.MIN_VALUE, 
+                yMin = Number.MAX_VALUE;
+            
+            for (i = 0; i < letters.length; i++) {
+                tw += letters[i].offsetWidth;
+            }
+            minRadius = (tw / Math.PI) / 2 + ch;
+
+            if (settings.fluid) {
+                settings.radius = Math.max(elem.offsetWidth / 2, minRadius);
+            }    
+            else if (!settings.radius) {
+                settings.radius = minRadius;
+            }    
+            if (settings.dir === -1) {
+                origin = 'center ' + (-settings.radius + ch) + 'px';
+            } else {
+                origin = 'center ' + settings.radius + 'px';
+            }
+
+            innerRadius = settings.radius - ch;
+                
+            for (i = 0; i < letters.length; i++) {
+                l = letters[i];
+                offset += l.offsetWidth / 2 / innerRadius * delta;
+                l.rot = offset;                      
+                offset += l.offsetWidth / 2 / innerRadius * delta;
+            }   
+            for (i = 0; i < letters.length; i++) {
+                l = letters[i]
+                style = l.style
+                r = (-offset * settings.dir / 2) + l.rot * settings.dir            
+                transform = 'rotate(' + r + 'deg)';
+                    
+                style.position = 'absolute';
+                style.left = '50%';
+                style.marginLeft = -l.offsetWidth / 2 + 'px';
+
+                style.webkitTransform = transform;
+                style.MozTransform = transform;
+                style.oTransform = transform;
+                style.msTransform = transform;
+                style.transform = transform;
+
+                style.webkitTransformOrigin = origin;
+                style.MozTransformOrigin = origin;
+                style.oTransformOrigin = origin;
+                style.msTransformOrigin = origin;
+                style.transformOrigin = origin;
+                if(settings.dir === -1) {
+                    style.bottom = 0;
+                }
+
+                bb = l.getBoundingClientRect();
+                if (bb.bottom < yMin) {
+                    yMin = bb.bottom;
+                } 
+                else if (bb.bottom > yMax) {
+                    yMax = bb.bottom;
+                }
+                
+            }
+            if (settings.dir !== -1) {
+                yMax += ch;
+            }
+            elem.style.height = yMax - yMin + 'px';            
+        };
+
+        if (settings.fluid) {
+            $(window).resize(function () {
+                layout();
             });
-        });
+        }    
+
+        if (document.readyState !== "complete") {
+            elem.style.visibility = 'hidden';
+            $(window).load(function () {
+                elem.style.visibility = 'visible';
+                layout();
+            });
+        } else {
+            layout();
+        }
     });
 };
