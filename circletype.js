@@ -1,6 +1,7 @@
 /*
  * CircleType 0.3
- * Peter Hrynkow
+ *
+ * Peter Hrynkow, Prime
  * Copyright 2013, Licensed GPL & MIT
  *
 */
@@ -106,16 +107,21 @@ $.fn.circleType = function(options) {
                 }
                 
             }
-            elem.style.height = yMax - yMin + ch + 'px';      
+            
+            if (settings.dir !== -1) {
+                yMax += ch;
+            }
+            
+            elem.style.height = yMax - yMin + 'px';      
         };
         
         var getPosition = function (elem) {
-            var docElem = document.documentElement,
-                box = elem.getBoundingClientRect();
-            return {
-                top: box.top + window.pageYOffset - docElem.clientTop,
-                left: box.left + window.pageXOffset - docElem.clientLeft
-            };
+        	var docElem = document.documentElement,
+        	    box = elem.getBoundingClientRect();
+	        return {
+		        top: box.top + window.pageYOffset - docElem.clientTop,
+		        left: box.left + window.pageXOffset - docElem.clientLeft
+	        };
         };        
 
 
