@@ -1,14 +1,12 @@
-/*global jQuery */
-/*!	
-* CircleType.JS 0.2
-*
-* Copyright 2013, Peter Hrynkow http://peterhrynkow.com
-* Released under the WTFPL license 
-* http://sam.zoy.org/wtfpl/
-*
-*
-* Date: Sun Feb 17
+/*
+ * CircleType 0.3
+ *
+ * Peter Hrynkow, Prime
+ * Copyright 2013, Licensed GPL & MIT
+ *
 */
+
+
 $.fn.circleType = function(options) {
 
     var settings = {
