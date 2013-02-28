@@ -1,7 +1,6 @@
 /*
  * CircleType 0.3
- *
- * Peter Hrynkow, Prime
+ * Peter Hrynkow
  * Copyright 2013, Licensed GPL & MIT
  *
 */
