@@ -85,13 +85,13 @@ $.fn.circleType = function(options) {
 
                 style.webkitTransform = transform;
                 style.MozTransform = transform;
-                style.oTransform = transform;
+                style.OTransform = transform;
                 style.msTransform = transform;
                 style.transform = transform;
 
                 style.webkitTransformOrigin = origin;
                 style.MozTransformOrigin = origin;
-                style.oTransformOrigin = origin;
+                style.OTransformOrigin = origin;
                 style.msTransformOrigin = origin;
                 style.transformOrigin = origin;
                 if(settings.dir === -1) {
