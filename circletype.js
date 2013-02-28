@@ -1,5 +1,5 @@
 /*global jQuery */
-/*!    
+/*!	
 * CircleType.JS 0.2
 *
 * Copyright 2013, Peter Hrynkow http://peterhrynkow.com
@@ -7,7 +7,7 @@
 * http://sam.zoy.org/wtfpl/
 *
 *
-* Date: Sun Feb 27
+* Date: Sun Feb 17
 */
 $.fn.circleType = function(options) {
 
@@ -38,7 +38,6 @@ $.fn.circleType = function(options) {
         letters = elem.getElementsByTagName('span');
                 
         var layout = function () {
-            
             var tw = 0, 
                 i,
                 offset = 0,
@@ -101,20 +100,27 @@ $.fn.circleType = function(options) {
                     style.bottom = 0;
                 }
 
-                bb = l.getBoundingClientRect();
-                if (bb.bottom < yMin) {
-                    yMin = bb.bottom;
+                bb = getPosition(l);
+                if (bb.top < yMin) {
+                    yMin = bb.top;
                 } 
-                else if (bb.bottom > yMax) {
-                    yMax = bb.bottom;
+                if (bb.top > yMax) {
+                    yMax = bb.top;
                 }
                 
             }
-            if (settings.dir !== -1) {
-                yMax += ch;
-            }
-            elem.style.height = yMax - yMin + 'px';            
+            elem.style.height = yMax - yMin + ch + 'px';      
         };
+        
+        var getPosition = function (elem) {
+        	var docElem = document.documentElement,
+        	    box = elem.getBoundingClientRect();
+	        return {
+		        top: box.top + window.pageYOffset - docElem.clientTop,
+		        left: box.left + window.pageXOffset - docElem.clientLeft
+	        };
+        };        
+
 
         if (settings.fluid) {
             $(window).resize(function () {
