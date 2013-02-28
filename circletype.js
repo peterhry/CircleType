@@ -110,12 +110,12 @@ $.fn.circleType = function(options) {
         };
         
         var getPosition = function (elem) {
-        	var docElem = document.documentElement,
-        	    box = elem.getBoundingClientRect();
-	        return {
-		        top: box.top + window.pageYOffset - docElem.clientTop,
-		        left: box.left + window.pageXOffset - docElem.clientLeft
-	        };
+            var docElem = document.documentElement,
+                box = elem.getBoundingClientRect();
+            return {
+                top: box.top + window.pageYOffset - docElem.clientTop,
+                left: box.left + window.pageXOffset - docElem.clientLeft
+            };
         };        
 
 
