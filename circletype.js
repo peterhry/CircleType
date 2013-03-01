@@ -1,5 +1,5 @@
 /*
- * CircleType 0.31
+ * CircleType 0.32
  * Peter Hrynkow
  * Copyright 2013, Licensed GPL & MIT
  *
@@ -49,11 +49,10 @@ $.fn.circleType = function(options) {
                 tw += letters[i].offsetWidth;
             }
             minRadius = (tw / Math.PI) / 2 + ch;
-
             if (settings.fluid) {
                 settings.radius = Math.max(elem.offsetWidth / 2, minRadius);
             }    
-            else if (!settings.radius) {
+            else if (!settings.radius || settings.fitText) {
                 settings.radius = minRadius;
             }    
             if (settings.dir === -1) {
@@ -122,6 +121,16 @@ $.fn.circleType = function(options) {
             $(window).resize(function () {
                 layout();
             });
+        }    
+        if (settings.fitText) {
+            if (typeof($.fn.fitText) !== 'function') {
+                console.log('FitText.js is required when using the fitText option');
+            } else {
+                $(elem).fitText();
+                $(window).resize(function () {
+                    layout();
+                });
+            }
         }    
 
         if (document.readyState !== "complete") {
