@@ -1,5 +1,5 @@
 /*
- * CircleType 0.3
+ * CircleType 0.31
  * Peter Hrynkow
  * Copyright 2013, Licensed GPL & MIT
  *
@@ -43,9 +43,7 @@ $.fn.circleType = function(options) {
                 origin, 
                 innerRadius,
                 l, style, r, transform,
-                bb,
-                yMax = Number.MIN_VALUE, 
-                yMin = Number.MAX_VALUE;
+                y1, y2, h;
             
             for (i = 0; i < letters.length; i++) {
                 tw += letters[i].offsetWidth;
@@ -96,22 +94,18 @@ $.fn.circleType = function(options) {
                 if(settings.dir === -1) {
                     style.bottom = 0;
                 }
-
-                bb = getPosition(l);
-                if (bb.top < yMin) {
-                    yMin = bb.top;
-                } 
-                if (bb.top > yMax) {
-                    yMax = bb.top;
-                }
-                
             }
             
-            if (settings.dir !== -1) {
-                yMax += ch;
+            y1 = getPosition(letters[Math.floor(letters.length / 2)]).top;
+            y2 = getPosition(l).top;
+            
+            if (y1 < y2) {
+                h = y2 - y1 + ch;
+            } else {
+                h = y1 - y2 + ch;
             }
             
-            elem.style.height = yMax - yMin + 'px';      
+            elem.style.height = h + 'px';      
         };
         
         var getPosition = function (elem) {
