@@ -1,22 +1,19 @@
 /*
- * CircleType 0.32
+ * CircleType 0.33
  * Peter Hrynkow
  * Copyright 2013, Licensed GPL & MIT
  *
 */
-
 
 $.fn.circleType = function(options) {
 
     var settings = {
         dir: 1
     };
-
     if (typeof($.fn.lettering) !== 'function') {
         console.log('Lettering.js is required');
         return;
     }
-
     return this.each(function () {
     
         if (options) { 
@@ -24,41 +21,44 @@ $.fn.circleType = function(options) {
         }
         var elem = this, 
             delta = (180 / Math.PI),
-            txt = elem.innerHTML.replace(/\s/g, '&nbsp;'),
-            letters;
+            txt = elem.innerHTML.replace(/^\s+|\s+$/g, '').replace(/\s/g, '&nbsp;'),
+            letters, 
+            center;
         
         elem.innerHTML = txt
         $(elem).lettering();
-
         elem.style.position =  'relative';
 
         letters = elem.getElementsByTagName('span');
+        center = Math.floor(letters.length / 2)
                 
         var layout = function () {
             var tw = 0, 
                 i,
                 offset = 0,
-                ch = parseInt($(elem).css('line-height'), 10),
+                ch = letters[0].getBoundingClientRect().height,
+                fs = parseInt($(elem).css('font-size'), 10),
                 minRadius, 
                 origin, 
                 innerRadius,
-                l, style, r, transform,
-                y1, y2, h;
-            
+                l, style, r, transform;
+                                                
             for (i = 0; i < letters.length; i++) {
                 tw += letters[i].offsetWidth;
             }
             minRadius = (tw / Math.PI) / 2 + ch;
-            if (settings.fluid) {
+            
+            if (settings.fluid && !settings.fitText) {
                 settings.radius = Math.max(elem.offsetWidth / 2, minRadius);
             }    
-            else if (!settings.radius || settings.fitText) {
+            else if (!settings.radius) {
                 settings.radius = minRadius;
-            }    
+            }   
+            
             if (settings.dir === -1) {
-                origin = 'center ' + (-settings.radius + ch) + 'px';
+                origin = 'center ' + (-settings.radius + ch) / fs + 'em';
             } else {
-                origin = 'center ' + settings.radius + 'px';
+                origin = 'center ' + settings.radius / fs + 'em';
             }
 
             innerRadius = settings.radius - ch;
@@ -77,7 +77,7 @@ $.fn.circleType = function(options) {
                     
                 style.position = 'absolute';
                 style.left = '50%';
-                style.marginLeft = -l.offsetWidth / 2 + 'px';
+                style.marginLeft = -(l.offsetWidth / 2) / fs + 'em';
 
                 style.webkitTransform = transform;
                 style.MozTransform = transform;
@@ -95,42 +95,45 @@ $.fn.circleType = function(options) {
                 }
             }
             
-            y1 = getPosition(letters[Math.floor(letters.length / 2)]).top;
-            y2 = getPosition(l).top;
-            
-            if (y1 < y2) {
-                h = y2 - y1 + ch;
-            } else {
-                h = y1 - y2 + ch;
-            }
-            
-            elem.style.height = h + 'px';      
+            if (settings.fitText) {
+                if (typeof($.fn.fitText) !== 'function') {
+                    console.log('FitText.js is required when using the fitText option');
+                } else {
+                    $(elem).fitText();
+                    $(window).resize(function () {
+                        updateHeight();
+                    });
+                }
+            }    
+            updateHeight();
         };
         
-        var getPosition = function (elem) {
+        var getBounds = function (elem) {
         	var docElem = document.documentElement,
         	    box = elem.getBoundingClientRect();
 	        return {
 		        top: box.top + window.pageYOffset - docElem.clientTop,
-		        left: box.left + window.pageXOffset - docElem.clientLeft
+		        left: box.left + window.pageXOffset - docElem.clientLeft,
+		        height: box.height
 	        };
         };        
+        
+        var updateHeight = function () {
+            var mid = getBounds(letters[center]),
+                first = getBounds(letters[0]),
+                h;
+            if (mid.top < first.top) {
+                h = first.top - mid.top + first.height;
+            } else {
+                h = mid.top - first.top + first.height;
+            }
+            elem.style.height = h + 'px';  
+        }
 
-
-        if (settings.fluid) {
+        if (settings.fluid && !settings.fitText) {
             $(window).resize(function () {
                 layout();
             });
-        }    
-        if (settings.fitText) {
-            if (typeof($.fn.fitText) !== 'function') {
-                console.log('FitText.js is required when using the fitText option');
-            } else {
-                $(elem).fitText();
-                $(window).resize(function () {
-                    layout();
-                });
-            }
         }    
 
         if (document.readyState !== "complete") {
@@ -144,3 +147,7 @@ $.fn.circleType = function(options) {
         }
     });
 };
+
+
+
+
