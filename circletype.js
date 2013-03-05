@@ -1,5 +1,5 @@
 /*
- * CircleType 0.33
+ * CircleType 0.34
  * Peter Hrynkow
  * Copyright 2013, Licensed GPL & MIT
  *
@@ -21,12 +21,15 @@ $.fn.circleType = function(options) {
         }
         var elem = this, 
             delta = (180 / Math.PI),
+            ch = parseInt($(elem).css('line-height'), 10),
+            fs = parseInt($(elem).css('font-size'), 10),
             txt = elem.innerHTML.replace(/^\s+|\s+$/g, '').replace(/\s/g, '&nbsp;'),
             letters, 
             center;
         
         elem.innerHTML = txt
         $(elem).lettering();
+
         elem.style.position =  'relative';
 
         letters = elem.getElementsByTagName('span');
@@ -36,8 +39,6 @@ $.fn.circleType = function(options) {
             var tw = 0, 
                 i,
                 offset = 0,
-                ch = letters[0].getBoundingClientRect().height,
-                fs = parseInt($(elem).css('font-size'), 10),
                 minRadius, 
                 origin, 
                 innerRadius,
