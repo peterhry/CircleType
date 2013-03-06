@@ -1,0 +1,36 @@
+{
+    "name": "CircleType",
+    "title": "CircleType",
+    "description": "Circletype.js is a tiny (2.7kb) jQuery plugin that lets you set type on a circle",
+    "keywords": [
+        "circle",
+        "circle text",
+        "arc text",
+        "arc"
+    ],
+    "version": "0.33",
+    "author": {
+        "name": "Peter Hrynkow",
+        "url": "http://peterhrynkow.com"
+    },
+    "maintainers": [
+        {
+            "name": "Peter Hrynkow",
+            "email": "peter@labwire.ca",
+            "url": "http://peterhrynkow.com"
+        }
+    ],
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "https://github.com/jquery/jquery-color/blob/2.1.2/MIT-LICENSE.txt"
+        }
+    ],
+    "bugs": "https://github.com/peterhry/circletype/issues",
+    "homepage": "http://circletype.labwire.ca",
+    "docs": "http://circletype.labwire.ca",
+    "download": "http://code.jquery.com/#circletype",
+    "dependencies": {
+        "jquery": ">=1.5"
+    }
+}
