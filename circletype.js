@@ -8,7 +8,8 @@
 $.fn.circleType = function(options) {
 
     var settings = {
-        dir: 1
+        dir: 1,
+        position: 'relative'
     };
     if (typeof($.fn.lettering) !== 'function') {
         console.log('Lettering.js is required');
@@ -30,7 +31,7 @@ $.fn.circleType = function(options) {
         elem.innerHTML = txt
         $(elem).lettering();
 
-        elem.style.position =  'relative';
+        elem.style.position =  settings.position;
 
         letters = elem.getElementsByTagName('span');
         center = Math.floor(letters.length / 2)
