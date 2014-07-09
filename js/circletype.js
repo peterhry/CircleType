@@ -5,11 +5,12 @@
  *
 */
 
-$.fn.circleType = function(options, callback) {
+$.fn.circleType = function(options) {
 
-    var settings = {
+    var self = this,
+        settings = {
         dir: 1,
-        position: 'relative'
+        position: 'relative',
     };
     if (typeof($.fn.lettering) !== 'function') {
         console.log('Lettering.js is required');
@@ -109,8 +110,9 @@ $.fn.circleType = function(options, callback) {
             }    
             updateHeight();
             
-            if (typeof callback === 'function') {
-              callback();
+            if (typeof settings.callback === 'function') {
+                // Execute our callback with the element we transformed as `this`
+                settings.callback.apply(elem);
             }
           };
         
