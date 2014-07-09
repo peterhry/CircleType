@@ -5,7 +5,7 @@
  *
 */
 
-$.fn.circleType = function(options) {
+$.fn.circleType = function(options, callback) {
 
     var settings = {
         dir: 1,
@@ -108,16 +108,20 @@ $.fn.circleType = function(options) {
                 }
             }    
             updateHeight();
-        };
+            
+            if (typeof callback === 'function') {
+              callback();
+            }
+          };
         
         var getBounds = function (elem) {
-        	var docElem = document.documentElement,
-        	    box = elem.getBoundingClientRect();
-	        return {
-		        top: box.top + window.pageYOffset - docElem.clientTop,
-		        left: box.left + window.pageXOffset - docElem.clientLeft,
-		        height: box.height
-	        };
+          var docElem = document.documentElement,
+              box = elem.getBoundingClientRect();
+          return {
+            top: box.top + window.pageYOffset - docElem.clientTop,
+            left: box.left + window.pageXOffset - docElem.clientLeft,
+            height: box.height
+          };
         };        
         
         var updateHeight = function () {
@@ -149,6 +153,5 @@ $.fn.circleType = function(options) {
         }
     });
 };
-
 
 
