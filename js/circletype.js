@@ -1,7 +1,7 @@
 /*
- * CircleType 0.34
+ * CircleType 0.35
  * Peter Hrynkow
- * Copyright 2013, Licensed GPL & MIT
+ * Copyright 2014, Licensed GPL & MIT
  *
 */
 
@@ -114,16 +114,16 @@ $.fn.circleType = function(options) {
                 // Execute our callback with the element we transformed as `this`
                 settings.callback.apply(elem);
             }
-          };
+        };
         
         var getBounds = function (elem) {
-          var docElem = document.documentElement,
-              box = elem.getBoundingClientRect();
-          return {
-            top: box.top + window.pageYOffset - docElem.clientTop,
-            left: box.left + window.pageXOffset - docElem.clientLeft,
-            height: box.height
-          };
+            var docElem = document.documentElement,
+                box = elem.getBoundingClientRect();
+            return {
+                top: box.top + window.pageYOffset - docElem.clientTop,
+                left: box.left + window.pageXOffset - docElem.clientLeft,
+                height: box.height
+            };
         };        
         
         var updateHeight = function () {
