@@ -7,9 +7,10 @@
 
 $.fn.circleType = function(options) {
 
-    var settings = {
+    var self = this,
+        settings = {
         dir: 1,
-        position: 'relative'
+        position: 'relative',
     };
     if (typeof($.fn.lettering) !== 'function') {
         console.log('Lettering.js is required');
@@ -108,16 +109,21 @@ $.fn.circleType = function(options) {
                 }
             }    
             updateHeight();
-        };
+            
+            if (typeof settings.callback === 'function') {
+                // Execute our callback with the element we transformed as `this`
+                settings.callback.apply(elem);
+            }
+          };
         
         var getBounds = function (elem) {
-        	var docElem = document.documentElement,
-        	    box = elem.getBoundingClientRect();
-	        return {
-		        top: box.top + window.pageYOffset - docElem.clientTop,
-		        left: box.left + window.pageXOffset - docElem.clientLeft,
-		        height: box.height
-	        };
+          var docElem = document.documentElement,
+              box = elem.getBoundingClientRect();
+          return {
+            top: box.top + window.pageYOffset - docElem.clientTop,
+            left: box.left + window.pageXOffset - docElem.clientLeft,
+            height: box.height
+          };
         };        
         
         var updateHeight = function () {
@@ -149,6 +155,5 @@ $.fn.circleType = function(options) {
         }
     });
 };
-
 
 
