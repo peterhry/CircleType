@@ -11,6 +11,7 @@ $.fn.circleType = function(options) {
         settings = {
         dir: 1,
         position: 'relative',
+        updateWidth: false
     };
     if (typeof($.fn.lettering) !== 'function') {
         console.log('Lettering.js is required');
@@ -98,6 +99,10 @@ $.fn.circleType = function(options) {
                 }
             }
             
+            if (settings.updateWidth) {
+                updateWidth();
+            }
+
             if (settings.fitText) {
                 if (typeof($.fn.fitText) !== 'function') {
                     console.log('FitText.js is required when using the fitText option');
@@ -108,9 +113,8 @@ $.fn.circleType = function(options) {
                     });
                 }
             }    
-            
+
             updateHeight();
-            updateWidth();
             
             if (typeof settings.callback === 'function') {
                 // Execute our callback with the element we transformed as `this`
