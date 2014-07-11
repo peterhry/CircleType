@@ -108,7 +108,9 @@ $.fn.circleType = function(options) {
                     });
                 }
             }    
+            
             updateHeight();
+            updateWidth();
             
             if (typeof settings.callback === 'function') {
                 // Execute our callback with the element we transformed as `this`
@@ -136,6 +138,15 @@ $.fn.circleType = function(options) {
                 h = mid.top - first.top + first.height;
             }
             elem.style.height = h + 'px';  
+        }
+
+        var updateWidth = function () {
+            var first = letters[0],
+                last = Array.prototype.pop.apply(letters),
+                w;
+
+            w = last.getBoundingClientRect().right - first.getBoundingClientRect().left;
+            elem.style.width = w + 'px';
         }
 
         if (settings.fluid && !settings.fitText) {
