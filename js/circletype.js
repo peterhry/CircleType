@@ -144,12 +144,42 @@ $.fn.circleType = function(options) {
             elem.style.height = h + 'px';  
         }
 
+        var getLeftmost = function (letters) {
+            var leftmost;
+
+            $.each(letters, function (index, letter) {
+                if (typeof leftmost === 'undefined') {
+                    leftmost = letter;
+                } else if (letter.getBoundingClientRect().left < leftmost.getBoundingClientRect().left) {
+                    leftmost = letter;
+                }
+            });
+
+            return leftmost;
+        } 
+
+        var getRightmost = function (letters) {
+            var rightmostIndex;
+
+            $.each(letters, function (index, letter) {
+                if (typeof rightmost === 'undefined') {
+                    rightmost = letter;
+                } else if (letter.getBoundingClientRect().right > rightmost.getBoundingClientRect().right) {
+                    rightmost = letter;
+                }
+            });
+
+            return rightmost;
+        }
+
+        var get
+
         var updateWidth = function () {
-            var first = letters[0],
-                last = Array.prototype.pop.apply(letters),
+            var leftmost = getLeftmost(letters),
+                rightmost = getRightmost(letters),
                 w;
 
-            w = last.getBoundingClientRect().right - first.getBoundingClientRect().left;
+            w = rightmost.getBoundingClientRect().right - leftmost.getBoundingClientRect().left;
             elem.style.width = w + 'px';
         }
 
