@@ -172,8 +172,6 @@ $.fn.circleType = function(options) {
             return rightmost;
         }
 
-        var get
-
         var updateWidth = function () {
             var leftmost = getLeftmost(letters),
                 rightmost = getRightmost(letters),
