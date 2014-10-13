@@ -1,0 +1,36 @@
+{
+  "name": "CircleType.js",
+  "version": "0.36",
+  "keywords": [
+    "js",
+    "css",
+    "lettering",
+    "typography",
+    "curve",
+    "arc"
+  ],
+  "homepage": "http://circletype.labwire.ca/",
+  "authors": [
+    "Peter Hrynkow <peter@labwire.ca>"
+  ],
+  "description": "A jQuery plugin that lets you curve type on the web",
+  "main": [
+    "js/circletype.js",
+    "js/circletype.min.js"
+  ],
+  "ignore": [
+    "js/vendor/*",
+    "js/plugins.js",
+    "sass/*",
+    "stylesheetes/*",
+    ".gitignore",
+    "config.rb",
+    "favicon.ico",
+    "index.html"
+  ],
+  "dependencies": {
+    "jquery": ">= 1.9.0",
+    "letteringjs": ">= 0.6.1"
+  },
+  "license": "MIT"
+}
