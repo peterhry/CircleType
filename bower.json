@@ -22,7 +22,7 @@
     "js/vendor/*",
     "js/plugins.js",
     "sass/*",
-    "stylesheetes/*",
+    "stylesheets/*",
     ".gitignore",
     "config.rb",
     "favicon.ico",
