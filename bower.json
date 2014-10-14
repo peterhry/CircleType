@@ -19,10 +19,10 @@
     "js/circletype.min.js"
   ],
   "ignore": [
-    "js/vendor/*",
+    "js/vendor",
     "js/plugins.js",
-    "sass/*",
-    "stylesheets/*",
+    "sass",
+    "stylesheets",
     ".gitignore",
     "config.rb",
     "favicon.ico",
