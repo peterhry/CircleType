@@ -1,7 +1,7 @@
 CircleType
 ========
 
-A jQuery plugin for setting type on a circle
+A jQuery plugin that lets you curve type on the web
 
 Demos: http://circletype.labwire.ca
 
