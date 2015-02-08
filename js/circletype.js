@@ -11,6 +11,7 @@ $.fn.circleType = function(options) {
         settings = {
         dir: 1,
         position: 'relative',
+        links: false
     };
     if (typeof($.fn.lettering) !== 'function') {
         console.log('Lettering.js is required');
@@ -21,13 +22,15 @@ $.fn.circleType = function(options) {
         if (options) { 
             $.extend(settings, options);
         }
-        var elem = this, 
+
+        var elem = this,
             delta = (180 / Math.PI),
             fs = parseInt($(elem).css('font-size'), 10),
             ch = parseInt($(elem).css('line-height'), 10) || fs,
             txt = elem.innerHTML.replace(/^\s+|\s+$/g, '').replace(/\s/g, '&nbsp;'),
             letters, 
-            center;
+            center,
+            linksMap = {};
 
         elem.innerHTML = txt
         $(elem).lettering();
@@ -35,7 +38,17 @@ $.fn.circleType = function(options) {
         elem.style.position =  settings.position;
 
         letters = elem.getElementsByTagName('span');
-        center = Math.floor(letters.length / 2)
+        center = Math.floor(letters.length / 2);
+
+        if (options.links) {
+            var tokens0 = txt.split('<a&nbsp');
+            tokens0.shift();                            // remove first element
+            tokens0.forEach(function(entry) {
+                var tokens1 = entry.substring(7, entry.indexOf('<')).split('>');
+                linksMap[tokens1[0].substring(0, tokens1[0].length - 1)] = tokens1[1].replace(/&nbsp;/g, ' ');
+            });
+        }
+        console.log(linksMap);
                 
         var layout = function () {
             var tw = 0, 
@@ -71,7 +84,8 @@ $.fn.circleType = function(options) {
                 offset += l.offsetWidth / 2 / innerRadius * delta;
                 l.rot = offset;                      
                 offset += l.offsetWidth / 2 / innerRadius * delta;
-            }   
+            }
+
             for (i = 0; i < letters.length; i++) {
                 l = letters[i]
                 style = l.style
