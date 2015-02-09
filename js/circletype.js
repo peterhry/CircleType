@@ -29,26 +29,15 @@ $.fn.circleType = function(options) {
             ch = parseInt($(elem).css('line-height'), 10) || fs,
             txt = elem.innerHTML.replace(/^\s+|\s+$/g, '').replace(/\s/g, '&nbsp;'),
             letters, 
-            center,
-            linksMap = {};
+            center;
 
         elem.innerHTML = txt
         $(elem).lettering();
 
-        elem.style.position =  settings.position;
+        elem.style.position = settings.position;
 
         letters = elem.getElementsByTagName('span');
         center = Math.floor(letters.length / 2);
-
-        if (options.links) {
-            var tokens0 = txt.split('<a&nbsp');
-            tokens0.shift();                            // remove first element
-            tokens0.forEach(function(entry) {
-                var tokens1 = entry.substring(7, entry.indexOf('<')).split('>');
-                linksMap[tokens1[0].substring(0, tokens1[0].length - 1)] = tokens1[1].replace(/&nbsp;/g, ' ');
-            });
-        }
-        console.log(linksMap);
                 
         var layout = function () {
             var tw = 0, 
@@ -86,10 +75,29 @@ $.fn.circleType = function(options) {
                 offset += l.offsetWidth / 2 / innerRadius * delta;
             }
 
+            var linksMapNames = new Array(),
+                linksMapTargets = new Array();
+
+            if (options.links) {
+                var tokens0 = txt.split('<a&nbsp');
+                tokens0.shift();
+                tokens0.forEach(function(entry) {
+                    var tokens1 = entry.substring(7, entry.indexOf('<')).split('>');
+                    linksMapNames.push(tokens1[1].replace(/&nbsp;/g, ' '));
+                    linksMapTargets.push(tokens1[0].substring(0, tokens1[0].length - 1));
+                });
+            }
+
+            var linkIndex = 0,
+                innerLinkIndex = 0,
+                justChanged = false;
             for (i = 0; i < letters.length; i++) {
-                l = letters[i]
-                style = l.style
-                r = (-offset * settings.dir / 2) + l.rot * settings.dir            
+                l = letters[i];
+
+                //console.log('<a href=\'#\'>' + l + '</a>');
+
+                style = l.style;
+                r = (-offset * settings.dir / 2) + l.rot * settings.dir;
                 transform = 'rotate(' + r + 'deg)';
                     
                 style.position = 'absolute';
@@ -109,6 +117,18 @@ $.fn.circleType = function(options) {
                 style.transformOrigin = origin;
                 if(settings.dir === -1) {
                     style.bottom = 0;
+                }
+
+                if ((linksMapNames[linkIndex].charAt(innerLinkIndex) == l.innerHTML) || (l.innerHTML == '&nbsp;' && linksMapNames[linkIndex].charAt(innerLinkIndex) == ' ')) {
+                    l.innerHTML = '<a href=\'' + linksMapTargets[linkIndex] + '\'>' + l.innerHTML + '</a>';
+                    innerLinkIndex++;
+                    justChanged = true;
+                } else {
+                    if (justChanged) {
+                        linkIndex++;
+                        innerLinkIndex = 0;
+                        justChanged = false;
+                    }
                 }
             }
             
