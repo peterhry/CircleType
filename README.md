@@ -1,7 +1,5 @@
 CircleType
-========
+==========
 
-A jQuery plugin that lets you curve type on the web
-
-Demos: http://circletype.labwire.ca
+Extended the original plugin to use HTML links in circled text.
 
