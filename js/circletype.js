@@ -11,6 +11,7 @@ $.fn.circleType = function(options) {
         settings = {
         dir: 1,
         position: 'relative',
+        updateWidth: false
     };
     if (typeof($.fn.lettering) !== 'function') {
         console.log('Lettering.js is required');
@@ -98,6 +99,10 @@ $.fn.circleType = function(options) {
                 }
             }
             
+            if (settings.updateWidth) {
+                updateWidth();
+            }
+
             if (settings.fitText) {
                 if (typeof($.fn.fitText) !== 'function') {
                     console.log('FitText.js is required when using the fitText option');
@@ -108,6 +113,7 @@ $.fn.circleType = function(options) {
                     });
                 }
             }    
+
             updateHeight();
             
             if (typeof settings.callback === 'function') {
@@ -136,6 +142,43 @@ $.fn.circleType = function(options) {
                 h = mid.top - first.top + first.height;
             }
             elem.style.height = h + 'px';  
+        }
+
+        var getLeftmost = function (letters) {
+            var leftmost;
+
+            $.each(letters, function (index, letter) {
+                if (typeof leftmost === 'undefined') {
+                    leftmost = letter;
+                } else if (letter.getBoundingClientRect().left < leftmost.getBoundingClientRect().left) {
+                    leftmost = letter;
+                }
+            });
+
+            return leftmost;
+        } 
+
+        var getRightmost = function (letters) {
+            var rightmostIndex;
+
+            $.each(letters, function (index, letter) {
+                if (typeof rightmost === 'undefined') {
+                    rightmost = letter;
+                } else if (letter.getBoundingClientRect().right > rightmost.getBoundingClientRect().right) {
+                    rightmost = letter;
+                }
+            });
+
+            return rightmost;
+        }
+
+        var updateWidth = function () {
+            var leftmost = getLeftmost(letters),
+                rightmost = getRightmost(letters),
+                w;
+
+            w = rightmost.getBoundingClientRect().right - leftmost.getBoundingClientRect().left;
+            elem.style.width = w + 'px';
         }
 
         if (settings.fluid && !settings.fitText) {
