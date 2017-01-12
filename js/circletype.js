@@ -139,14 +139,14 @@ $.fn.circleType = function(options) {
         }
 
         if (settings.fluid && !settings.fitText) {
-            $(window).resize(function () {
+            $(window).on('resize', function () {
                 layout();
             });
         }    
 
         if (document.readyState !== "complete") {
             elem.style.visibility = 'hidden';
-            $(window).load(function () {
+            $(window).on('load',function () {
                 elem.style.visibility = 'visible';
                 layout();
             });
