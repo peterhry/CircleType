@@ -1,5 +1,5 @@
 {
-  "name": "circletype.js",
+  "name": "circletype",
   "version": "1.0.0",
   "description": "A jQuery plugin that lets you curve type on the web",
   "main": "js/circletype.js",
