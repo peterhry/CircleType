@@ -1,0 +1,29 @@
+{
+  "name": "circletype.js",
+  "version": "1.0.0",
+  "description": "A jQuery plugin that lets you curve type on the web",
+  "main": "js/circletype.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/peterhry/CircleType.git"
+  },
+  "keywords": [
+    "curved",
+    "text",
+    "curved",
+    "type",
+    "circular",
+    "text",
+    "typography",
+    "jquery"
+  ],
+  "author": "Peter Hrynkow",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/peterhry/CircleType/issues"
+  },
+  "homepage": "https://github.com/peterhry/CircleType#readme"
+}

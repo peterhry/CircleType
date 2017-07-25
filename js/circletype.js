@@ -1,5 +1,5 @@
 /*
- * CircleType 0.36
+ * CircleType 1.0.0
  * Peter Hrynkow
  * Copyright 2014, Licensed GPL & MIT
  *
