@@ -17,16 +17,16 @@ $.fn.circleType = function(options) {
         return;
     }
     return this.each(function () {
-    
-        if (options) { 
+
+        if (options) {
             $.extend(settings, options);
         }
-        var elem = this, 
+        var elem = this,
             delta = (180 / Math.PI),
             fs = parseInt($(elem).css('font-size'), 10),
             ch = parseInt($(elem).css('line-height'), 10) || fs,
             txt = elem.innerHTML.replace(/^\s+|\s+$/g, '').replace(/\s/g, '&nbsp;'),
-            letters, 
+            letters,
             center;
 
         elem.innerHTML = txt
@@ -36,28 +36,28 @@ $.fn.circleType = function(options) {
 
         letters = elem.getElementsByTagName('span');
         center = Math.floor(letters.length / 2)
-                
+
         var layout = function () {
-            var tw = 0, 
+            var tw = 0,
                 i,
                 offset = 0,
-                minRadius, 
-                origin, 
+                minRadius,
+                origin,
                 innerRadius,
                 l, style, r, transform;
-                                                
+
             for (i = 0; i < letters.length; i++) {
                 tw += letters[i].offsetWidth;
             }
             minRadius = (tw / Math.PI) / 2 + ch;
-            
+
             if (settings.fluid && !settings.fitText) {
                 settings.radius = Math.max(elem.offsetWidth / 2, minRadius);
-            }    
+            }
             else if (!settings.radius) {
                 settings.radius = minRadius;
-            }   
-            
+            }
+
             if (settings.dir === -1) {
                 origin = 'center ' + (-settings.radius + ch) / fs + 'em';
             } else {
@@ -65,19 +65,19 @@ $.fn.circleType = function(options) {
             }
 
             innerRadius = settings.radius - ch;
-                
+
             for (i = 0; i < letters.length; i++) {
                 l = letters[i];
                 offset += l.offsetWidth / 2 / innerRadius * delta;
-                l.rot = offset;                      
+                l.rot = offset;
                 offset += l.offsetWidth / 2 / innerRadius * delta;
-            }   
+            }
             for (i = 0; i < letters.length; i++) {
                 l = letters[i]
                 style = l.style
-                r = (-offset * settings.dir / 2) + l.rot * settings.dir            
+                r = (-offset * settings.dir / 2) + l.rot * settings.dir
                 transform = 'rotate(' + r + 'deg)';
-                    
+
                 style.position = 'absolute';
                 style.left = '50%';
                 style.marginLeft = -(l.offsetWidth / 2) / fs + 'em';
@@ -97,7 +97,7 @@ $.fn.circleType = function(options) {
                     style.bottom = 0;
                 }
             }
-            
+
             if (settings.fitText) {
                 if (typeof($.fn.fitText) !== 'function') {
                     console.log('FitText.js is required when using the fitText option');
@@ -107,15 +107,15 @@ $.fn.circleType = function(options) {
                         updateHeight();
                     });
                 }
-            }    
+            }
             updateHeight();
-            
+
             if (typeof settings.callback === 'function') {
                 // Execute our callback with the element we transformed as `this`
                 settings.callback.apply(elem);
             }
         };
-        
+
         var getBounds = function (elem) {
             var docElem = document.documentElement,
                 box = elem.getBoundingClientRect();
@@ -124,8 +124,8 @@ $.fn.circleType = function(options) {
                 left: box.left + window.pageXOffset - docElem.clientLeft,
                 height: box.height
             };
-        };       
-        
+        };
+
         var updateHeight = function () {
             var mid = getBounds(letters[center]),
                 first = getBounds(letters[0]),
@@ -135,14 +135,14 @@ $.fn.circleType = function(options) {
             } else {
                 h = mid.top - first.top + first.height;
             }
-            elem.style.height = h + 'px';  
+            elem.style.height = h + 'px';
         }
 
         if (settings.fluid && !settings.fitText) {
             $(window).on('resize', function () {
                 layout();
             });
-        }    
+        }
 
         if (document.readyState !== "complete") {
             elem.style.visibility = 'hidden';
