@@ -32,9 +32,8 @@
     "favicon.ico",
     "index.html"
   ],
+  "license": "MIT",
   "dependencies": {
-    "jquery": ">= 1.9.0",
-    "letteringjs": ">= 0.6.1"
-  },
-  "license": "MIT"
+    "letteringjs": "~0.7.0"
+  }
 }

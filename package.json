@@ -25,5 +25,8 @@
   "bugs": {
     "url": "https://github.com/peterhry/CircleType/issues"
   },
-  "homepage": "https://github.com/peterhry/CircleType#readme"
+  "homepage": "https://github.com/peterhry/CircleType#readme",
+  "dependencies": {
+    "lettering.js": "^0.8.2"
+  }
 }
