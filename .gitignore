@@ -1,7 +1,5 @@
 .sass-cache
 .DS_Store
-sync.sh
 favicon.ico
-google8106fab987594dfa.html
 .htaccess
-sftp-config.json
+node_modules

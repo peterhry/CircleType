@@ -1,159 +1,160 @@
+import charming from 'charming';
+
 /*
- * CircleType 1.0.0
+ * CircleType 2.0.0
  * Peter Hrynkow
  * Copyright 2014, Licensed GPL & MIT
  *
 */
 
-$.fn.circleType = function(options) {
+/* globals $ */
 
-    var self = this,
-        settings = {
-        dir: 1,
-        position: 'relative',
+const vendors = ['webkit', 'Moz', 'O', 'ms'];
+const { PI, floor, max } = Math;
+const radiansToDegrees = radians => radians * (180 / PI);
+
+class CircleType {
+  static get defaultOptions() {
+    return {
+      dir: 1,
+      position: 'relative',
     };
-    if (typeof($.fn.lettering) !== 'function') {
-        console.log('Lettering.js is required');
-        return;
-    }
-    return this.each(function () {
+  }
 
-        if (options) {
-            $.extend(settings, options);
-        }
-        var elem = this,
-            delta = (180 / Math.PI),
-            fs = parseInt($(elem).css('font-size'), 10),
-            ch = parseInt($(elem).css('line-height'), 10) || fs,
-            txt = elem.innerHTML.replace(/^\s+|\s+$/g, '').replace(/\s/g, '&nbsp;'),
-            letters,
-            center;
+  static _getBounds(elem) {
+    const { top, left, width, height } = elem.getBoundingClientRect();
 
-        elem.innerHTML = txt
-        $(elem).lettering();
+    return {
+      top: top + window.pageYOffset,
+      left: left + window.pageXOffset,
+      width,
+      height,
+    };
+  }
 
-        elem.style.position =  settings.position;
+  constructor(elem, options = {}) {
+    this.elem = elem;
+    this.options = { ...CircleType.defaultOptions, ...options };
+    this.originalHTML = this.elem.innerHTML;
 
-        letters = elem.getElementsByTagName('span');
-        center = Math.floor(letters.length / 2)
+    const txt = this.elem.innerHTML.replace(/^\s+|\s+$/g, '').replace(/\s/g, '&nbsp;');
 
-        var layout = function () {
-            var tw = 0,
-                i,
-                offset = 0,
-                minRadius,
-                origin,
-                innerRadius,
-                l, style, r, transform;
+    this.elem.innerHTML = txt;
 
-            for (i = 0; i < letters.length; i++) {
-                tw += letters[i].offsetWidth;
-            }
-            minRadius = (tw / Math.PI) / 2 + ch;
+    const container = document.createElement('div');
+    container.innerHTML = txt;
+    container.style.position = this.options.position;
+    this.elem.innerHTML = '';
+    this.elem.appendChild(container);
 
-            if (settings.fluid && !settings.fitText) {
-                settings.radius = Math.max(elem.offsetWidth / 2, minRadius);
-            }
-            else if (!settings.radius) {
-                settings.radius = minRadius;
-            }
+    charming(container);
 
-            if (settings.dir === -1) {
-                origin = 'center ' + (-settings.radius + ch) / fs + 'em';
-            } else {
-                origin = 'center ' + settings.radius / fs + 'em';
-            }
+    this.container = container;
+    this.letters = [...elem.getElementsByTagName('span')];
+    this.center = floor(this.letters.length / 2);
 
-            innerRadius = settings.radius - ch;
+    this.letters.forEach((letter) => {
+      const style = letter.style;
 
-            for (i = 0; i < letters.length; i++) {
-                l = letters[i];
-                offset += l.offsetWidth / 2 / innerRadius * delta;
-                l.rot = offset;
-                offset += l.offsetWidth / 2 / innerRadius * delta;
-            }
-            for (i = 0; i < letters.length; i++) {
-                l = letters[i]
-                style = l.style
-                r = (-offset * settings.dir / 2) + l.rot * settings.dir
-                transform = 'rotate(' + r + 'deg)';
-
-                style.position = 'absolute';
-                style.left = '50%';
-                style.marginLeft = -(l.offsetWidth / 2) / fs + 'em';
-
-                style.webkitTransform = transform;
-                style.MozTransform = transform;
-                style.OTransform = transform;
-                style.msTransform = transform;
-                style.transform = transform;
-
-                style.webkitTransformOrigin = origin;
-                style.MozTransformOrigin = origin;
-                style.OTransformOrigin = origin;
-                style.msTransformOrigin = origin;
-                style.transformOrigin = origin;
-                if(settings.dir === -1) {
-                    style.bottom = 0;
-                }
-            }
-
-            if (settings.fitText) {
-                if (typeof($.fn.fitText) !== 'function') {
-                    console.log('FitText.js is required when using the fitText option');
-                } else {
-                    $(elem).fitText();
-                    $(window).resize(function () {
-                        updateHeight();
-                    });
-                }
-            }
-            updateHeight();
-
-            if (typeof settings.callback === 'function') {
-                // Execute our callback with the element we transformed as `this`
-                settings.callback.apply(elem);
-            }
-        };
-
-        var getBounds = function (elem) {
-            var docElem = document.documentElement,
-                box = elem.getBoundingClientRect();
-            return {
-                top: box.top + window.pageYOffset - docElem.clientTop,
-                left: box.left + window.pageXOffset - docElem.clientLeft,
-                height: box.height
-            };
-        };
-
-        var updateHeight = function () {
-            var mid = getBounds(letters[center]),
-                first = getBounds(letters[0]),
-                h;
-            if (mid.top < first.top) {
-                h = first.top - mid.top + first.height;
-            } else {
-                h = mid.top - first.top + first.height;
-            }
-            elem.style.height = h + 'px';
-        }
-
-        if (settings.fluid && !settings.fitText) {
-            $(window).on('resize', function () {
-                layout();
-            });
-        }
-
-        if (document.readyState !== "complete") {
-            elem.style.visibility = 'hidden';
-            $(window).on('load',function () {
-                elem.style.visibility = 'visible';
-                layout();
-            });
-        } else {
-            layout();
-        }
+      style.position = 'absolute';
+      style.left = '50%';
+      style.bottom = this.options.dir === -1 ? 0 : 'auto';
     });
+
+
+    const computedStyle = window.getComputedStyle(this.elem);
+
+    this.fontSize = parseInt(computedStyle.fontSize, 10);
+    this.lineHeight = parseInt(computedStyle.lineHeight, 10) || this.fontSize;
+
+    this.metrics = this.letters.map(CircleType._getBounds);
+
+    const totalWidth = this.metrics.reduce((sum, { width }) => sum + width, 0);
+    this.minRadius = (totalWidth / PI / 2) + this.lineHeight;
+
+    this._layout();
+  }
+
+  refresh() {
+    this._layout();
+  }
+
+  destroy() {
+    this.elem.innerHTML = this.originalHTML;
+    this.elem.CircleTypeInstance = null;
+  }
+
+  _layout() {
+    const { radius, callback, dir, fluid } = this.options;
+    const { letters, elem, metrics, lineHeight, fontSize, minRadius } = this;
+
+    let finalRadius = radius;
+
+    if (fluid) {
+      finalRadius = max(elem.offsetWidth / 2, minRadius);
+    } else if (!radius) {
+      finalRadius = minRadius;
+    }
+
+    const originY = dir === -1 ? (-finalRadius + lineHeight) : finalRadius;
+
+    const origin = `center ${originY / fontSize}em`;
+
+    const innerRadius = finalRadius - lineHeight;
+
+
+    const { rotations, sum } = metrics.reduce((data, { width }) => {
+      const rotation = radiansToDegrees(width / innerRadius);
+
+      return {
+        sum: data.sum + rotation,
+        rotations: [
+          ...data.rotations,
+          data.sum + (rotation / 2),
+        ],
+      };
+    }, { sum: 0, rotations: [] });
+
+
+    letters.forEach((letter, index) => {
+      const { style } = letter;
+      const rotate = ((sum / -2) + rotations[index]) * dir;
+      const translateX = (metrics[index].width / -2) / this.fontSize;
+
+      vendors.forEach((vendor) => {
+        style[`${vendor}Transform`] = `translateX(${translateX}em) rotate(${rotate}deg)`;
+        style[`${vendor}TransformOrigin`] = origin;
+      });
+    });
+
+    this._updateHeight();
+
+    if (typeof callback === 'function') {
+      callback.apply(elem);
+    }
+  }
+
+  _updateHeight() {
+    const { letters, center } = this;
+    const mid = CircleType._getBounds(letters[center]);
+    const first = CircleType._getBounds(letters[0]);
+    const height = first.height + Math.abs(first.top - mid.top);
+
+    this.container.style.height = `${height}px`;
+  }
+}
+
+$.fn.circleType = function (options) {
+  return this.each(function () {
+    if (options === 'refresh') {
+      return this.CircleTypeInstance.refresh();
+    }
+
+    this.CircleTypeInstance = new CircleType(this, options);
+
+    return this.CircleTypeInstance;
+  });
 };
 
 
+export default CircleType;

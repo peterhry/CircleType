@@ -3,20 +3,16 @@
   "version": "1.0.0",
   "description": "A jQuery plugin that lets you curve type on the web",
   "main": "js/circletype.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/peterhry/CircleType.git"
   },
   "keywords": [
-    "curved",
-    "text",
-    "curved",
-    "type",
-    "circular",
-    "text",
+    "circletype",
+    "curved text",
+    "curved type",
+    "circular text",
     "typography",
     "jquery"
   ],
@@ -27,6 +23,21 @@
   },
   "homepage": "https://github.com/peterhry/CircleType#readme",
   "dependencies": {
+    "charming": "2.0.1",
     "lettering.js": "^0.8.2"
+  },
+  "devDependencies": {
+    "babel": "6.23.0",
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.1.1",
+    "babel-plugin-transform-object-rest-spread": "6.23.0",
+    "babel-preset-env": "^1.6.0",
+    "eslint": "4.4.1",
+    "eslint-config-airbnb": "15.1.0",
+    "eslint-loader": "1.9.0",
+    "eslint-plugin-import": "2.7.0",
+    "eslint-plugin-jsx-a11y": "5.1.1",
+    "eslint-plugin-react": "7.2.0",
+    "webpack": "^3.5.3"
   }
 }

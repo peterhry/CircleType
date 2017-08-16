@@ -1,159 +1,126 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if lt IE 7]>  <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>     <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>     <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>CircleType.js lets you curve type on the web</title>
-        <meta name="description" content="CircleType.js is a tiny (4kb) jQuery plugin that lets you set type on a circle">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-
-        <script type="text/javascript" src="//use.typekit.net/fbl0lhq.js"></script>
-        <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
-
-        <link rel="stylesheet" href="stylesheets/screen.css">
-
-        <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-    </head>
-    <body>
-
-        <div class="container">
-            <h1 class="puffy" id="title">CircleType.js</h1>
-
-            <div class="social">
-                <!--
-                <iframe src="http://ghbtns.com/github-btn.html?user=peterhry&amp;repo=CircleType&amp;type=watch&amp;count=true&amp;size=large" allowtransparency="true" frameborder="0" scrolling="0" width="145px" height="30px"></iframe>                
-                -->
-                <a href="https://twitter.com/share" class="twitter-share-button" data-via="peterhry" data-size="large" data-url="http://circletype.labwire.ca/">Tweet</a>
-                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-            </div>
-            
-            <p>CircleType.js is a tiny (2kb) jQuery plugin that lets you curve type on the web.</p>
-        
-            <h2 class="strong">Features</h2>
-            <ul class="bullets">
-                <li>Use any font</li>
-                <li>Adjust letter-spacing as usual with CSS</li>
-                <li><a href="#reverse">Flip it</a> around so it reads counter-clockwise instead</li>
-                <li>Set the radius manually or <a href="#auto">let CircleType.js figure it out for you</a></li>
-                <li>Works in <a href="#fluid">fluid and responsive</a> layouts</li>
-                <li>Plays well with <a href="#fitText">FitText.js</a></li>
-            </ul>
-        
-            <p>
-                <a href="https://github.com/peterhry/circletype" class="btn">Download on GitHub</a>
-            </p>
-        
-            <h2 class="strong">Demos</h2>
-            
-            <h3 class="puffy">Basic Arc</h3>
-            <p>Here’s some curved text that flows clockwise.</p>
-            <div class="demo-box" id="demo-box1">
-                <h2 id="demo1" class="demo strong">Here’s some curved text flowing clockwise.</h2>
-            </div>
-            <code>&lt;h2 id="demo1"&gt;Here’s some curved text flowing clockwise.&lt;/h2&gt;
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>CircleType.js lets you curve type on the web</title>
+    <meta name="description" content="CircleType.js is a tiny (4kb) jQuery plugin that lets you set type on a circle">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <script type="text/javascript" src="//use.typekit.net/fbl0lhq.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    <link rel="stylesheet" href="stylesheets/screen.css">
+    <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="puffy" id="title">CircleType.js</h1>
+      <div class="social">
+        <a href="https://twitter.com/share" class="twitter-share-button" data-via="peterhry" data-size="large" data-url="http://circletype.labwire.ca/">Tweet</a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+      </div>
+      <p>CircleType.js is a tiny (2kb) jQuery plugin that lets you curve type on the web.</p>
+      <h2 class="strong">Features</h2>
+      <ul class="bullets">
+        <li>Use any font</li>
+        <li>Adjust letter-spacing as usual with CSS</li>
+        <li><a href="#reverse">Flip it</a> around so it reads counter-clockwise instead</li>
+        <li>Set the radius manually or <a href="#auto">let CircleType.js figure it out for you</a></li>
+        <li>Works in <a href="#fluid">fluid and responsive</a> layouts</li>
+        <li>Plays well with <a href="#fitText">FitText.js</a></li>
+      </ul>
+      <p>
+        <a href="https://github.com/peterhry/circletype" class="btn">Download on GitHub</a>
+      </p>
+      <h2 class="strong">Demos</h2>
+      <h3 class="puffy">Basic Arc</h3>
+      <p>Here’s some curved text that flows clockwise.</p>
+      <div class="demo-box" id="demo-box1">
+        <h2 id="demo1" class="demo strong">Here’s some curved text flowing clockwise.</h2>
+      </div>
+      <code>&lt;h2 id="demo1"&gt;Here’s some curved text flowing clockwise.&lt;/h2&gt;
 $('#demo1').circleType({radius: 384});
-            </code>
-
-
-            <h3 class="puffy" id="reverse">Reversed Arc</h3>
-            <p>By setting dir to -1, the text will flow counter-clockwise instead.</p>
-            <div class="demo-box" id="demo-box2">
-                <h2 id="demo2" class="demo strong">Here’s some curved text flowing counter-clockwise.</h2>
-            </div>
-            <code>&lt;h2 id="demo2"&gt;Here’s some curved text flowing counter-clockwise.&lt;/h2&gt;
+      </code>
+      <h3 class="puffy" id="reverse">Reversed Arc</h3>
+      <p>By setting dir to -1, the text will flow counter-clockwise instead.</p>
+      <div class="demo-box" id="demo-box2">
+        <h2 id="demo2" class="demo strong">Here’s some curved text flowing counter-clockwise.</h2>
+      </div>
+      <code>&lt;h2 id="demo2"&gt;Here’s some curved text flowing counter-clockwise.&lt;/h2&gt;
 $('#demo2').circleType({radius: 384, dir:-1});
-            </code>
-
-
-            <h3 class="puffy" id="auto">Auto Radius</h3>
-            <p>By leaving the radius empty, CircleType.js will find the perfect radius so the text makes a complete rotation.</p>
-            <div class="demo-box" id="demo-box3">
-                <h2 id="demo3" class="demo strong">This text makes a complete rotation no matter how long it is. </h2>
-            </div>
-            <code>&lt;h2 id="demo3"&gt;This text makes a complete rotation no matter how long it is. &lt;/h2&gt;
+      </code>
+      <h3 class="puffy" id="auto">Auto Radius</h3>
+      <p>By leaving the radius empty, CircleType.js will find the perfect radius so the text makes a complete rotation.</p>
+      <div class="demo-box" id="demo-box3">
+        <h2 id="demo3" class="demo strong">This text makes a complete rotation no matter how long it is. </h2>
+      </div>
+      <code>&lt;h2 id="demo3"&gt;This text makes a complete rotation no matter how long it is. &lt;/h2&gt;
 $('#demo3').circleType();
-            </code>
-
-
-            <h3 class="puffy" id="fluid">Fluid</h3>
-            <p>The fluid setting gives the type a flexible radius (try resizing your window)</p>
-            <div class="demo-box" id="demo-box4">
-                <h2 id="demo4" class="demo strong">This curved type shrinks and expands to fit inside its container. </h2>
-            </div>
-            <code>&lt;h2 id="demo4"&gt;This curved type shrinks and expands to fit inside its container. &lt;/h2&gt;
+      </code>
+      <h3 class="puffy" id="fluid">Fluid</h3>
+      <p>The fluid setting gives the type a flexible radius (try resizing your window)</p>
+      <div class="demo-box" id="demo-box4">
+        <h2 id="demo4" class="demo strong">This curved type shrinks and expands to fit inside its container. </h2>
+      </div>
+      <code>&lt;h2 id="demo4"&gt;This curved type shrinks and expands to fit inside its container. &lt;/h2&gt;
 $('#demo4').circleType({fluid:true});
-            </code>
-
-
-
-            <h3 class="puffy" id="fitText">Using FitText.js</h3>
-            <p>Here’s how you can use <a href="http://fittextjs.com" target="_blank">FitText.js</a> to make the text a bit more flexible (try resizing your window)</p>
-            <div class="demo-box" id="demo-box5">
-                <h2 id="demo5" class="demo strong">I play well with FitText.js too! </h2>
-            </div>
-            <code>&lt;h2 id="demo5"&gt;I play well with FitText.js too! &lt;/h2&gt;
+      </code>
+      <h3 class="puffy" id="fitText">Using FitText.js</h3>
+      <p>Here’s how you can use <a href="http://fittextjs.com" target="_blank">FitText.js</a> to make the text a bit more flexible (try resizing your window)</p>
+      <div class="demo-box" id="demo-box5">
+        <h2 id="demo5" class="demo strong">I play well with FitText.js too! </h2>
+      </div>
+      <code>&lt;h2 id="demo5"&gt;I play well with FitText.js too! &lt;/h2&gt;
 $('#demo5').circleType({fitText:true, radius: 180});
-            </code>
+      </code>
+      <h2 class="strong">Requirements</h2>
+      <ul class="bullets">
+        <li><a href="http://letteringjs.com/" target="_blank">Lettering.js</a> is required</li>
+        <li>IE9+</li>
+        <li>Firefox 12+</li>
+        <li>Opera 10.5+</li>
+        <li>Safari 4.0+</li>
+        <li>Chrome 2.0+</li>
+      </ul>
+      <footer>
+        <a href="https://twitter.com/peterhry" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @peterhry</a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+        <p>CircleType.js is © 2014 <a href="http://peterhrynkow.com">Peter Hrynkow</a> and is licensed under the terms of GPL & MIT licenses.</p>
+      </footer>
+    </div>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+    <script src="js/plugins.js"></script>
+    <script src="js/circletype.min.js"></script>
+    <script>
+      $(window).load(function() {
+        $('#title').circleType({radius: 400, fluid: true});
 
+        $('#demo1').circleType({radius: 384});
+        $('#demo2').circleType({radius: 384, dir:-1});
+        $('#demo3').circleType();
 
+        $('#demo4').circleType({fluid: true});
 
+        $('#demo5').circleType({radius: 180}).fitText().circleType('refresh');
 
-            <h2 class="strong">Requirements</h2>
-            <ul class="bullets">
-                <li><a href="http://letteringjs.com/" target="_blank">Lettering.js</a> is required</li>
-                <li>IE9+</li>
-                <li>Firefox 12+</li>
-                <li>Opera 10.5+</li>
-                <li>Safari 4.0+</li>
-                <li>Chrome 2.0+</li>
-            </ul>
+        $(window).resize(function() {
+          $('#title, #demo4, #demo5').circleType('refresh');
+        })
+      })
+    </script>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-1581384-27']);
+      _gaq.push(['_trackPageview']);
 
-
-            <footer>
-                <a href="https://twitter.com/peterhry" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @peterhry</a>
-                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>                
-                <p>CircleType.js is © 2014 <a href="http://peterhrynkow.com">Peter Hrynkow</a> and is licensed under the terms of GPL & MIT licenses.</p>
-            </footer>
-        </div>
-
-
-    
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
-
-        <script src="js/plugins.js"></script>
-        <script src="js/circletype.js"></script>
-
-        <script>
-            $('#title').circleType({radius: 400, fluid: true});
-            
-            
-            $('#demo1').circleType({radius: 384});
-            $('#demo2').circleType({radius: 384, dir:-1});
-            $('#demo3').circleType();
-            $('#demo4').circleType({fluid:true});
-            $('#demo5').circleType({fitText:true, radius: 180})
-            
-        </script>
-
-
-
-        <script type="text/javascript">
-
-          var _gaq = _gaq || [];
-          _gaq.push(['_setAccount', 'UA-1581384-27']);
-          _gaq.push(['_trackPageview']);
-
-          (function() {
-            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-          })();
-
-        </script>
-
-    </body>
+      (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </body>
 </html>
