@@ -1,5 +1,3 @@
-import charming from 'charming';
-
 /*
  * CircleType 2.0.0
  * Peter Hrynkow
@@ -10,8 +8,22 @@ import charming from 'charming';
 /* globals $ */
 
 const vendors = ['webkit', 'Moz', 'O', 'ms'];
-const { PI, floor, max } = Math;
+const { PI, floor, max, abs } = Math;
+const tagName = 'span';
+const openTag = `<${tagName} aria-hidden>`;
+const closeTag = `</${tagName}>`;
+
 const radiansToDegrees = radians => radians * (180 / PI);
+const getBounds = (elem) => {
+  const { top, left, width, height } = elem.getBoundingClientRect();
+
+  return {
+    top: top + window.pageYOffset,
+    left: left + window.pageXOffset,
+    width,
+    height,
+  };
+};
 
 class CircleType {
   static get defaultOptions() {
@@ -21,36 +33,30 @@ class CircleType {
     };
   }
 
-  static _getBounds(elem) {
-    const { top, left, width, height } = elem.getBoundingClientRect();
-
-    return {
-      top: top + window.pageYOffset,
-      left: left + window.pageXOffset,
-      width,
-      height,
-    };
-  }
-
   constructor(elem, options = {}) {
     this.elem = elem;
     this.options = { ...CircleType.defaultOptions, ...options };
     this.originalHTML = this.elem.innerHTML;
 
-    const txt = this.elem.innerHTML.replace(/^\s+|\s+$/g, '').replace(/\s/g, '&nbsp;');
+    const txt = this.elem.innerText.trim();
 
-    this.elem.innerHTML = txt;
+    const spans = txt.split('')
+      .map(letter => (letter === ' ' ? '&nbsp;' : letter))
+      .join(`${closeTag}${openTag}`);
+
+    const html = `${openTag}${spans}${closeTag}`;
 
     const container = document.createElement('div');
-    container.innerHTML = txt;
+    container.setAttribute('aria-label', txt);
+    container.innerHTML = html;
     container.style.position = this.options.position;
+
     this.elem.innerHTML = '';
     this.elem.appendChild(container);
 
-    charming(container);
 
     this.container = container;
-    this.letters = [...elem.getElementsByTagName('span')];
+    this.letters = [...elem.getElementsByTagName(tagName)];
     this.center = floor(this.letters.length / 2);
 
     this.letters.forEach((letter) => {
@@ -61,13 +67,12 @@ class CircleType {
       style.bottom = this.options.dir === -1 ? 0 : 'auto';
     });
 
+    const { fontSize, lineHeight } = window.getComputedStyle(this.elem);
 
-    const computedStyle = window.getComputedStyle(this.elem);
+    this.fontSize = parseInt(fontSize, 10);
+    this.lineHeight = parseInt(lineHeight, 10) || this.fontSize;
 
-    this.fontSize = parseInt(computedStyle.fontSize, 10);
-    this.lineHeight = parseInt(computedStyle.lineHeight, 10) || this.fontSize;
-
-    this.metrics = this.letters.map(CircleType._getBounds);
+    this.metrics = this.letters.map(getBounds);
 
     const totalWidth = this.metrics.reduce((sum, { width }) => sum + width, 0);
     this.minRadius = (totalWidth / PI / 2) + this.lineHeight;
@@ -81,7 +86,7 @@ class CircleType {
 
   destroy() {
     this.elem.innerHTML = this.originalHTML;
-    this.elem.CircleTypeInstance = null;
+    this.elem.circleTypeInstance = null;
   }
 
   _layout() {
@@ -91,7 +96,7 @@ class CircleType {
     let finalRadius = radius;
 
     if (fluid) {
-      finalRadius = max(elem.offsetWidth / 2, minRadius);
+      finalRadius = max(elem.offsetWidth * 0.5, minRadius);
     } else if (!radius) {
       finalRadius = minRadius;
     }
@@ -101,7 +106,6 @@ class CircleType {
     const origin = `center ${originY / fontSize}em`;
 
     const innerRadius = finalRadius - lineHeight;
-
 
     const { rotations, sum } = metrics.reduce((data, { width }) => {
       const rotation = radiansToDegrees(width / innerRadius);
@@ -118,8 +122,8 @@ class CircleType {
 
     letters.forEach((letter, index) => {
       const { style } = letter;
-      const rotate = ((sum / -2) + rotations[index]) * dir;
-      const translateX = (metrics[index].width / -2) / this.fontSize;
+      const rotate = ((sum * -0.5) + rotations[index]) * dir;
+      const translateX = (metrics[index].width * -0.5) / this.fontSize;
 
       vendors.forEach((vendor) => {
         style[`${vendor}Transform`] = `translateX(${translateX}em) rotate(${rotate}deg)`;
@@ -136,9 +140,9 @@ class CircleType {
 
   _updateHeight() {
     const { letters, center } = this;
-    const mid = CircleType._getBounds(letters[center]);
-    const first = CircleType._getBounds(letters[0]);
-    const height = first.height + Math.abs(first.top - mid.top);
+    const mid = getBounds(letters[center]);
+    const first = getBounds(letters[0]);
+    const height = first.height + abs(first.top - mid.top);
 
     this.container.style.height = `${height}px`;
   }
@@ -147,12 +151,12 @@ class CircleType {
 $.fn.circleType = function (options) {
   return this.each(function () {
     if (options === 'refresh') {
-      return this.CircleTypeInstance.refresh();
+      return this.circleTypeInstance.refresh();
     }
 
-    this.CircleTypeInstance = new CircleType(this, options);
+    this.circleTypeInstance = new CircleType(this, options);
 
-    return this.CircleTypeInstance;
+    return this.circleTypeInstance;
   });
 };
 
