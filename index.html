@@ -96,18 +96,18 @@ $('#demo5').circleType({fitText:true, radius: 180});
     <script src="js/circletype.min.js"></script>
     <script>
       $(window).load(function() {
-        $('#title').circleType({radius: 400, fluid: true});
+        $('#title').circleType();
 
         $('#demo1').circleType({radius: 384});
         $('#demo2').circleType({radius: 384, dir:-1});
         $('#demo3').circleType();
 
-        $('#demo4').circleType({fluid: true});
+        $('#demo4').circleType();
 
         $('#demo5').circleType({radius: 180}).fitText().circleType('refresh');
 
         $(window).resize(function() {
-          $('#title, #demo4, #demo5').circleType('refresh');
+          $('#demo5').circleType('refresh');
         })
       })
     </script>

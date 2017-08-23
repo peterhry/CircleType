@@ -1,7 +1,7 @@
 module.exports = {
   context: __dirname,
   entry: {
-    circletype: './js/circletype.js'
+    circletype: './js/entry.js'
   },
 
   module: {
@@ -20,6 +20,5 @@ module.exports = {
   output: {
     filename: './js/[name].min.js',
     libraryTarget: 'umd',
-    library: 'CircleType'
   },
 };
