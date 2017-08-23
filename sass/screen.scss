@@ -18,13 +18,12 @@ body {
     font-family: 'ff-meta-web-pro', sans-serif;
 }
 
-
 * {
     @include box-sizing(border-box);
 }
 
 p, ul, ol, dl {
-    margin: 0 0 rhythm(1, $base-font-size); 
+    margin: 0 0 rhythm(1, $base-font-size);
 }
 
 a {
@@ -34,7 +33,7 @@ a {
 h1 {
     @include adjust-font-size-to(48px);
     @include adjust-leading-to(2, 48px);
-    margin: 0 0 rhythm(1, 48px); 
+    margin: 0 0 rhythm(1, 48px);
 }
 
 h2 {
@@ -45,24 +44,23 @@ h3 {
     @include adjust-font-size-to(28px);
 }
 
-
 .strong {
     font-family: 'franklin-gothic-ext-comp-urw', sans-serif;
     text-transform: uppercase;
 }
+
 .puffy {
     font-family: 'cooper-black-std', serif;
     color: #ff3300;
 }
 
-
 .bullets {
     list-style: disc;
 }
+
 .bullets li {
     margin-left: rhythm(1, $base-font-size);
 }
-
 
 .btn {
     background-color: #ff3300;
@@ -82,12 +80,10 @@ h3 {
     padding: rhythm(1, $base-font-size) 0;
 }
 
-
 .demo {
     color: #ff3300;
     margin: 0;
 }
-
 
 code {
     display: block;
@@ -100,23 +96,19 @@ code {
     white-space: pre;
 }
 
-
 .container {
     overflow: hidden;
     width: 90%;
     max-width: 1200px;
     margin: rhythm(3, $base-font-size) auto;
-    
+
 }
-
-
 
 .social {
     position: absolute;
     right: 0;
     top: 1em;
 }
-
 
 footer {
     font-size: .875em;

@@ -22,10 +22,7 @@
     "url": "https://github.com/peterhry/CircleType/issues"
   },
   "homepage": "https://github.com/peterhry/CircleType#readme",
-  "dependencies": {
-    "charming": "2.0.1",
-    "lettering.js": "^0.8.2"
-  },
+  "dependencies": {},
   "devDependencies": {
     "babel": "6.23.0",
     "babel-core": "^6.25.0",
