@@ -77,7 +77,6 @@ $('#demo5').circleType({fitText:true, radius: 180});
       </code>
       <h2 class="strong">Requirements</h2>
       <ul class="bullets">
-        <li><a href="http://letteringjs.com/" target="_blank">Lettering.js</a> is required</li>
         <li>IE9+</li>
         <li>Firefox 12+</li>
         <li>Opera 10.5+</li>
@@ -87,7 +86,7 @@ $('#demo5').circleType({fitText:true, radius: 180});
       <footer>
         <a href="https://twitter.com/peterhry" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @peterhry</a>
         <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-        <p>CircleType.js is © 2014 <a href="http://peterhrynkow.com">Peter Hrynkow</a> and is licensed under the terms of GPL & MIT licenses.</p>
+        <p>CircleType.js is © 2014-2017 <a href="http://peterhrynkow.com">Peter Hrynkow</a> and is licensed under the terms of GPL & MIT licenses.</p>
       </footer>
     </div>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -95,26 +94,41 @@ $('#demo5').circleType({fitText:true, radius: 180});
     <script src="js/plugins.js"></script>
     <script src="js/circletype.min.js"></script>
     <script>
-      $(window).load(function() {
-        new CircleType(document.getElementById('title'));
+      /**
+       * Updates a demo radius based on the element width
+       */
+      function updateRadius(demo) {
+        demo.radius(demo.element.offsetWidth / 2);
+      }
 
-        new CircleType(document.getElementById('demo1')).radius(384);
+      window.addEventListener('load', function() {
 
-        new CircleType(document.getElementById('demo2')).dir(-1).radius(384);
+        // Title (fluid)
+        var titleDemo = new CircleType(document.getElementById('title'));
+        window.addEventListener('resize', updateRadius.bind(null, titleDemo));
+        updateRadius(titleDemo);
 
+        // Basic Arc
+        new CircleType(document.getElementById('demo1'))
+          .radius(384);
+
+        // Reversed Arc
+        new CircleType(document.getElementById('demo2'))
+          .dir(-1)
+          .radius(384);
+
+        // Auto Radius
         new CircleType(document.getElementById('demo3'));
 
-        new CircleType(document.getElementById('demo4'));
+        // Fluid
+        var demo4 = new CircleType(document.getElementById('demo4'));
+        window.addEventListener('resize', updateRadius.bind(null, demo4));
+        updateRadius(demo4);
 
-        var demo5 = new CircleType(document.getElementById('demo5'));
-        demo5.radius(180);
-
+        // FitText
+        var demo5 = new CircleType(document.getElementById('demo5')).radius(180);
         $(demo5.element).fitText();
-
-
-        $(window).resize(function() {
-          demo5.refresh();
-        })
+        window.addEventListener('resize', demo5.refresh.bind(demo5));
       })
     </script>
     <script type="text/javascript">
