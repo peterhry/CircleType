@@ -45,10 +45,6 @@ const getBounds = (elem) => {
 const getLetters = text => (
   text.trim().split('').map((letter) => {
     const span = document.createElement('span');
-    const { style } = span;
-
-    style.position = 'absolute';
-    style.left = '50%';
 
     span.innerHTML = letter === ' ' ? '&nbsp;' : letter;
 
@@ -73,7 +69,7 @@ const getHeight = (letters) => {
 };
 
 /**
- * A CircleType instance creates a circular text _elem
+ * A CircleType instance creates a circular text element.
  *
  * @param  {HTMLElement} elem A target HTML element.
  */
@@ -95,7 +91,7 @@ class CircleType {
    * @return {Number}        The radius
    */
   radius(value) {
-    if (typeof value !== 'undefined') {
+    if (value !== undefined) {
       this._radius = value;
 
       this._invalidate();
@@ -114,7 +110,7 @@ class CircleType {
    * @return {Number}        The direction
    */
   dir(value) {
-    if (typeof value !== 'undefined') {
+    if (value !== undefined) {
       this._dir = value;
 
       this._invalidate();
@@ -146,7 +142,7 @@ class CircleType {
 
   /**
    * Invalidates the current state, scheduling a task to refresh the layout in
-   * the next frame.
+   * the next animation frame.
    *
    * @private
    *
@@ -226,7 +222,9 @@ class CircleType {
       const rotate = ((sum * -0.5) + rotations[index]) * this._dir;
       const translateX = (this._metrics[index].width * -0.5) / this._fontSize;
 
+      style.position = 'absolute';
       style.bottom = this._dir === -1 ? 0 : 'auto';
+      style.left = '50%';
 
       vendors.forEach((vendor) => {
         style[`${vendor}Transform`] = `translateX(${translateX}em) rotate(${rotate}deg)`;
