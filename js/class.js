@@ -5,8 +5,6 @@
  *
 */
 
-/* globals $ */
-
 const vendors = ['webkit', 'Moz', 'O', 'ms'];
 const { PI, floor, abs } = Math;
 
@@ -82,27 +80,30 @@ const getHeight = (letters) => {
 class CircleType {
   constructor(elem) {
     this._dir = 1;
-    this._elem = elem;
-    this.originalHTML = this._elem.innerHTML;
+    this.element = elem;
+    this.originalHTML = this.element.innerHTML;
 
-    this.invalidate();
+    this._build();
+    this._invalidate();
   }
 
   /**
-   * Gets or sets the _radius.
+   * Gets or sets the radius.
    *
-   * @param  {Number=} value A _radius value
+   * @param  {Number=} value A radius value
    *
-   * @return {Number}        The _radius
+   * @return {Number}        The radius
    */
   radius(value) {
     if (typeof value !== 'undefined') {
-      this.__radius = value;
+      this._radius = value;
 
-      this.invalidate();
+      this._invalidate();
+
+      return this;
     }
 
-    return this.__radius;
+    return this._radius;
   }
 
   /**
@@ -116,27 +117,19 @@ class CircleType {
     if (typeof value !== 'undefined') {
       this._dir = value;
 
-      this.invalidate();
+      this._invalidate();
+
+      return this;
     }
 
     return this._dir;
   }
 
   /**
-   * Invalidates the current state, scheduling a task to rebuild the effect.
-   *
-   * @return {CircleType} This instance.
+   * Public method to invalidate the layout.
    */
-  invalidate() {
-    requestAnimationFrame(() => {
-      this.destroy().build();
-    });
-
-    return this;
-  }
-
   refresh() {
-    return this.invalidate();
+    return this._invalidate();
   }
 
   /**
@@ -146,8 +139,23 @@ class CircleType {
    * @return {CircleType} This instance.
    */
   destroy() {
-    this._elem.innerHTML = this.originalHTML;
-    this._elem.circleTypeInstance = null;
+    this.element.innerHTML = this.originalHTML;
+
+    return this;
+  }
+
+  /**
+   * Invalidates the current state, scheduling a task to refresh the layout in
+   * the next frame.
+   *
+   * @private
+   *
+   * @return {CircleType} This instance.
+   */
+  _invalidate() {
+    requestAnimationFrame(() => {
+      this._layout();
+    });
 
     return this;
   }
@@ -155,50 +163,44 @@ class CircleType {
   /**
    * Builds the elements neccessary for the effect.
    *
+   * @private
+   *
    * @return {CircleType} This instance.
    */
-  build() {
-    const txt = this._elem.innerText;
+  _build() {
+    const txt = this.element.innerText;
 
     const container = document.createElement('div');
     container.setAttribute('aria-label', txt);
     container.style.position = 'relative';
-
-    this._letters = getLetters(txt);
-    this._elem.innerHTML = '';
-    this._elem.appendChild(container);
-
     this.container = container;
 
-    this._letters.forEach((letter) => {
-      const { style } = letter;
+    this._letters = getLetters(txt);
+    this._letters.forEach(letter => container.appendChild(letter));
 
-      style.bottom = this._dir === -1 ? 0 : 'auto';
+    this.element.innerHTML = '';
+    this.element.appendChild(container);
 
-      container.appendChild(letter);
-    });
-
-    const { fontSize, lineHeight } = window.getComputedStyle(this._elem);
+    const { fontSize, lineHeight } = window.getComputedStyle(this.element);
 
     this._fontSize = parseInt(fontSize, 10);
     this._lineHeight = parseInt(lineHeight, 10) || this._fontSize;
-
     this._metrics = this._letters.map(getBounds);
 
     const totalWidth = this._metrics.reduce((sum, { width }) => sum + width, 0);
     this._minRadius = (totalWidth / PI / 2) + this._lineHeight;
 
-    return this.layout();
+    return this._layout();
   }
 
   /**
-   * Rotates and positions the _letters.
+   * Rotates and positions the letters.
    *
    * @private
    *
    * @return {CircleType} This instance.
    */
-  layout() {
+  _layout() {
     const finalRadius = !this._radius ? this._minRadius : this._radius;
 
     const originY = this._dir === -1 ? (-finalRadius + this._lineHeight) : finalRadius;
@@ -206,7 +208,6 @@ class CircleType {
     const origin = `center ${originY / this._fontSize}em`;
 
     const innerRadius = finalRadius - this._lineHeight;
-
     const { rotations, sum } = this._metrics.reduce((data, { width }) => {
       const rotation = radiansToDegrees(width / innerRadius);
 
@@ -225,6 +226,8 @@ class CircleType {
       const rotate = ((sum * -0.5) + rotations[index]) * this._dir;
       const translateX = (this._metrics[index].width * -0.5) / this._fontSize;
 
+      style.bottom = this._dir === -1 ? 0 : 'auto';
+
       vendors.forEach((vendor) => {
         style[`${vendor}Transform`] = `translateX(${translateX}em) rotate(${rotate}deg)`;
         style[`${vendor}TransformOrigin`] = origin;
@@ -236,22 +239,5 @@ class CircleType {
     return this;
   }
 }
-
-$.fn.circleType = function (options) {
-  return this.each(function () {
-    if (typeof options === 'string') {
-      return this.circleTypeInstance[options]();
-    }
-
-    this.circleTypeInstance = new CircleType(this);
-
-    if (typeof options === 'object') {
-      this.circleTypeInstance.radius(options.radius);
-      this.circleTypeInstance.dir(options.dir);
-    }
-
-    return this.circleTypeInstance;
-  });
-};
 
 export default CircleType;

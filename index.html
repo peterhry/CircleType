@@ -96,18 +96,24 @@ $('#demo5').circleType({fitText:true, radius: 180});
     <script src="js/circletype.min.js"></script>
     <script>
       $(window).load(function() {
-        $('#title').circleType();
+        new CircleType(document.getElementById('title'));
 
-        $('#demo1').circleType({radius: 384});
-        $('#demo2').circleType({radius: 384, dir:-1});
-        $('#demo3').circleType();
+        new CircleType(document.getElementById('demo1')).radius(384);
 
-        $('#demo4').circleType();
+        new CircleType(document.getElementById('demo2')).dir(-1).radius(384);
 
-        $('#demo5').circleType({radius: 180}).fitText().circleType('refresh');
+        new CircleType(document.getElementById('demo3'));
+
+        new CircleType(document.getElementById('demo4'));
+
+        var demo5 = new CircleType(document.getElementById('demo5'));
+        demo5.radius(180);
+
+        $(demo5.element).fitText();
+
 
         $(window).resize(function() {
-          $('#demo5').circleType('refresh');
+          demo5.refresh();
         })
       })
     </script>
