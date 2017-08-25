@@ -128,6 +128,8 @@ footer {
 }
 
 .wf-active #title,
-.wf-active .demo {
+.wf-active .demo,
+.wf-inactive #title,
+.wf-inactive .demo {
   visibility: visible;
 }
