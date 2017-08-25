@@ -1,6 +1,6 @@
 # CircleType
 
-A jQuery plugin that lets you curve type on the web
+A JavaScript library that lets you curve type on the web
 
 Demos: http://circletype.labwire.ca
 
