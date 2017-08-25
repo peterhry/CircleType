@@ -1,12 +1,13 @@
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font:inherit;font-size:100%;vertical-align:baseline}html{line-height:1}ol,ul{list-style:none}table{border-collapse:collapse;border-spacing:0}caption,th,td{text-align:left;font-weight:normal;vertical-align:middle}q,blockquote{quotes:none}q:before,q:after,blockquote:before,blockquote:after{content:"";content:none}a img{border:none}article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section,summary{display:block}html{font-size:100%;line-height:1.5em}body{font-family:'ff-meta-web-pro', sans-serif}*{-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box}p,ul,ol,dl{margin:0 0 1.5em}a{color:#ff3300}h1{font-size:3em;line-height:1.5em;line-height:1em;margin:0 0 0.5em}h2{font-size:2.25em;line-height:1.33333em}h3{font-size:1.75em;line-height:1.71429em}.strong{font-family:'franklin-gothic-ext-comp-urw', sans-serif;text-transform:uppercase}#title{text-align: center;}.puffy{font-family:'cooper-black-std', serif;color:#ff3300;}.bullets{list-style:disc}.bullets li{margin-left:1.5em}.btn{background-color:#ff3300;display:inline-block;color:#fff;text-decoration:none;padding:0.375em 0.75em}.btn:hover{background-color:#e62e00}.demo-box{border:1px solid #101010;position:relative;padding:1.5em 0;text-align:center;}.demo{color:#ff3300;margin:0;text-align:center;}code{display:block;background:#101010;color:#fff;font-family:"Andale Mono", AndaleMono, monospace;font-size:12px;padding:1em;margin:0 0 4em;white-space:pre}.container{overflow:hidden;width:90%;max-width:1200px;margin:4.5em auto}.social{position:absolute;right:0;top:1em}footer{font-size:.875em;color:#666}
 
-
 #title,
 .demo {
   visibility: hidden;
 }
 
 .wf-active #title,
-.wf-active .demo {
+.wf-active .demo,
+.wf-inactive #title,
+.wf-inactive .demo {
   visibility: visible;
 }
