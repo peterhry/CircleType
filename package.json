@@ -1,8 +1,8 @@
 {
   "name": "circletype",
-  "version": "1.0.0",
-  "description": "A jQuery plugin that lets you curve type on the web",
-  "main": "js/circletype.js",
+  "version": "2.0.0",
+  "description": "A JavaScript libarary that lets you curve type on the web",
+  "main": "src/circletype.js",
   "scripts": {},
   "repository": {
     "type": "git",

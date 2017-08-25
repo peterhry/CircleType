@@ -9,10 +9,8 @@
     <title>CircleType.js lets you curve type on the web</title>
     <meta name="description" content="CircleType.js is a tiny (4kb) jQuery plugin that lets you set type on a circle">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-    <script type="text/javascript" src="//use.typekit.net/fbl0lhq.js"></script>
-    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    <script src="//use.typekit.net/fbl0lhq.js"></script>
     <link rel="stylesheet" href="stylesheets/screen.css">
-    <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
   </head>
   <body>
     <div class="container">
@@ -21,7 +19,7 @@
         <a href="https://twitter.com/share" class="twitter-share-button" data-via="peterhry" data-size="large" data-url="http://circletype.labwire.ca/">Tweet</a>
         <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
       </div>
-      <p>CircleType.js is a tiny (2kb) jQuery plugin that lets you curve type on the web.</p>
+      <p>CircleType.js is a tiny (4kb) JavaScript library that lets you curve type on the web.</p>
       <h2 class="strong">Features</h2>
       <ul class="bullets">
         <li>Use any font</li>
@@ -41,47 +39,55 @@
         <h2 id="demo1" class="demo strong">Here’s some curved text flowing clockwise.</h2>
       </div>
       <code>&lt;h2 id="demo1"&gt;Here’s some curved text flowing clockwise.&lt;/h2&gt;
-$('#demo1').circleType({radius: 384});
-      </code>
+new CircleType(document.getElementById('demo1')).radius(384);</code>
       <h3 class="puffy" id="reverse">Reversed Arc</h3>
       <p>By setting dir to -1, the text will flow counter-clockwise instead.</p>
       <div class="demo-box" id="demo-box2">
         <h2 id="demo2" class="demo strong">Here’s some curved text flowing counter-clockwise.</h2>
       </div>
       <code>&lt;h2 id="demo2"&gt;Here’s some curved text flowing counter-clockwise.&lt;/h2&gt;
-$('#demo2').circleType({radius: 384, dir:-1});
-      </code>
+new CircleType(document.getElementById('demo2')).dir(-1).radius(384);</code>
       <h3 class="puffy" id="auto">Auto Radius</h3>
       <p>By leaving the radius empty, CircleType.js will find the perfect radius so the text makes a complete rotation.</p>
       <div class="demo-box" id="demo-box3">
         <h2 id="demo3" class="demo strong">This text makes a complete rotation no matter how long it is. </h2>
       </div>
       <code>&lt;h2 id="demo3"&gt;This text makes a complete rotation no matter how long it is. &lt;/h2&gt;
-$('#demo3').circleType();
-      </code>
+new CircleType(document.getElementById('demo3'));</code>
       <h3 class="puffy" id="fluid">Fluid</h3>
       <p>The fluid setting gives the type a flexible radius (try resizing your window)</p>
       <div class="demo-box" id="demo-box4">
         <h2 id="demo4" class="demo strong">This curved type shrinks and expands to fit inside its container. </h2>
       </div>
       <code>&lt;h2 id="demo4"&gt;This curved type shrinks and expands to fit inside its container. &lt;/h2&gt;
-$('#demo4').circleType({fluid:true});
-      </code>
+var demo4 = new CircleType(document.getElementById('demo4'));
+window.addEventListener('resize', function updateRadius() {
+  demo4.radius(demo4.element.offsetWidth / 2);
+});
+updateRadius(demo4);</code>
       <h3 class="puffy" id="fitText">Using FitText.js</h3>
-      <p>Here’s how you can use <a href="http://fittextjs.com" target="_blank">FitText.js</a> to make the text a bit more flexible (try resizing your window)</p>
+      <p>Here’s how you can use <a href="http://fittextjs.com" target="_blank">FitText.js</a> to make the text scale (try resizing your window)</p>
       <div class="demo-box" id="demo-box5">
         <h2 id="demo5" class="demo strong">I play well with FitText.js too! </h2>
       </div>
       <code>&lt;h2 id="demo5"&gt;I play well with FitText.js too! &lt;/h2&gt;
-$('#demo5').circleType({fitText:true, radius: 180});
-      </code>
-      <h2 class="strong">Requirements</h2>
+var demo5 = new CircleType(document.getElementById('demo5')).radius(180);
+$(demo5.element).fitText();
+window.addEventListener('resize', demo5.refresh.bind(demo5));</code>
+      <h3 class="puffy" id="fitText">Destroy</h3>
+      <p>Here’s how you can remove the effect from an element.</p>
+      <div class="demo-box" id="demo-box6">
+        <p><a href="#" class="btn" id="destroyButton">Destroy Me</a></p>
+        <h2 id="demo6" class="demo strong">Easily remove the effect.</h2>
+      </div>
+      <code>&lt;button id="destroyButton">Destroy Me&lt;/button&gt;
+&lt;h2 id="demo6"&gt;Easily remove the effect.&lt;/h2&gt;
+var demo6 = new CircleType(document.getElementById('demo6')).radius(180);
+document.getElementById('destroyButton').addEventListener('click', demo6.destroy.bind(demo6));</code>
+      <h2 class="strong">Browser Support</h2>
       <ul class="bullets">
-        <li>IE9+</li>
-        <li>Firefox 12+</li>
-        <li>Opera 10.5+</li>
-        <li>Safari 4.0+</li>
-        <li>Chrome 2.0+</li>
+        <li>Chrome, Firefox, Safari, Opera, Edge (last 2 versions)</li>
+        <li>IE 10+</li>
       </ul>
       <footer>
         <a href="https://twitter.com/peterhry" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @peterhry</a>
@@ -89,48 +95,69 @@ $('#demo5').circleType({fitText:true, radius: 180});
         <p>CircleType.js is © 2014-2017 <a href="http://peterhrynkow.com">Peter Hrynkow</a> and is licensed under the terms of GPL & MIT licenses.</p>
       </footer>
     </div>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
-    <script src="js/plugins.js"></script>
-    <script src="js/circletype.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.slim.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/FitText.js/1.2.0/jquery.fittext.min.js"></script>
+    <script src="dist/circletype.min.js"></script>
     <script>
-      /**
-       * Updates a demo radius based on the element width
-       */
-      function updateRadius(demo) {
-        demo.radius(demo.element.offsetWidth / 2);
+      try {
+        Typekit.load({
+          active: renderDemo,
+        })
+      } catch (e) {
+        // Error loading fonts
       }
 
-      window.addEventListener('load', function() {
+      function renderDemo() {
+        /**
+         * Title
+         */
+        var titleDemo = new CircleType(document.getElementById('title')).radius(500);
 
-        // Title (fluid)
-        var titleDemo = new CircleType(document.getElementById('title'));
-        window.addEventListener('resize', updateRadius.bind(null, titleDemo));
-        updateRadius(titleDemo);
-
-        // Basic Arc
+        /**
+         * Basic Arc
+         */
         new CircleType(document.getElementById('demo1'))
           .radius(384);
 
-        // Reversed Arc
+        /**
+         * Reversed Arc
+         */
         new CircleType(document.getElementById('demo2'))
           .dir(-1)
           .radius(384);
 
-        // Auto Radius
+        /**
+         * Auto Radius
+         */
         new CircleType(document.getElementById('demo3'));
 
-        // Fluid
+        /**
+         * Fluid
+         */
         var demo4 = new CircleType(document.getElementById('demo4'));
-        window.addEventListener('resize', updateRadius.bind(null, demo4));
+        function updateRadius() {
+          demo4.radius(demo4.element.offsetWidth / 2);
+        }
+        window.addEventListener('resize', updateRadius);
         updateRadius(demo4);
 
-        // FitText
+        /**
+         * FitText
+         */
         var demo5 = new CircleType(document.getElementById('demo5')).radius(180);
         $(demo5.element).fitText();
         window.addEventListener('resize', demo5.refresh.bind(demo5));
-      })
-    </script>
+
+        /**
+         * Destroy
+         */
+        var demo6 = new CircleType(document.getElementById('demo6')).radius(180);
+        document.getElementById('destroyButton').addEventListener('click', function(event) {
+          demo6.destroy();
+          event.preventDefault();
+        });
+      }
+   </script>
     <script type="text/javascript">
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-1581384-27']);

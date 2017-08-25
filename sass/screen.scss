@@ -52,6 +52,7 @@ h3 {
 .puffy {
     font-family: 'cooper-black-std', serif;
     color: #ff3300;
+    text-align: center;
 }
 
 .bullets {
@@ -78,11 +79,13 @@ h3 {
     border: 1px solid #101010;
     position: relative;
     padding: rhythm(1, $base-font-size) 0;
+    text-align:center;
 }
 
 .demo {
     color: #ff3300;
     margin: 0;
+    text-align:center;
 }
 
 code {
@@ -113,4 +116,18 @@ code {
 footer {
     font-size: .875em;
     color: #666;
+}
+
+#title {
+    text-align: center;
+}
+
+#title,
+.demo {
+  visibility: hidden;
+}
+
+.wf-active #title,
+.wf-active .demo {
+  visibility: visible;
 }

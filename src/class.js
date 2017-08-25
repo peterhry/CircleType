@@ -4,7 +4,6 @@
  * Copyright 2014, Licensed GPL & MIT
  *
 */
-
 const vendors = ['webkit', 'Moz', 'O', 'ms'];
 const { PI, floor, abs } = Math;
 
@@ -79,12 +78,35 @@ class CircleType {
     this.element = elem;
     this.originalHTML = this.element.innerHTML;
 
-    this._build();
+    const txt = this.element.innerText;
+
+    const container = document.createElement('div');
+    container.setAttribute('aria-label', txt);
+    container.style.position = 'relative';
+    this.container = container;
+
+    this._letters = getLetters(txt);
+    this._letters.forEach(letter => container.appendChild(letter));
+
+    this.element.innerHTML = '';
+    this.element.appendChild(container);
+
+    const { fontSize, lineHeight } = window.getComputedStyle(this.element);
+
+    this._fontSize = parseInt(fontSize, 10);
+    this._lineHeight = parseInt(lineHeight, 10) || this._fontSize;
+    this._metrics = this._letters.map(getBounds);
+
+    const totalWidth = this._metrics.reduce((sum, { width }) => sum + width, 0);
+    this._minRadius = (totalWidth / PI / 2) + this._lineHeight;
+
     this._invalidate();
   }
 
   /**
    * Gets or sets the radius.
+   *
+   * @public
    *
    * @param  {Number=} value A radius value
    *
@@ -105,6 +127,8 @@ class CircleType {
   /**
    * Gets or sets the direction.
    *
+   * @public
+   *
    * @param  {Number=} value A direction value (1|-1)
    *
    * @return {Number}        The direction
@@ -123,6 +147,8 @@ class CircleType {
 
   /**
    * Public method to invalidate the layout.
+   *
+   * @public
    */
   refresh() {
     return this._invalidate();
@@ -131,6 +157,8 @@ class CircleType {
   /**
    * Removes the CircleType effect from the element, restoring it to its
    * original state.
+   *
+   * @public
    *
    * @return {CircleType} This instance.
    */
@@ -154,39 +182,6 @@ class CircleType {
     });
 
     return this;
-  }
-
-  /**
-   * Builds the elements neccessary for the effect.
-   *
-   * @private
-   *
-   * @return {CircleType} This instance.
-   */
-  _build() {
-    const txt = this.element.innerText;
-
-    const container = document.createElement('div');
-    container.setAttribute('aria-label', txt);
-    container.style.position = 'relative';
-    this.container = container;
-
-    this._letters = getLetters(txt);
-    this._letters.forEach(letter => container.appendChild(letter));
-
-    this.element.innerHTML = '';
-    this.element.appendChild(container);
-
-    const { fontSize, lineHeight } = window.getComputedStyle(this.element);
-
-    this._fontSize = parseInt(fontSize, 10);
-    this._lineHeight = parseInt(lineHeight, 10) || this._fontSize;
-    this._metrics = this._letters.map(getBounds);
-
-    const totalWidth = this._metrics.reduce((sum, { width }) => sum + width, 0);
-    this._minRadius = (totalWidth / PI / 2) + this._lineHeight;
-
-    return this._layout();
   }
 
   /**
