@@ -1,11 +1,5 @@
-/*
- * CircleType 2.0.0
- * Peter Hrynkow
- * Copyright 2014, Licensed GPL & MIT
- *
-*/
 const vendors = ['webkit', 'Moz', 'O', 'ms'];
-const { PI, floor, abs } = Math;
+const { PI, floor, abs, max } = Math;
 
 /**
  * Converts radians to degrees.
@@ -114,7 +108,7 @@ class CircleType {
    */
   radius(value) {
     if (value !== undefined) {
-      this._radius = value;
+      this._radius = max(this._minRadius, value);
 
       this._invalidate();
 

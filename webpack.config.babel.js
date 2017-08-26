@@ -1,3 +1,12 @@
+import webpack from 'webpack';
+import PACKAGE from './package.json';
+
+const banner = `${PACKAGE.name} ${PACKAGE.version}
+${PACKAGE.description}
+Copyright © 2014-${new Date().getFullYear()} ${PACKAGE.author}
+Licensed ${PACKAGE.license}
+${PACKAGE.homepage}`;
+
 module.exports = {
   context: __dirname,
   entry: {
@@ -21,4 +30,8 @@ module.exports = {
     filename: './dist/[name].min.js',
     libraryTarget: 'umd',
   },
+
+  plugins: [
+    new webpack.BannerPlugin(banner)
+  ],
 };

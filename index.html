@@ -112,6 +112,11 @@ document.getElementById('destroyButton').addEventListener('click', demo6.destroy
          * Title
          */
         var titleDemo = new CircleType(document.getElementById('title')).radius(500);
+        function updateTitleDemoRadius() {
+          titleDemo.radius(titleDemo.element.offsetWidth / 2);
+        }
+        window.addEventListener('resize', updateTitleDemoRadius);
+        updateTitleDemoRadius();
 
         /**
          * Basic Arc
@@ -139,7 +144,7 @@ document.getElementById('destroyButton').addEventListener('click', demo6.destroy
           demo4.radius(demo4.element.offsetWidth / 2);
         }
         window.addEventListener('resize', updateRadius);
-        updateRadius(demo4);
+        updateRadius();
 
         /**
          * FitText
