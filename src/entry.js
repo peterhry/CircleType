@@ -1,6 +1,3 @@
-/* eslint-disable */
 import CircleType from './class';
 
-export {
-  CircleType,
-};
+module.exports = CircleType;
