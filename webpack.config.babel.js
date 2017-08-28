@@ -28,6 +28,7 @@ module.exports = {
 
   output: {
     filename: './dist/[name].min.js',
+    library: 'CircleType',
     libraryTarget: 'umd',
   },
 
