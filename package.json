@@ -3,7 +3,9 @@
   "version": "2.0.3",
   "description": "A JavaScript library that lets you curve type on the web.",
   "main": "dist/circletype.min.js",
-  "scripts": {},
+  "scripts": {
+    "test": "jest --notify"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/peterhry/CircleType.git"
@@ -35,6 +37,7 @@
     "eslint-plugin-import": "2.7.0",
     "eslint-plugin-jsx-a11y": "5.1.1",
     "eslint-plugin-react": "7.2.0",
+    "jest": "20.0.4",
     "webpack": "^3.5.3"
   }
 }
