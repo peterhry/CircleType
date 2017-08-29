@@ -1,14 +1,7 @@
-const vendors = ['webkit', 'Moz', 'O', 'ms'];
-const { PI, floor, abs, max } = Math;
+import radiansToDegrees from './radiansToDegrees';
+import getLetters from './getLetters';
 
-/**
- * Converts radians to degrees.
- *
- * @param  {Number} radians A radians value.
- *
- * @return {Number}         A degrees value.
- */
-const radiansToDegrees = radians => radians * (180 / PI);
+const { PI, floor, abs, max } = Math;
 
 /**
  * Gets an element’s bounds relative to the document.
@@ -27,23 +20,6 @@ const getBounds = (elem) => {
     height,
   };
 };
-
-/**
- * Splits `text` into individual span elements.
- *
- * @param  {String} text  A string of text to convert.
- *
- * @return {Array}        An array of letter elements.
- */
-const getLetters = text => (
-  text.trim().split('').map((letter) => {
-    const span = document.createElement('span');
-
-    span.innerHTML = letter === ' ' ? '&nbsp;' : letter;
-
-    return span;
-  })
-);
 
 /**
  * Gets the combined height of all letter elements.
@@ -210,15 +186,15 @@ class CircleType {
       const { style } = letter;
       const rotate = ((sum * -0.5) + rotations[index]) * this._dir;
       const translateX = (this._metrics[index].width * -0.5) / this._fontSize;
+      const transform = `translateX(${translateX}em) rotate(${rotate}deg)`;
 
       style.position = 'absolute';
       style.bottom = this._dir === -1 ? 0 : 'auto';
       style.left = '50%';
-
-      vendors.forEach((vendor) => {
-        style[`${vendor}Transform`] = `translateX(${translateX}em) rotate(${rotate}deg)`;
-        style[`${vendor}TransformOrigin`] = origin;
-      });
+      style.transform = transform;
+      style.transformOrigin = origin;
+      style.webkitTransform = transform;
+      style.webkitTransformOrigin = origin;
     });
 
     this.container.style.height = `${getHeight(this._letters)}px`;
