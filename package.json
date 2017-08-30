@@ -22,7 +22,6 @@
   "bugs": "https://github.com/peterhry/CircleType/issues",
   "homepage": "https://github.com/peterhry/CircleType#readme",
   "devDependencies": {
-    "babel": "6.23.0",
     "babel-core": "6.26.0",
     "babel-loader": "7.1.2",
     "babel-plugin-transform-object-rest-spread": "6.26.0",
@@ -31,7 +30,7 @@
     "eslint-config-airbnb": "15.1.0",
     "eslint-loader": "1.9.0",
     "eslint-plugin-import": "2.7.0",
-    "eslint-plugin-jsx-a11y": "5.1.0",
+    "eslint-plugin-jsx-a11y": "5.1.1",
     "eslint-plugin-react": "7.3.0",
     "jest": "20.0.4",
     "webpack": "3.5.5"
