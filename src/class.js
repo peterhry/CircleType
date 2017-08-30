@@ -1,41 +1,8 @@
 import radiansToDegrees from './radiansToDegrees';
 import getLetters from './getLetters';
+import getHeight from './getHeight';
 
-const { PI, floor, abs, max } = Math;
-
-/**
- * Gets an element’s bounds relative to the document.
- *
- * @param  {HTMLElement} elem An element.
- *
- * @return {Object}
- */
-const getBounds = (elem) => {
-  const { top, left, width, height } = elem.getBoundingClientRect();
-
-  return {
-    top: top + window.pageYOffset,
-    left: left + window.pageXOffset,
-    width,
-    height,
-  };
-};
-
-/**
- * Gets the combined height of all letter elements.
- *
- * @param  {Array} letters  An array of letter elements.
- *
- * @return {Number}         The total height.
- */
-const getHeight = (letters) => {
-  const center = floor(letters.length / 2);
-  const mid = getBounds(letters[center]);
-  const first = getBounds(letters[0]);
-  const height = first.height + abs(first.top - mid.top);
-
-  return height;
-};
+const { PI, max } = Math;
 
 /**
  * A CircleType instance creates a circular text element.
