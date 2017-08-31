@@ -4,6 +4,7 @@ module.exports = {
     browser: true,
   },
   rules: {
+    'array-bracket-spacing': 'off',
     'arrow-parens': 'off',
     'no-underscore-dangle': 'off',
   },

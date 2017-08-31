@@ -1,6 +1,6 @@
 import radiansToDegrees from './radiansToDegrees';
 import getBounds from './getBounds';
-import getLetters from './getLetters';
+import splitNode from './utils/splitNode';
 import getHeight from './getHeight';
 
 const { PI, max } = Math;
@@ -27,7 +27,7 @@ class CircleType {
     container.style.position = 'relative';
     this.container = container;
 
-    this._letters = getLetters(elem);
+    this._letters = splitNode(elem);
     this._letters.forEach(letter => container.appendChild(letter));
 
     this.element.innerHTML = '';
