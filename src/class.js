@@ -1,4 +1,5 @@
 import radiansToDegrees from './radiansToDegrees';
+import getBounds from './getBounds';
 import getLetters from './getLetters';
 import getHeight from './getHeight';
 
@@ -15,14 +16,12 @@ class CircleType {
     this.element = elem;
     this.originalHTML = this.element.innerHTML;
 
-    const txt = this.element.innerText;
-
     const container = document.createElement('div');
-    container.setAttribute('aria-label', txt);
+    container.setAttribute('aria-label', elem.innerText);
     container.style.position = 'relative';
     this.container = container;
 
-    this._letters = getLetters(txt);
+    this._letters = getLetters(elem);
     this._letters.forEach(letter => container.appendChild(letter));
 
     this.element.innerHTML = '';

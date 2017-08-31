@@ -1,16 +1,20 @@
 /**
- * Splits `text` into individual span elements.
+ * Splits the text of the provided element into its individual chars, wrapping
+ * each with an instance of the provided wrapper element.
  *
- * @param  {String} text  A string of text to convert.
+ * @param {Node} node The node whose `innerText` will be split.
+ * @param {string} [wrapper='span'] The name of the element to wrap each char.
  *
- * @return {Array}        An array of letter elements.
+ * @return {Element[]} The wrapped split chars.
  */
-export default text => (
-  text.trim().split('').map((letter) => {
-    const span = document.createElement('span');
+export default (node, wrapper = 'span') => {
+  const wrapperElement = document.createElement(wrapper);
 
-    span.innerHTML = letter === ' ' ? '&nbsp;' : letter;
+  return node.innerText.trim().split('').map(char => {
+    const parent = wrapperElement.cloneNode();
 
-    return span;
-  })
-);
+    parent.insertAdjacentHTML('afterbegin', char === ' ' ? '&nbsp;' : char);
+
+    return parent;
+  });
+};

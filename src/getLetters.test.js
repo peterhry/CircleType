@@ -2,7 +2,11 @@ import getLetters from './getLetters';
 
 describe('getLetters', () => {
   it('returns a span for each character', () => {
-    const result = getLetters(' Mauris iaculis.   ').map(letter => letter.innerHTML);
+    const p = document.createElement('p');
+
+    p.innerText = ' Mauris iaculis.   ';
+
+    const result = getLetters(p).map(letter => letter.innerHTML);
 
     expect(result).toEqual([
       'M',
