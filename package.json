@@ -1,6 +1,6 @@
 {
   "name": "circletype",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "A JavaScript library that lets you curve type on the web.",
   "main": "dist/circletype.min.js",
   "files": [
@@ -8,7 +8,8 @@
   ],
   "repository": "peterhry/CircleType",
   "scripts": {
-    "test": "jest --notify"
+    "test": "jest --notify",
+    "docs": "jsdoc2md --template README.hbs --files src/class.js > README.md"
   },
   "keywords": [
     "circletype",
@@ -33,6 +34,7 @@
     "eslint-plugin-jsx-a11y": "5.1.1",
     "eslint-plugin-react": "7.3.0",
     "jest": "20.0.4",
+    "jsdoc-to-markdown": "3.0.0",
     "webpack": "3.5.5"
   }
 }
