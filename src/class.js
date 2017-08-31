@@ -9,6 +9,12 @@ const { PI, max } = Math;
  * A CircleType instance creates a circular text element.
  *
  * @param  {HTMLElement} elem A target HTML element.
+ *
+ * @example
+ * const circleType = new CircleType(document.getElementById('elementId'));
+ *
+ * // Instance methods are chainable.
+ * circleType.radius(200).dir(-1);
  */
 class CircleType {
   constructor(elem) {
@@ -40,13 +46,36 @@ class CircleType {
   }
 
   /**
-   * Gets or sets the radius.
+   * Gets the current text radius in pixels.
    *
-   * @public
+   * @name radius
+   * @function
+   * @instance
+   * @memberof CircleType
+   * @return {Number} The current text radius.
    *
-   * @param  {Number=} value A radius value
+   * @example
+   * const circleType = new CircleType(myElement);
    *
-   * @return {Number}        The radius
+   * circleType.radius();
+   * // > 150
+   */
+
+  /**
+   * Sets the text radius.
+   *
+   * @name radius
+   * @function
+   * @instance
+   * @memberof CircleType
+   * @param  {Number} value A new text radius in pixels.
+   * @return {Number}       The current instance.
+   *
+   * @example
+   * const circleType = new CircleType(myElement);
+   *
+   * // Set the radius to 150 pixels.
+   * circleType.radius(150);
    */
   radius(value) {
     if (value !== undefined) {
@@ -61,13 +90,39 @@ class CircleType {
   }
 
   /**
-   * Gets or sets the direction.
+   * Gets the current text direction. `1` is clockwise, `-1` is counter-clockwise.
    *
-   * @public
+   * @name dir
+   * @function
+   * @instance
+   * @memberof CircleType
+   * @return {Number} The current text radius.
    *
-   * @param  {Number=} value A direction value (1|-1)
+   * @example
+   * const circleType = new CircleType(myElement);
    *
-   * @return {Number}        The direction
+   * circleType.dir();
+   * // > 1 (clockwise)
+   */
+
+  /**
+   * Sets the text direction. `1` is clockwise, `-1` is counter-clockwise.
+   *
+   * @name dir
+   * @function
+   * @instance
+   * @memberof CircleType
+   * @param  {Number} value A new text direction.
+   * @return {CircleType}   The current instance.
+   *
+   * @example
+   * const circleType = new CircleType(myElement);
+   *
+   * // Set the direction to counter-clockwise.
+   * circleType.dir(-1);
+   *
+   * // Set the direction to clockwise.
+   * circleType.dir(1);
    */
   dir(value) {
     if (value !== undefined) {
@@ -82,9 +137,15 @@ class CircleType {
   }
 
   /**
-   * Public method to invalidate the layout.
+   * Schedules a task to recalculate the height of the element. This should be
+   * called if the font size is ever changed.
    *
-   * @public
+   * @return {CircleType} The current instance.
+   *
+   * @example
+   * const circleType = new CircleType(myElement);
+   *
+   * circleType.refresh();
    */
   refresh() {
     return this._invalidate();
@@ -94,9 +155,13 @@ class CircleType {
    * Removes the CircleType effect from the element, restoring it to its
    * original state.
    *
-   * @public
-   *
    * @return {CircleType} This instance.
+   *
+   * @example
+   * const circleType = new CircleType(myElement);
+   *
+   * // Restore `myElement` to its original state.
+   * circleType.destroy();
    */
   destroy() {
     this.element.innerHTML = this.originalHTML;
@@ -105,8 +170,8 @@ class CircleType {
   }
 
   /**
-   * Invalidates the current state, scheduling a task to refresh the layout in
-   * the next animation frame.
+   * Invalidates the current state and schedules a task to refresh the layout
+   * in the next animation frame.
    *
    * @private
    *
@@ -146,7 +211,6 @@ class CircleType {
         ],
       };
     }, { sum: 0, rotations: [] });
-
 
     this._letters.forEach((letter, index) => {
       const { style } = letter;
