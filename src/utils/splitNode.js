@@ -10,7 +10,7 @@
 export default (node, wrapper = 'span') => {
   const wrapperElement = document.createElement(wrapper);
 
-  return node.innerText.trim().split('').map(char => {
+  return [ ...node.innerText.trim() ].map(char => {
     const parent = wrapperElement.cloneNode();
 
     parent.insertAdjacentHTML('afterbegin', char === ' ' ? '&nbsp;' : char);
