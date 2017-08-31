@@ -3,6 +3,8 @@ language: node_js
 node_js:
   - node
 
+script: eslint src --ignore-pattern "src/**/*\.test\.js" && npm test
+
 cache:
   yarn: true
   directories:
