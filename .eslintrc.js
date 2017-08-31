@@ -4,6 +4,7 @@ module.exports = {
     browser: true,
   },
   rules: {
+    'arrow-parens': 'off',
     'no-underscore-dangle': 'off',
   },
 };
