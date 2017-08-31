@@ -70,7 +70,6 @@ describe('splitNode', () => {
 
   it('allows chars to be wrapped by any tag', () => {
     const testText = 'X';
-    const { length } = testText;
     const node = createNode(testText);
     const [ anchor ] = splitNode(node, 'a');
     const [ div ] = splitNode(node, 'div');
