@@ -15,14 +15,13 @@ describe('splitNode', () => {
     const node = createNode(testText);
     const spans = splitNode(node);
 
+    expect(spans).toBeInstanceOf(Array);
     expect(spans).toHaveLength(length);
 
-    for (let i = 0; i < length; i++) {
-      const span = spans[i];
-
+    spans.forEach((span, i) => {
       expect(span).toBeInstanceOf(HTMLSpanElement);
       expect(span.innerHTML).toBe(testText.charAt(i));
-    }
+    });
   });
 
   it('ignores space chars before and after the real text', () => {
@@ -36,28 +35,23 @@ describe('splitNode', () => {
 
   it('converts space chars to `&nbsp;`', () => {
     const testText = 'Some piece of text with space chars in it.';
-    const { length } = testText;
     const node = createNode(testText);
     const spans = splitNode(node);
 
-    for (let i = 0; i < length; i++) {
+    spans.forEach((span, i) => {
       if (testText.charAt(i) === ' ') {
-        expect(spans[i].innerHTML).toBe('&nbsp;');
+        expect(span.innerHTML).toBe('&nbsp;');
       }
-    }
+    });
   });
 
   it('handles any node', () => {
-    const testText = 'Some piece of text with space chars in it.';
+    const testText = 'Some test text.';
     const { length } = testText;
     const nodeTypes = ['div', 'a', 'time', 'asdf'];
     const nodes = nodeTypes.map(type => createNode(testText, type));
 
-    for (const node of nodes) {
-      const spans = splitNode(node);
-
-      expect(spans).toHaveLength(length);
-    }
+    nodes.forEach(node => expect(splitNode(node)).toHaveLength(length));
   });
 
   it('handles nodes with no text content', () => {
@@ -91,11 +85,9 @@ describe('splitNode', () => {
 
     expect(spans).toHaveLength(length);
 
-    for (let i = 0; i < length; i++) {
-      const span = spans[i];
-
+    spans.forEach((span, i) => {
       expect(span).toBeInstanceOf(HTMLSpanElement);
       expect(span.innerHTML).toBe(emojis[i]);
-    }
+    });
   });
 });
