@@ -1,14 +1,12 @@
 module.exports = {
-  extends: 'airbnb',
+  extends: 'airbnb-base',
   env: {
     browser: true,
     jest: true,
   },
   rules: {
-    'array-bracket-spacing': 'off',
-    'arrow-parens': 'off',
-    'no-plusplus': 'off',
-    'no-restricted-syntax': 'off',
+    'array-bracket-spacing': [ 'error', 'always' ],
+    'arrow-parens': [ 'error', 'as-needed' ],
     'no-underscore-dangle': 'off',
   },
 };

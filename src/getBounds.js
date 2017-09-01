@@ -5,7 +5,7 @@
  *
  * @return {Object}
  */
-export default (elem) => {
+export default elem => {
   const { top, left, width, height } = elem.getBoundingClientRect();
 
   return {
