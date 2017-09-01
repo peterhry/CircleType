@@ -48,7 +48,7 @@ describe('splitNode', () => {
   it('handles any node', () => {
     const testText = 'Some test text.';
     const { length } = testText;
-    const nodeTypes = ['div', 'a', 'time', 'asdf'];
+    const nodeTypes = [ 'div', 'a', 'time', 'asdf' ];
     const nodes = nodeTypes.map(type => createNode(testText, type));
 
     nodes.forEach(node => expect(splitNode(node)).toHaveLength(length));
@@ -77,7 +77,7 @@ describe('splitNode', () => {
   });
 
   it('handles all emojis (chars whose length might be `2`)', () => {
-    const emojis = ['🙂', '🤓', '👹', '🙉', '💩'];
+    const emojis = [ '🙂', '🤓', '👹', '🙉', '💩' ];
     const testText = emojis.join('');
     const { length } = emojis;
     const node = createNode(testText);
