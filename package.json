@@ -8,7 +8,7 @@
   ],
   "repository": "peterhry/CircleType",
   "scripts": {
-    "test": "jest --notify",
+    "test": "jest --notify && backstop test",
     "docs": "jsdoc2md --template README.hbs --files src/class.js > README.md"
   },
   "keywords": [
@@ -27,6 +27,7 @@
     "babel-loader": "7.1.2",
     "babel-plugin-transform-object-rest-spread": "6.26.0",
     "babel-preset-env": "1.6.0",
+    "backstopjs": "3.0.22",
     "eslint": "4.5.0",
     "eslint-config-airbnb-base": "11.3.2",
     "eslint-loader": "1.9.0",
