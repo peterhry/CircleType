@@ -17,9 +17,12 @@
       "label": "CircleType Demo",
       "url": "demo/index.html",
       "selectors": [
-        ".demo"
+        "#demo1",
+        "#demo2",
+        "#demo3",
+        "#demo4",
+        "#demo5"
       ],
-      "selectorExpansion": true,
       "misMatchThreshold": 0.1,
       "requireSameDimensions": false,
       "readySelector": ".demo span"
