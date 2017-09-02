@@ -17,16 +17,12 @@
       "label": "CircleType Demo",
       "url": "demo/index.html",
       "selectors": [
-        "#demo1",
-        "#demo2",
-        "#demo3",
-        "#demo4",
-        "#demo5",
-        "#demo6"
+        ".demo"
       ],
-      "delay": 500,
+      "selectorExpansion": true,
       "misMatchThreshold": 0.1,
-      "requireSameDimensions": false
+      "requireSameDimensions": false,
+      "readySelector": ".demo span"
     }
   ],
   "paths": {
@@ -37,6 +33,6 @@
   "report": ["browser"],
   "engine": "chrome",
   "engineFlags": [],
-  "debug": true,
+  "debug": false,
   "debugWindow": false
 }
