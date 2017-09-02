@@ -1,5 +1,5 @@
 addons:
-  chrome: beta
+  chrome: stable
 language: node_js
 node_js:
 - node
