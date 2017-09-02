@@ -24,9 +24,9 @@
         "#demo5",
         "#demo6"
       ],
+      "delay": 500,
       "misMatchThreshold": 0.1,
-      "requireSameDimensions": false,
-      "readySelector": ".demo span"
+      "requireSameDimensions": false
     }
   ],
   "paths": {
