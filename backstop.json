@@ -18,7 +18,7 @@
       "url": "demo/index.html",
       "selectors": ".demo",
       "selectorExpansion": true,
-      "misMatchThreshold": 1.25,
+      "misMatchThreshold": 0,
       "requireSameDimensions": false,
       "readySelector": ".demo span"
     }
