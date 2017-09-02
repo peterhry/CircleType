@@ -6,7 +6,7 @@ language: node_js
 node_js:
   - node
 
-script: eslint src && npm t
+script: eslint src && npm t && npm run backstop
 
 cache:
   yarn: true
