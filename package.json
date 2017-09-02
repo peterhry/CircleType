@@ -8,7 +8,7 @@
   ],
   "repository": "peterhry/CircleType",
   "scripts": {
-    "test": "jest --notify && backstop test",
+    "test": "jest --notify && backstop reference",
     "docs": "jsdoc2md --template README.hbs --files src/class.js > README.md"
   },
   "keywords": [
