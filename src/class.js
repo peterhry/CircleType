@@ -1,4 +1,4 @@
-import radiansToDegrees from './radiansToDegrees';
+import radiansToDegrees from './utils/radiansToDegrees';
 import getBounds from './getBounds';
 import splitNode from './utils/splitNode';
 import getHeight from './getHeight';
