@@ -11,14 +11,14 @@ const { PI, max } = Math;
  * @param  {HTMLElement} elem A target HTML element.
  *
  * @example
- * const circleType = new CircleType(document.getElementById('elementId'));
+ * // Instantiate `CircleType` with an HTML element.
+ * const circleType = new CircleType(document.getElementById('myElement'));
  *
- * // Instance methods are chainable.
+ * // Set the text radius and direction. Note: setter methods are chainable.
  * circleType.radius(200).dir(-1);
  */
 class CircleType {
   constructor(elem) {
-    this._dir = 1;
     this.element = elem;
     this.originalHTML = this.element.innerHTML;
 
@@ -42,11 +42,15 @@ class CircleType {
     const totalWidth = this._metrics.reduce((sum, { width }) => sum + width, 0);
     this._minRadius = (totalWidth / PI / 2) + this._lineHeight;
 
+    this._dir = 1;
+    this._radius = this._minRadius;
+
     this._invalidate();
   }
 
   /**
-   * Gets the current text radius in pixels.
+   * Gets the text radius in pixels. The default radius is the radius required
+   * for the text to form a complete circle.
    *
    * @name radius
    * @function
@@ -55,14 +59,16 @@ class CircleType {
    * @return {Number} The current text radius.
    *
    * @example
-   * const circleType = new CircleType(myElement);
+   * const circleType = new CircleType(document.getElementById('myElement'));
    *
    * circleType.radius();
    * // > 150
    */
 
   /**
-   * Sets the text radius.
+   * Sets the desired text radius. The minimum radius is the radius required
+   * for the text to form a complete circle. If `value` is less than the minimum
+   * radius, the minimum radius is used.
    *
    * @name radius
    * @function
@@ -72,7 +78,7 @@ class CircleType {
    * @return {Number}       The current instance.
    *
    * @example
-   * const circleType = new CircleType(myElement);
+   * const circleType = new CircleType(document.getElementById('myElement'));
    *
    * // Set the radius to 150 pixels.
    * circleType.radius(150);
@@ -90,7 +96,7 @@ class CircleType {
   }
 
   /**
-   * Gets the current text direction. `1` is clockwise, `-1` is counter-clockwise.
+   * Gets the text direction. `1` is clockwise, `-1` is counter-clockwise.
    *
    * @name dir
    * @function
@@ -99,7 +105,7 @@ class CircleType {
    * @return {Number} The current text radius.
    *
    * @example
-   * const circleType = new CircleType(myElement);
+   * const circleType = new CircleType(document.getElementById('myElement'));
    *
    * circleType.dir();
    * // > 1 (clockwise)
@@ -116,7 +122,7 @@ class CircleType {
    * @return {CircleType}   The current instance.
    *
    * @example
-   * const circleType = new CircleType(myElement);
+   * const circleType = new CircleType(document.getElementById('myElement'));
    *
    * // Set the direction to counter-clockwise.
    * circleType.dir(-1);
@@ -143,7 +149,7 @@ class CircleType {
    * @return {CircleType} The current instance.
    *
    * @example
-   * const circleType = new CircleType(myElement);
+   * const circleType = new CircleType(document.getElementById('myElement'));
    *
    * circleType.refresh();
    */
@@ -158,7 +164,7 @@ class CircleType {
    * @return {CircleType} This instance.
    *
    * @example
-   * const circleType = new CircleType(myElement);
+   * const circleType = new CircleType(document.getElementById('myElement'));
    *
    * // Restore `myElement` to its original state.
    * circleType.destroy();

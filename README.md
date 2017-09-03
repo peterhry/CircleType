@@ -2,19 +2,27 @@
 
 [![Build Status](https://travis-ci.org/peterhry/CircleType.svg?branch=master)](https://travis-ci.org/peterhry/CircleType)
 
-A JavaScript library that lets you curve type on the web
+A JavaScript library that lets you curve type on the web.
 
-Demos: <http://circletype.labwire.ca>
+Demo: <http://circletype.labwire.ca>
 
 ## Installation
 
-**npm**
+In a browser:
+```html
+<script src="circletype.min.js"></script>
+```
 
-    npm i circletype --save
+Using npm:
 
-**bower**
+```shell
+$ npm i circletype --save
+```
 
-    bower i circletype.js --save
+Load ES6 module:
+```js
+import CircleType from `circletype`;
+```
 
 # API
 
@@ -44,15 +52,18 @@ A CircleType instance creates a circular text element.
 
 **Example**  
 ```js
-const circleType = new CircleType(document.getElementById('elementId'));
+// Instantiate `CircleType` with an HTML element.
+const circleType = new CircleType(document.getElementById('myElement'));
 
-// Instance methods are chainable.
+// Set the text radius and direction. Note: setter methods are chainable.
 circleType.radius(200).dir(-1);
 ```
 <a name="CircleType+radius"></a>
 
 ### circleType.radius(value) ⇒ <code>Number</code>
-Sets the text radius.
+Sets the desired text radius. The minimum radius is the radius required
+for the text to form a complete circle. If `value` is less than the minimum
+radius, the minimum radius is used.
 
 **Kind**: instance method of [<code>CircleType</code>](#CircleType)  
 **Returns**: <code>Number</code> - The current instance.  
@@ -63,7 +74,7 @@ Sets the text radius.
 
 **Example**  
 ```js
-const circleType = new CircleType(myElement);
+const circleType = new CircleType(document.getElementById('myElement'));
 
 // Set the radius to 150 pixels.
 circleType.radius(150);
@@ -71,13 +82,14 @@ circleType.radius(150);
 <a name="CircleType+radius"></a>
 
 ### circleType.radius() ⇒ <code>Number</code>
-Gets the current text radius in pixels.
+Gets the text radius in pixels. The default radius is the radius required
+for the text to form a complete circle.
 
 **Kind**: instance method of [<code>CircleType</code>](#CircleType)  
 **Returns**: <code>Number</code> - The current text radius.  
 **Example**  
 ```js
-const circleType = new CircleType(myElement);
+const circleType = new CircleType(document.getElementById('myElement'));
 
 circleType.radius();
 // > 150
@@ -96,7 +108,7 @@ Sets the text direction. `1` is clockwise, `-1` is counter-clockwise.
 
 **Example**  
 ```js
-const circleType = new CircleType(myElement);
+const circleType = new CircleType(document.getElementById('myElement'));
 
 // Set the direction to counter-clockwise.
 circleType.dir(-1);
@@ -107,13 +119,13 @@ circleType.dir(1);
 <a name="CircleType+dir"></a>
 
 ### circleType.dir() ⇒ <code>Number</code>
-Gets the current text direction. `1` is clockwise, `-1` is counter-clockwise.
+Gets the text direction. `1` is clockwise, `-1` is counter-clockwise.
 
 **Kind**: instance method of [<code>CircleType</code>](#CircleType)  
 **Returns**: <code>Number</code> - The current text radius.  
 **Example**  
 ```js
-const circleType = new CircleType(myElement);
+const circleType = new CircleType(document.getElementById('myElement'));
 
 circleType.dir();
 // > 1 (clockwise)
@@ -128,7 +140,7 @@ called if the font size is ever changed.
 **Returns**: [<code>CircleType</code>](#CircleType) - The current instance.  
 **Example**  
 ```js
-const circleType = new CircleType(myElement);
+const circleType = new CircleType(document.getElementById('myElement'));
 
 circleType.refresh();
 ```
@@ -142,7 +154,7 @@ original state.
 **Returns**: [<code>CircleType</code>](#CircleType) - This instance.  
 **Example**  
 ```js
-const circleType = new CircleType(myElement);
+const circleType = new CircleType(document.getElementById('myElement'));
 
 // Restore `myElement` to its original state.
 circleType.destroy();
