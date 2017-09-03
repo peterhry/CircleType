@@ -6,7 +6,12 @@
  * @return {Object}
  */
 export default elem => {
-  const { top, left, width, height } = elem.getBoundingClientRect();
+  const {
+    top,
+    left,
+    width,
+    height,
+  } = elem.getBoundingClientRect();
 
   return {
     top: top + window.pageYOffset,
