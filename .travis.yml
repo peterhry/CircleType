@@ -22,15 +22,21 @@ branches:
   # - cat coverage/lcov.info | node_modules/.bin/coveralls
 
 deploy:
-  provider: s3
-  access_key_id: AKIAJ3RTIW27ZFRX25JA
-  secret_access_key:
-    secure: OlwhefG17um4EeNGf1z9vQ6LBvwI/tV61vITFdK18eclOk82WEJMigfaU5VafcXLlslJ1BCfmvAeKynuStvJQagF+N408xj2HIYDakOStxUGfCpBYN2Q33CsVv0PnNIueqN3oKc/pKef9gecgJTZVXUmlFMnq2f10ixguijGB92gIBT3FsHuJ6AS3U9vAVw31zJUXCoNPd0pcCmoBtYteHaeQR7R9xzoqTigglqEq+w/BMnLIGjmRT6/5EiD4UXyF9I6+r7u4JPFIlK1688UTkr106UW/3Au5Q7VlKVKljDd5+7D8xaBPJ+VjMm0Nmz1y7T/Y5vaUDC0I5Nh3GNn88Lf7GjujNA2ynyOxXJGtvMreiGSKLILTzaYhd6sEk93sYJ37W2ThtFTG/YLmcChIUXMDdBtc/vQg2Tl/i87dTrowwGHbcQ+vVntMVex55iesYQPpHrw2e+PbCsxQMkTtSQUwr28fsl6Pb3rYscU3Wu2v1e6Yi/mxIB4W6H0xLg7iJuTZSahEVC8BMht5M+OVinTwnJcrs3j3yYk7GaUINUw/EcZ0Tq5PyPn040y6aqXEXgpN2M0puWrecpy6R6674zT9+FRV1B0gkHZ/Jvl8/afDDSgE56+yr2RtiS8UICUgsPtFGspxX49evB/+lS1RSA/gBQy60vhKU5dqtN5VIk=
-  bucket: circletype
-  skip_cleanup: true
-  local_dir: backstop_data
-  on:
-    branch: generate-reference-images
+  - provider: s3
+    access_key_id: AKIAJ3RTIW27ZFRX25JA
+    secret_access_key:
+      secure: OlwhefG17um4EeNGf1z9vQ6LBvwI/tV61vITFdK18eclOk82WEJMigfaU5VafcXLlslJ1BCfmvAeKynuStvJQagF+N408xj2HIYDakOStxUGfCpBYN2Q33CsVv0PnNIueqN3oKc/pKef9gecgJTZVXUmlFMnq2f10ixguijGB92gIBT3FsHuJ6AS3U9vAVw31zJUXCoNPd0pcCmoBtYteHaeQR7R9xzoqTigglqEq+w/BMnLIGjmRT6/5EiD4UXyF9I6+r7u4JPFIlK1688UTkr106UW/3Au5Q7VlKVKljDd5+7D8xaBPJ+VjMm0Nmz1y7T/Y5vaUDC0I5Nh3GNn88Lf7GjujNA2ynyOxXJGtvMreiGSKLILTzaYhd6sEk93sYJ37W2ThtFTG/YLmcChIUXMDdBtc/vQg2Tl/i87dTrowwGHbcQ+vVntMVex55iesYQPpHrw2e+PbCsxQMkTtSQUwr28fsl6Pb3rYscU3Wu2v1e6Yi/mxIB4W6H0xLg7iJuTZSahEVC8BMht5M+OVinTwnJcrs3j3yYk7GaUINUw/EcZ0Tq5PyPn040y6aqXEXgpN2M0puWrecpy6R6674zT9+FRV1B0gkHZ/Jvl8/afDDSgE56+yr2RtiS8UICUgsPtFGspxX49evB/+lS1RSA/gBQy60vhKU5dqtN5VIk=
+    bucket: circletype
+    skip_cleanup: true
+    local_dir: backstop_data
+    on:
+      branch: generate-reference-images
+  - provider: pages
+    skip_cleanup: true
+    github_token: $GITHUB_TOKEN
+    local_dir: demo
+    on:
+      branch: master
 
 env:
   - CHROME_PATH=/usr/bin/google-chrome-beta
