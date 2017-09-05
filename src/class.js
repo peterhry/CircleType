@@ -184,7 +184,9 @@ class CircleType {
    * @return {CircleType} This instance.
    */
   _invalidate() {
-    requestAnimationFrame(() => {
+    cancelAnimationFrame(this._raf);
+
+    this._raf = requestAnimationFrame(() => {
       this._layout();
     });
 
