@@ -17,14 +17,18 @@ describe('getRect', () => {
     expect(getBoundingClientRect).toHaveBeenCalledTimes(1);
   });
 
-  it('allows a passed in reference to offset the returned position', () => {
+  it('offsets the returned position relative to `window`', () => {
     const top = 415;
     const left = 604;
     const pageXOffset = 3000;
     const pageYOffset = 9000;
     const getBoundingClientRect = jest.fn().mockReturnValue({ left, top });
     const element = { getBoundingClientRect };
-    const result = getRect(element, { pageXOffset, pageYOffset });
+
+    global.pageXOffset = pageXOffset;
+    global.pageYOffset = pageYOffset;
+
+    const result = getRect(element);
 
     expect(result.left).toBe(left + pageXOffset);
     expect(result.top).toBe(top + pageYOffset);
