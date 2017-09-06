@@ -6,10 +6,17 @@
  * @return {object} The size and position of the provided element.
  */
 export default element => {
-  const rect = { ...element.getBoundingClientRect() };
+  const {
+    top,
+    left,
+    width,
+    height,
+  } = element.getBoundingClientRect();
 
-  rect.left += window.pageXOffset;
-  rect.top += window.pageYOffset;
-
-  return rect;
+  return {
+    left: left + window.pageXOffset,
+    top: top + window.pageYOffset,
+    height,
+    width,
+  };
 };
