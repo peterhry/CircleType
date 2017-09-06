@@ -13,7 +13,7 @@ describe('getRect', () => {
     const element = { getBoundingClientRect };
     const result = getRect(element);
 
-    expect(result).toBe(rect);
+    expect(result).toMatchObject(rect);
     expect(getBoundingClientRect).toHaveBeenCalledTimes(1);
   });
 
