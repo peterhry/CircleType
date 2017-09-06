@@ -233,7 +233,10 @@ class CircleType {
       style.webkitTransformOrigin = origin;
     });
 
-    this.container.style.height = `${getHeight(this._radius, sum) + this._lineHeight}px`;
+    const sagInner = getHeight(innerRadius, sum) + this._lineHeight;
+    const sagOuter = getHeight(this._radius, sum);
+
+    this.container.style.height = `${max(sagInner, sagOuter) / this._fontSize}em`;
 
     return this;
   }

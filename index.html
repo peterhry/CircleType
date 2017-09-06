@@ -73,8 +73,7 @@ updateRadius();</code>
       </div>
       <code>&lt;h2 id="demo5"&gt;I play well with FitText.js too! &lt;/h2&gt;
 var demo5 = new CircleType(document.getElementById('demo5')).radius(180);
-$(demo5.element).fitText();
-window.addEventListener('resize', demo5.refresh.bind(demo5));</code>
+$(demo5.element).fitText();</code>
       <h3 class="puffy" id="fitText">Destroy</h3>
       <p>Here’s how you can remove the effect from an element.</p>
       <div class="demo-box" id="demo-box6">
@@ -152,7 +151,6 @@ document.getElementById('destroyButton').addEventListener('click', demo6.destroy
          */
         var demo5 = new CircleType(document.getElementById('demo5')).radius(180);
         $(demo5.element).fitText();
-        window.addEventListener('resize', demo5.refresh.bind(demo5));
 
         /**
          * Destroy
