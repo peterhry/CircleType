@@ -8,7 +8,9 @@ import degreesToRadians from './utils/degreesToRadians';
  * @return {Number}         The total height.
  */
 export default (radius, theta) => {
-  const chord = 2 * radius * Math.sin(degreesToRadians(theta) / 2);
+  const halfChord = radius * Math.sin(degreesToRadians(theta / 2));
 
-  return radius - Math.sqrt((radius ** 2) - ((chord / 2) ** 2));
+  const delta = Math.sqrt((radius ** 2) - (halfChord ** 2));
+
+  return (theta > 180) ? radius + delta : radius - delta;
 };
