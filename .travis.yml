@@ -33,6 +33,7 @@ deploy:
       branch: generate-reference-images
   - provider: pages
     skip_cleanup: true
+    fqdn: circletype.labwire.ca
     github_token: $GITHUB_TOKEN
     on:
       branch: master
