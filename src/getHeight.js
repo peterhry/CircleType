@@ -1,4 +1,4 @@
-import getRect from './utils/getRect';
+import degreesToRadians from './utils/degreesToRadians';
 
 /**
  * Gets the combined height of all letter elements.
@@ -7,9 +7,8 @@ import getRect from './utils/getRect';
  *
  * @return {Number}         The total height.
  */
-export default letters => {
-  const mid = getRect(letters[Math.floor(letters.length / 2)]);
-  const first = getRect(letters[0]);
+export default (radius, theta) => {
+  const chord = 2 * radius * Math.sin(degreesToRadians(theta) / 2);
 
-  return first.height + Math.abs(first.top - mid.top);
+  return radius - Math.sqrt((radius ** 2) - ((chord / 2) ** 2));
 };

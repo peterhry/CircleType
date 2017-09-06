@@ -235,7 +235,7 @@ class CircleType {
       style.webkitTransformOrigin = origin;
     });
 
-    this.container.style.height = `${getHeight(this._letters)}px`;
+    this.container.style.height = `${getHeight(this._radius, sum)}px`;
 
     return this;
   }
