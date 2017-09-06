@@ -1,4 +1,4 @@
-import getBounds from './getBounds';
+import getRect from './utils/getRect';
 
 /**
  * Gets the combined height of all letter elements.
@@ -8,8 +8,8 @@ import getBounds from './getBounds';
  * @return {Number}         The total height.
  */
 export default letters => {
-  const mid = getBounds(letters[Math.floor(letters.length / 2)]);
-  const first = getBounds(letters[0]);
+  const mid = getRect(letters[Math.floor(letters.length / 2)]);
+  const first = getRect(letters[0]);
 
   return first.height + Math.abs(first.top - mid.top);
 };
