@@ -33,4 +33,21 @@ describe('getRect', () => {
     expect(result.left).toBe(left + pageXOffset);
     expect(result.top).toBe(top + pageYOffset);
   });
+
+  it('does not mutate the rect returned by `getBoundingClientRect`', () => {
+    const rect = { left: 0, top: 0 };
+    const pageXOffset = 3000;
+    const pageYOffset = 9000;
+    const getBoundingClientRect = jest.fn().mockReturnValue(rect);
+    const element = { getBoundingClientRect };
+
+    global.pageXOffset = pageXOffset;
+    global.pageYOffset = pageYOffset;
+
+    const result = getRect(element);
+
+    expect(result).not.toBe(rect);
+    expect(rect.left).not.toBe(pageXOffset);
+    expect(rect.top).not.toBe(pageYOffset);
+  });
 });
