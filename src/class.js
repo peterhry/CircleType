@@ -1,7 +1,7 @@
 import radiansToDegrees from './utils/radiansToDegrees';
 import getRect from './utils/getRect';
 import splitNode from './utils/splitNode';
-import getHeight from './getHeight';
+import sagitta from './utils/sagitta';
 
 const { PI, max } = Math;
 
@@ -233,8 +233,8 @@ class CircleType {
       style.webkitTransformOrigin = origin;
     });
 
-    const sagInner = getHeight(innerRadius, sum) + this._lineHeight;
-    const sagOuter = getHeight(this._radius, sum);
+    const sagInner = sagitta(innerRadius, sum) + this._lineHeight;
+    const sagOuter = sagitta(this._radius, sum);
 
     this.container.style.height = `${max(sagInner, sagOuter) / this._fontSize}em`;
 
