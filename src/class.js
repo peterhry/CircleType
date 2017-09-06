@@ -1,5 +1,5 @@
 import radiansToDegrees from './utils/radiansToDegrees';
-import getBounds from './getBounds';
+import getRect from './utils/getRect';
 import splitNode from './utils/splitNode';
 import getHeight from './getHeight';
 
@@ -37,7 +37,7 @@ class CircleType {
 
     this._fontSize = parseInt(fontSize, 10);
     this._lineHeight = parseInt(lineHeight, 10) || this._fontSize;
-    this._metrics = this._letters.map(getBounds);
+    this._metrics = this._letters.map(letter => getRect(letter));
 
     const totalWidth = this._metrics.reduce((sum, { width }) => sum + width, 0);
     this._minRadius = (totalWidth / PI / 2) + this._lineHeight;
