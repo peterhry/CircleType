@@ -15,7 +15,7 @@
   "scenarios": [
     {
       "label": "CircleType Demo",
-      "url": "demo/index.html",
+      "url": "index.html",
       "selectors": ".demo",
       "selectorExpansion": true,
       "misMatchThreshold": 0,
