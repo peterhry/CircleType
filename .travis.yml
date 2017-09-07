@@ -6,7 +6,7 @@ language: node_js
 node_js:
   - node
 
-script: eslint src && npm t && npm run backstop
+script: eslint src && npm t
 
 cache:
   yarn: true
@@ -16,7 +16,7 @@ cache:
 branches:
   only:
     - master
-    - generate-reference-images
+    - reference-images
 
 # after_script:
   # - cat coverage/lcov.info | node_modules/.bin/coveralls
@@ -30,7 +30,7 @@ deploy:
     skip_cleanup: true
     local_dir: backstop_data
     on:
-      branch: generate-reference-images
+      branch: reference-images
   - provider: pages
     skip_cleanup: true
     fqdn: circletype.labwire.ca
