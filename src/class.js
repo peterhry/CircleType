@@ -1,7 +1,7 @@
 import radiansToDegrees from './utils/radiansToDegrees';
 import getRect from './utils/getRect';
 import splitNode from './utils/splitNode';
-import getHeight from './getHeight';
+import sagitta from './utils/sagitta';
 
 const { PI, max } = Math;
 
@@ -201,13 +201,11 @@ class CircleType {
    * @return {CircleType} This instance.
    */
   _layout() {
-    const finalRadius = !this._radius ? this._minRadius : this._radius;
-
-    const originY = this._dir === -1 ? (-finalRadius + this._lineHeight) : finalRadius;
+    const originY = this._dir === -1 ? (-this._radius + this._lineHeight) : this._radius;
 
     const origin = `center ${originY / this._fontSize}em`;
 
-    const innerRadius = finalRadius - this._lineHeight;
+    const innerRadius = this._radius - this._lineHeight;
     const { rotations, sum } = this._metrics.reduce((data, { width }) => {
       const rotation = radiansToDegrees(width / innerRadius);
 
@@ -235,7 +233,10 @@ class CircleType {
       style.webkitTransformOrigin = origin;
     });
 
-    this.container.style.height = `${getHeight(this._letters)}px`;
+    const sagInner = sagitta(innerRadius, sum) + this._lineHeight;
+    const sagOuter = sagitta(this._radius, sum);
+
+    this.container.style.height = `${max(sagInner, sagOuter) / this._fontSize}em`;
 
     return this;
   }
