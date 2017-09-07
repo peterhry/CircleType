@@ -6,14 +6,9 @@ import degreesToRadians from './degreesToRadians';
  *
  * @see {@link https://en.wikipedia.org/wiki/Sagitta_(geometry)}
  *
- * @param {number} radius The radius in degrees of the arc.
- * @param {number} theta The angle of the arc.
+ * @param {number} r The radius of the arc.
+ * @param {number} θ The angle in degrees of the arc.
  *
  * @return {number} The sagitta of the provided arc.
  */
-export default (radius, theta) => {
-  const halfChord = radius * Math.sin(degreesToRadians(theta / 2));
-  const delta = Math.sqrt((radius ** 2) - (halfChord ** 2));
-
-  return (theta > 180) ? radius + delta : radius - delta;
-};
+export default (r, θ) => r * (1 - Math.cos(degreesToRadians(θ / 2)));
