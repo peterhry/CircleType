@@ -1,15 +1,15 @@
 import degreesToRadians from './degreesToRadians';
 
 /**
- * Gets the [sagitta][1] of an arc. The sagitta is the distance from the center
- * of the arc to the center of its base.
+ * Gets the sagitta of an arc. The sagitta of an arc is the distance from the
+ * center of the arc to the center of its base.
  *
- * [1]: https://en.wikipedia.org/wiki/Sagitta_(geometry)
-
- * @param  {Number} radius The radius of the arc.
- * @param  {Number} theta  The angle of the arc.
+ * @see {@link https://en.wikipedia.org/wiki/Sagitta_(geometry)}
  *
- * @return {Number}        The sagitta value.
+ * @param {number} radius The radius in degrees of the arc.
+ * @param {number} theta The angle of the arc.
+ *
+ * @return {number} The sagitta of the provided arc.
  */
 export default (radius, theta) => {
   const halfChord = radius * Math.sin(degreesToRadians(theta / 2));
