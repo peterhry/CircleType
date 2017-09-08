@@ -35,8 +35,8 @@ class CircleType {
 
     const { fontSize, lineHeight } = window.getComputedStyle(this.element);
 
-    this._fontSize = parseInt(fontSize, 10);
-    this._lineHeight = parseInt(lineHeight, 10) || this._fontSize;
+    this._fontSize = parseFloat(fontSize);
+    this._lineHeight = parseFloat(lineHeight) || this._fontSize;
     this._metrics = this._letters.map(getRect);
 
     const totalWidth = this._metrics.reduce((sum, { width }) => sum + width, 0);
