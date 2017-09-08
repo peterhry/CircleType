@@ -30,16 +30,30 @@ class CircleType {
     this._letters = splitNode(elem);
     this._letters.forEach(letter => container.appendChild(letter));
 
+    this._guide = document.createElement('div');
+    this._guide.style.borderRadius = '100%';
+    // this._guide.style.border = '1px solid red';
+    this._guide.style.left = '50%';
+    this._guide.style.pointerEvents = 'none';
+    this._guide.style.transform = 'translateX(-50%)';
+    this._guide.style.position = 'absolute';
+    container.appendChild(this._guide);
+
+
     this.element.innerHTML = '';
     this.element.appendChild(container);
 
-    const { fontSize, lineHeight } = window.getComputedStyle(this.element);
+    const { fontSize } = window.getComputedStyle(this.element);
 
-    this._fontSize = parseInt(fontSize, 10);
-    this._lineHeight = parseInt(lineHeight, 10) || this._fontSize;
     this._metrics = this._letters.map(getRect);
+    this._fontSize = parseInt(fontSize, 10);
+    // this._lineHeight = parseInt(lineHeight, 10) || this._fontSize;
+    this._lineHeight = this._metrics[0].height;
 
     const totalWidth = this._metrics.reduce((sum, { width }) => sum + width, 0);
+
+    // console.log(this._letters[1], this._lineHeight, this._fontSize, this._metrics[1].height);
+
     this._minRadius = (totalWidth / PI / 2) + this._lineHeight;
 
     this._dir = 1;
@@ -86,6 +100,9 @@ class CircleType {
   radius(value) {
     if (value !== undefined) {
       this._radius = max(this._minRadius, value);
+
+      this._guide.style.width = `${this._radius * 2}px`;
+      this._guide.style.height = `${this._radius * 2}px`;
 
       this._invalidate();
 
@@ -228,6 +245,7 @@ class CircleType {
       style.bottom = this._dir === -1 ? 0 : 'auto';
       style.left = '50%';
       style.transform = transform;
+      // style.border = '1px solid red'
       style.transformOrigin = origin;
       style.webkitTransform = transform;
       style.webkitTransformOrigin = origin;
