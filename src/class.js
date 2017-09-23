@@ -56,7 +56,7 @@ class CircleType {
    * @function
    * @instance
    * @memberof CircleType
-   * @return {Number} The current text radius.
+   * @return {number} The current text radius.
    *
    * @example
    * const circleType = new CircleType(document.getElementById('myElement'));
@@ -74,8 +74,8 @@ class CircleType {
    * @function
    * @instance
    * @memberof CircleType
-   * @param  {Number} value A new text radius in pixels.
-   * @return {Number}       The current instance.
+   * @param  {number} value A new text radius in pixels.
+   * @return {CircleType}   The current instance.
    *
    * @example
    * const circleType = new CircleType(document.getElementById('myElement'));
@@ -102,7 +102,7 @@ class CircleType {
    * @function
    * @instance
    * @memberof CircleType
-   * @return {Number} The current text radius.
+   * @return {number} The current text radius.
    *
    * @example
    * const circleType = new CircleType(document.getElementById('myElement'));
@@ -118,7 +118,7 @@ class CircleType {
    * @function
    * @instance
    * @memberof CircleType
-   * @param  {Number} value A new text direction.
+   * @param  {number} value A new text direction.
    * @return {CircleType}   The current instance.
    *
    * @example

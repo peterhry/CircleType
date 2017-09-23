@@ -35,10 +35,10 @@ A CircleType instance creates a circular text element.
 
 * [CircleType](#CircleType)
     * [new CircleType(elem)](#new_CircleType_new)
-    * [.radius(value)](#CircleType+radius) ⇒ <code>Number</code>
-    * [.radius()](#CircleType+radius) ⇒ <code>Number</code>
+    * [.radius(value)](#CircleType+radius) ⇒ [<code>CircleType</code>](#CircleType)
+    * [.radius()](#CircleType+radius) ⇒ <code>number</code>
     * [.dir(value)](#CircleType+dir) ⇒ [<code>CircleType</code>](#CircleType)
-    * [.dir()](#CircleType+dir) ⇒ <code>Number</code>
+    * [.dir()](#CircleType+dir) ⇒ <code>number</code>
     * [.refresh()](#CircleType+refresh) ⇒ [<code>CircleType</code>](#CircleType)
     * [.destroy()](#CircleType+destroy) ⇒ [<code>CircleType</code>](#CircleType)
 
@@ -60,17 +60,17 @@ circleType.radius(200).dir(-1);
 ```
 <a name="CircleType+radius"></a>
 
-### circleType.radius(value) ⇒ <code>Number</code>
+### circleType.radius(value) ⇒ [<code>CircleType</code>](#CircleType)
 Sets the desired text radius. The minimum radius is the radius required
 for the text to form a complete circle. If `value` is less than the minimum
 radius, the minimum radius is used.
 
 **Kind**: instance method of [<code>CircleType</code>](#CircleType)  
-**Returns**: <code>Number</code> - The current instance.  
+**Returns**: [<code>CircleType</code>](#CircleType) - The current instance.  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| value | <code>Number</code> | A new text radius in pixels. |
+| value | <code>number</code> | A new text radius in pixels. |
 
 **Example**  
 ```js
@@ -81,12 +81,12 @@ circleType.radius(150);
 ```
 <a name="CircleType+radius"></a>
 
-### circleType.radius() ⇒ <code>Number</code>
+### circleType.radius() ⇒ <code>number</code>
 Gets the text radius in pixels. The default radius is the radius required
 for the text to form a complete circle.
 
 **Kind**: instance method of [<code>CircleType</code>](#CircleType)  
-**Returns**: <code>Number</code> - The current text radius.  
+**Returns**: <code>number</code> - The current text radius.  
 **Example**  
 ```js
 const circleType = new CircleType(document.getElementById('myElement'));
@@ -104,7 +104,7 @@ Sets the text direction. `1` is clockwise, `-1` is counter-clockwise.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| value | <code>Number</code> | A new text direction. |
+| value | <code>number</code> | A new text direction. |
 
 **Example**  
 ```js
@@ -118,11 +118,11 @@ circleType.dir(1);
 ```
 <a name="CircleType+dir"></a>
 
-### circleType.dir() ⇒ <code>Number</code>
+### circleType.dir() ⇒ <code>number</code>
 Gets the text direction. `1` is clockwise, `-1` is counter-clockwise.
 
 **Kind**: instance method of [<code>CircleType</code>](#CircleType)  
-**Returns**: <code>Number</code> - The current text radius.  
+**Returns**: <code>number</code> - The current text radius.  
 **Example**  
 ```js
 const circleType = new CircleType(document.getElementById('myElement'));
