@@ -75,19 +75,4 @@ describe('splitNode', () => {
     expect(button).toBeInstanceOf(HTMLButtonElement);
     expect(unknown).toBeInstanceOf(HTMLUnknownElement);
   });
-
-  it('handles all emojis (chars whose length might be `2`)', () => {
-    const emojis = [ '🙂', '🤓', '👹', '🙉', '💩' ];
-    const testText = emojis.join('');
-    const { length } = emojis;
-    const node = createNode(testText);
-    const spans = splitNode(node);
-
-    expect(spans).toHaveLength(length);
-
-    spans.forEach((span, i) => {
-      expect(span).toBeInstanceOf(HTMLSpanElement);
-      expect(span.innerHTML).toBe(emojis[i]);
-    });
-  });
 });
