@@ -211,10 +211,7 @@ class CircleType {
 
       return {
         sum: data.sum + rotation,
-        rotations: [
-          ...data.rotations,
-          data.sum + (rotation / 2),
-        ],
+        rotations: data.rotations.concat([ data.sum + (rotation / 2) ]),
       };
     }, { sum: 0, rotations: [] });
 
