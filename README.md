@@ -19,7 +19,7 @@ Using npm:
 $ npm i circletype --save
 ```
 
-Load ES6 module:
+Load ES module:
 ```js
 import CircleType from `circletype`;
 ```
@@ -159,3 +159,12 @@ const circleType = new CircleType(document.getElementById('myElement'));
 // Restore `myElement` to its original state.
 circleType.destroy();
 ```
+
+## Development Commands
+
+| Command            | Description                   |
+|:-------------------|:------------------------------|
+| `npm run dev`      | Start dev server              |
+| `npm start`        | Build for release             |
+| `npm test`         | Run unit and screenshot tests |
+| `npm run docs`     | Generate documentation        |
