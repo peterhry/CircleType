@@ -162,9 +162,10 @@ circleType.destroy();
 
 ## Development Commands
 
-| Command            | Description                   |
-|:-------------------|:------------------------------|
-| `npm run dev`      | Start dev server              |
-| `npm start`        | Build for release             |
-| `npm test`         | Run unit and screenshot tests |
-| `npm run docs`     | Generate documentation        |
+| Command                 | Description                       |
+|:------------------------|:----------------------------------|
+| `npm run dev`           | Start dev server                  |
+| `npm start`             | Build for release                 |
+| `npm test`              | Run unit and screenshot tests     |
+| `npm run docs`          | Generate documentation            |
+| `npm run reference`     | Generate reference screenshots    |

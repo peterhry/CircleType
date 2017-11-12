@@ -10,8 +10,10 @@
   "scripts": {
     "dev": "webpack-dev-server --open",
     "start": "eslint src && npm t && npm run docs && webpack -p",
-    "test": "jest src --notify && docker run -w /usr/data -v \"$PWD\":/usr/data tenjaa/java-chrome-nodejs npm run backstop",
-    "backstop": "backstop test",
+    "test": "jest src --notify && docker run -w /usr/data -v \"$PWD\":/usr/data tenjaa/java-chrome-nodejs npm run backstop-test",
+    "reference": "docker run -w /usr/data -v \"$PWD\":/usr/data tenjaa/java-chrome-nodejs npm run backstop-reference",
+    "backstop-test": "backstop test",
+    "backstop-reference": "backstop reference",
     "docs": "jsdoc2md --template README.hbs --files src/class.js > README.md"
   },
   "keywords": [
