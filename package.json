@@ -8,7 +8,7 @@
   ],
   "repository": "peterhry/CircleType",
   "scripts": {
-    "test": "jest src --notify && node ./scripts/backstop.js",
+    "test": "jest src --notify && docker run -w /usr/data -v \"$PWD\":/usr/data tenjaa/java-chrome-nodejs npm run backstop",
     "backstop": "backstop test",
     "docs": "jsdoc2md --template README.hbs --files src/class.js > README.md"
   },
