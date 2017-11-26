@@ -4,7 +4,7 @@
 
 A JavaScript library that lets you curve type on the web.
 
-Demo: <http://circletype.labwire.ca>
+Demo: <https://circletype.labwire.ca>
 
 ## Installation
 
@@ -39,6 +39,10 @@ A CircleType instance creates a circular text element.
     * [.radius()](#CircleType+radius) ⇒ <code>number</code>
     * [.dir(value)](#CircleType+dir) ⇒ [<code>CircleType</code>](#CircleType)
     * [.dir()](#CircleType+dir) ⇒ <code>number</code>
+    * [.forceWidth(value)](#CircleType+forceWidth) ⇒ [<code>CircleType</code>](#CircleType)
+    * [.forceWidth()](#CircleType+forceWidth) ⇒ <code>boolean</code>
+    * [.forceHeight(value)](#CircleType+forceHeight) ⇒ [<code>CircleType</code>](#CircleType)
+    * [.forceHeight()](#CircleType+forceHeight) ⇒ <code>boolean</code>
     * [.refresh()](#CircleType+refresh) ⇒ [<code>CircleType</code>](#CircleType)
     * [.destroy()](#CircleType+destroy) ⇒ [<code>CircleType</code>](#CircleType)
 
@@ -92,7 +96,7 @@ for the text to form a complete circle.
 const circleType = new CircleType(document.getElementById('myElement'));
 
 circleType.radius();
-// > 150
+//=> 150
 ```
 <a name="CircleType+dir"></a>
 
@@ -128,7 +132,93 @@ Gets the text direction. `1` is clockwise, `-1` is counter-clockwise.
 const circleType = new CircleType(document.getElementById('myElement'));
 
 circleType.dir();
-// > 1 (clockwise)
+//=> 1 (clockwise)
+```
+<a name="CircleType+forceWidth"></a>
+
+### circleType.forceWidth(value) ⇒ [<code>CircleType</code>](#CircleType)
+Sets the `forceWidth` option. If `true` the width of the arc is calculated
+and applied to the element as an inline style.
+
+**Kind**: instance method of [<code>CircleType</code>](#CircleType)  
+**Returns**: [<code>CircleType</code>](#CircleType) - The current instance.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| value | <code>boolean</code> | `true` if the width should be set |
+
+**Example**  
+```js
+const circleType = new CircleType(document.getElementById('myElement'));
+
+circleType.radius(384);
+
+console.log(circleType.container);
+//=> <div style="position: relative; height: 3.18275em;">...</div>
+
+// Enable the force width option
+circleType.forceWidth(true);
+
+console.log(circleType.container);
+//=> <div style="position: relative; height: 3.18275em; width: 12.7473em;">...</div>
+```
+<a name="CircleType+forceWidth"></a>
+
+### circleType.forceWidth() ⇒ <code>boolean</code>
+Gets the `forceWidth` option. If `true` the width of the arc is calculated
+and applied to the element as an inline style. Defaults to `false`.
+
+**Kind**: instance method of [<code>CircleType</code>](#CircleType)  
+**Returns**: <code>boolean</code> - The current `forceWidth` value  
+**Example**  
+```js
+const circleType = new CircleType(document.getElementById('myElement'));
+
+circleType.forceWidth();
+//=> false
+```
+<a name="CircleType+forceHeight"></a>
+
+### circleType.forceHeight(value) ⇒ [<code>CircleType</code>](#CircleType)
+Sets the `forceHeight` option. If `true` the height of the arc is calculated
+and applied to the element as an inline style.
+
+**Kind**: instance method of [<code>CircleType</code>](#CircleType)  
+**Returns**: [<code>CircleType</code>](#CircleType) - The current instance.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| value | <code>boolean</code> | `true` if the height should be set |
+
+**Example**  
+```js
+const circleType = new CircleType(document.getElementById('myElement'));
+
+circleType.radius(384);
+
+console.log(circleType.container);
+//=> <div style="position: relative; height: 3.18275em;">...</div>
+
+// Disbale the force height option
+circleType.forceHeight(false);
+
+console.log(circleType.container);
+//=> <div style="position: relative;">...</div>
+```
+<a name="CircleType+forceHeight"></a>
+
+### circleType.forceHeight() ⇒ <code>boolean</code>
+Gets the `forceHeight` option. If `true` the height of the arc is calculated
+and applied to the element as an inline style. Defaults to `true`.
+
+**Kind**: instance method of [<code>CircleType</code>](#CircleType)  
+**Returns**: <code>boolean</code> - The current `forceHeight` value  
+**Example**  
+```js
+const circleType = new CircleType(document.getElementById('myElement'));
+
+circleType.forceHeight();
+//=> true
 ```
 <a name="CircleType+refresh"></a>
 
