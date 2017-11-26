@@ -1,8 +1,8 @@
-import radiansToDegrees from './utils/radiansToDegrees';
 import getRect from './utils/getRect';
 import splitNode from './utils/splitNode';
 import sagitta from './utils/sagitta';
 import chord from './utils/chord';
+import getLetterRotations from './utils/getLetterRotations';
 
 const { PI, max, min } = Math;
 
@@ -235,7 +235,7 @@ class CircleType {
    * console.log(circleType.container);
    * //=> <div style="position: relative; height: 3.18275em;">...</div>
    *
-   * // Disbale the force height option
+   * // Disable the force height option
    * circleType.forceHeight(false);
    *
    * console.log(circleType.container);
@@ -314,18 +314,9 @@ class CircleType {
   _layout() {
     const { _radius, _dir } = this;
     const originY = _dir === -1 ? (-_radius + this._lineHeight) : _radius;
-
     const origin = `center ${originY / this._fontSize}em`;
-
     const innerRadius = _radius - this._lineHeight;
-    const { rotations, θ } = this._metrics.reduce((data, { width }) => {
-      const rotation = radiansToDegrees(width / innerRadius);
-
-      return {
-        θ: data.θ + rotation,
-        rotations: data.rotations.concat([ data.θ + (rotation / 2) ]),
-      };
-    }, { θ: 0, rotations: [] });
+    const { rotations, θ } = getLetterRotations(this._metrics, innerRadius);
 
     this._letters.forEach((letter, index) => {
       const { style } = letter;

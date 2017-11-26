@@ -199,7 +199,7 @@ circleType.radius(384);
 console.log(circleType.container);
 //=> <div style="position: relative; height: 3.18275em;">...</div>
 
-// Disbale the force height option
+// Disable the force height option
 circleType.forceHeight(false);
 
 console.log(circleType.container);
