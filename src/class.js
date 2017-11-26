@@ -1,9 +1,10 @@
-import radiansToDegrees from './utils/radiansToDegrees';
 import getRect from './utils/getRect';
 import splitNode from './utils/splitNode';
 import sagitta from './utils/sagitta';
+import chord from './utils/chord';
+import getLetterRotations from './utils/getLetterRotations';
 
-const { PI, max } = Math;
+const { PI, max, min } = Math;
 
 /**
  * A CircleType instance creates a circular text element.
@@ -43,6 +44,8 @@ class CircleType {
     this._minRadius = (totalWidth / PI / 2) + this._lineHeight;
 
     this._dir = 1;
+    this._forceWidth = false;
+    this._forceHeight = true;
     this._radius = this._minRadius;
 
     this._invalidate();
@@ -62,7 +65,7 @@ class CircleType {
    * const circleType = new CircleType(document.getElementById('myElement'));
    *
    * circleType.radius();
-   * // > 150
+   * //=> 150
    */
 
   /**
@@ -108,7 +111,7 @@ class CircleType {
    * const circleType = new CircleType(document.getElementById('myElement'));
    *
    * circleType.dir();
-   * // > 1 (clockwise)
+   * //=> 1 (clockwise)
    */
 
   /**
@@ -140,6 +143,114 @@ class CircleType {
     }
 
     return this._dir;
+  }
+
+  /**
+   * Gets the `forceWidth` option. If `true` the width of the arc is calculated
+   * and applied to the element as an inline style. Defaults to `false`.
+   *
+   * @name forceWidth
+   * @function
+   * @instance
+   * @memberof CircleType
+   * @return {boolean} The current `forceWidth` value
+   *
+   * @example
+   * const circleType = new CircleType(document.getElementById('myElement'));
+   *
+   * circleType.forceWidth();
+   * //=> false
+   */
+
+  /**
+   * Sets the `forceWidth` option. If `true` the width of the arc is calculated
+   * and applied to the element as an inline style.
+   *
+   * @name forceWidth
+   * @function
+   * @instance
+   * @memberof CircleType
+   * @param  {boolean} value `true` if the width should be set
+   * @return {CircleType}   The current instance.
+   *
+   * @example
+   * const circleType = new CircleType(document.getElementById('myElement'));
+   *
+   * circleType.radius(384);
+   *
+   * console.log(circleType.container);
+   * //=> <div style="position: relative; height: 3.18275em;">...</div>
+   *
+   * // Enable the force width option
+   * circleType.forceWidth(true);
+   *
+   * console.log(circleType.container);
+   * //=> <div style="position: relative; height: 3.18275em; width: 12.7473em;">...</div>
+   */
+  forceWidth(value) {
+    if (value !== undefined) {
+      this._forceWidth = value;
+
+      this._invalidate();
+
+      return this;
+    }
+
+    return this._forceWidth;
+  }
+
+  /**
+   * Gets the `forceHeight` option. If `true` the height of the arc is calculated
+   * and applied to the element as an inline style. Defaults to `true`.
+   *
+   * @name forceHeight
+   * @function
+   * @instance
+   * @memberof CircleType
+   * @return {boolean} The current `forceHeight` value
+   *
+   * @example
+   * const circleType = new CircleType(document.getElementById('myElement'));
+   *
+   * circleType.forceHeight();
+   * //=> true
+   */
+
+  /**
+   * Sets the `forceHeight` option. If `true` the height of the arc is calculated
+   * and applied to the element as an inline style.
+   *
+   * @name forceHeight
+   * @function
+   * @instance
+   * @memberof CircleType
+   * @param  {boolean} value `true` if the height should be set
+   * @return {CircleType}   The current instance.
+   *
+   * @example
+   * const circleType = new CircleType(document.getElementById('myElement'));
+   *
+   * circleType.radius(384);
+   *
+   * console.log(circleType.container);
+   * //=> <div style="position: relative; height: 3.18275em;">...</div>
+   *
+   * // Disable the force height option
+   * circleType.forceHeight(false);
+   *
+   * console.log(circleType.container);
+   * //=> <div style="position: relative;">...</div>
+   */
+  forceHeight(value) {
+    if (value !== undefined) {
+      this._forceHeight = value;
+
+      this._invalidate();
+
+      return this;
+    }
+
+    return this._forceHeight;
   }
 
   /**
@@ -201,28 +312,20 @@ class CircleType {
    * @return {CircleType} This instance.
    */
   _layout() {
-    const originY = this._dir === -1 ? (-this._radius + this._lineHeight) : this._radius;
-
+    const { _radius, _dir } = this;
+    const originY = _dir === -1 ? (-_radius + this._lineHeight) : _radius;
     const origin = `center ${originY / this._fontSize}em`;
-
-    const innerRadius = this._radius - this._lineHeight;
-    const { rotations, sum } = this._metrics.reduce((data, { width }) => {
-      const rotation = radiansToDegrees(width / innerRadius);
-
-      return {
-        sum: data.sum + rotation,
-        rotations: data.rotations.concat([ data.sum + (rotation / 2) ]),
-      };
-    }, { sum: 0, rotations: [] });
+    const innerRadius = _radius - this._lineHeight;
+    const { rotations, θ } = getLetterRotations(this._metrics, innerRadius);
 
     this._letters.forEach((letter, index) => {
       const { style } = letter;
-      const rotate = ((sum * -0.5) + rotations[index]) * this._dir;
+      const rotate = ((θ * -0.5) + rotations[index]) * _dir;
       const translateX = (this._metrics[index].width * -0.5) / this._fontSize;
       const transform = `translateX(${translateX}em) rotate(${rotate}deg)`;
 
       style.position = 'absolute';
-      style.bottom = this._dir === -1 ? 0 : 'auto';
+      style.bottom = _dir === -1 ? 0 : 'auto';
       style.left = '50%';
       style.transform = transform;
       style.transformOrigin = origin;
@@ -230,10 +333,17 @@ class CircleType {
       style.webkitTransformOrigin = origin;
     });
 
-    const sagInner = sagitta(innerRadius, sum) + this._lineHeight;
-    const sagOuter = sagitta(this._radius, sum);
+    if (this._forceHeight) {
+      const height = θ > 180 ? sagitta(_radius, θ) : sagitta(innerRadius, θ) + this._lineHeight;
 
-    this.container.style.height = `${max(sagInner, sagOuter) / this._fontSize}em`;
+      this.container.style.height = `${height / this._fontSize}em`;
+    }
+
+    if (this._forceWidth) {
+      const width = chord(_radius, min(180, θ));
+
+      this.container.style.width = `${width / this._fontSize}em`;
+    }
 
     return this;
   }

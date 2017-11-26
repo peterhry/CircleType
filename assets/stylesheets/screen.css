@@ -139,8 +139,9 @@ footer {
 
 .demo {
   color: #ff3300;
+  display:flex;
+  justify-content: center;
   margin: 0;
-  text-align: center;
 }
 
 /**
