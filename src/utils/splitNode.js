@@ -10,11 +10,17 @@
 export default (node, wrapper = 'span') => {
   const wrapperElement = document.createElement(wrapper);
 
-  return node.innerText.trim().split('').map(char => {
+  const trimmedText = node.innerText.trim();
+  const elements = [];
+
+  // eslint-disable-next-line
+  for (const char of trimmedText) {
     const parent = wrapperElement.cloneNode();
 
     parent.insertAdjacentHTML('afterbegin', char === ' ' ? '&nbsp;' : char);
 
-    return parent;
-  });
+    elements.push(parent);
+  }
+
+  return elements;
 };
