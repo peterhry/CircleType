@@ -14,12 +14,12 @@ export default (node, wrapper = 'span') => {
 
   const chars = [];
   // eslint-disable-next-line
-  for (let i = 0; i < str.length - 1; ++i) {
-    const char = str[i];
+  for (let i = 0; i < trimmedText.length; i++) {
+    let char = trimmedText[i];
 
-    if (str[i + 1].charCodeAt(0) === 65039) {
-      char += str[i + 1];
-      i++;
+    if (trimmedText[i + 1] && trimmedText[i + 1].charCodeAt(0) === 65039) {
+      char += trimmedText[i + 1];
+      i += 1;
     }
 
     chars.push(char);
