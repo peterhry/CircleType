@@ -10,11 +10,28 @@
 export default (node, wrapper = 'span') => {
   const wrapperElement = document.createElement(wrapper);
 
-  return node.innerText.trim().split('').map(char => {
+  const trimmedText = node.innerText.trim();
+
+  const chars = [];
+  // eslint-disable-next-line
+  for (const char of trimmedText) {
+    if (char.charCodeAt(0) === 65039) {
+      chars[chars.length - 1] += char;
+    } else {
+      chars.push(char);
+    }
+  }
+
+  const elements = [];
+
+  // eslint-disable-next-line
+  for (const char of chars) {
     const parent = wrapperElement.cloneNode();
 
     parent.insertAdjacentHTML('afterbegin', char === ' ' ? '&nbsp;' : char);
 
-    return parent;
-  });
+    elements.push(parent);
+  }
+
+  return elements;
 };
