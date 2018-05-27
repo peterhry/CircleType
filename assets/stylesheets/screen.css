@@ -49,6 +49,10 @@ h3 {
   margin: 0;
 }
 
+pre {
+  margin: 0;
+}
+
 code {
   display: block;
   font-size: 14px;
@@ -127,7 +131,7 @@ footer {
  * Demo
  */
 .demo-box {
-  border: 1px solid #101010;
+  border: 1px solid #23241f;
   position: relative;
   padding: 1.5em 0;
   text-align: center;
