@@ -9,6 +9,8 @@
     <script src="https://use.typekit.net/fbl0lhq.js"></script>
     <link rel="shortcut icon" type="image/x-icon" href="assets/favicon.ico">
     <link rel="stylesheet" href="assets/stylesheets/screen.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai-sublime.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
   </head>
   <body>
     <div class="container">
@@ -31,175 +33,75 @@
         <a href="https://github.com/peterhry/circletype" class="btn">Download on GitHub</a>
       </p>
 
-      <ins
-        class="adsbygoogle"
-        style="display:block"
-        data-ad-format="fluid"
-        data-ad-layout="text-only"
-        data-ad-layout-key="-gw-c+2p-30-2w"
-        data-ad-client="ca-pub-2609593449239823"
-        data-ad-slot="9041076570">
-      </ins>
-      <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
-
       <h2 class="strong">Demos</h2>
       <h3 class="puffy">Basic Arc</h3>
       <p>Here’s some curved text that flows clockwise.</p>
       <div class="demo-box" id="demo-box1">
         <h2 id="demo1" class="demo strong">Here’s some curved text flowing clockwise.</h2>
       </div>
-      <code>&lt;h2 id="demo1"&gt;Here’s some curved text flowing clockwise.&lt;/h2&gt;
-new CircleType(document.getElementById('demo1')).radius(384);</code>
-
-      <ins
-        class="adsbygoogle"
-        style="display:block"
-        data-ad-format="fluid"
-        data-ad-layout="text-only"
-        data-ad-layout-key="-gw-c+2p-30-2w"
-        data-ad-client="ca-pub-2609593449239823"
-        data-ad-slot="9041076570">
-      </ins>
-      <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
-
+      <pre><code class="javascript">// &lt;h2 id="demo1">Here’s some curved text flowing clockwise.&lt;/h2&gt;
+new CircleType(document.getElementById('demo1'))
+  .radius(384);</code></pre>
       <h3 class="puffy" id="reverse">Reversed Arc</h3>
       <p>By setting dir to -1, the text will flow counter-clockwise instead.</p>
       <div class="demo-box" id="demo-box2">
         <h2 id="demo2" class="demo strong">Here’s some curved text flowing counter-clockwise.</h2>
       </div>
-      <code>&lt;h2 id="demo2"&gt;Here’s some curved text flowing counter-clockwise.&lt;/h2&gt;
-new CircleType(document.getElementById('demo2')).dir(-1).radius(384);</code>
-
-      <ins
-        class="adsbygoogle"
-        style="display:block"
-        data-ad-format="fluid"
-        data-ad-layout="text-only"
-        data-ad-layout-key="-gw-c+2p-30-2w"
-        data-ad-client="ca-pub-2609593449239823"
-        data-ad-slot="9041076570">
-      </ins>
-      <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
-
+      <pre><code class="js">// &lt;h2 id="demo2">Here’s some curved text flowing counter-clockwise.&lt;/h2&gt;
+new CircleType(document.getElementById('demo2'))
+  .dir(-1)
+  .radius(384);</code></pre>
       <h3 class="puffy" id="auto">Auto Radius</h3>
       <p>By leaving the radius empty, CircleType.js will find the perfect radius so the text makes a complete rotation.</p>
       <div class="demo-box" id="demo-box3">
         <h2 id="demo3" class="demo strong">This text makes a complete rotation no matter how long it is. </h2>
       </div>
-      <code>&lt;h2 id="demo3"&gt;This text makes a complete rotation no matter how long it is. &lt;/h2&gt;
-new CircleType(document.getElementById('demo3'));</code>
-
-      <ins
-        class="adsbygoogle"
-        style="display:block"
-        data-ad-format="fluid"
-        data-ad-layout="text-only"
-        data-ad-layout-key="-gw-c+2p-30-2w"
-        data-ad-client="ca-pub-2609593449239823"
-        data-ad-slot="9041076570">
-      </ins>
-      <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
-
+      <pre><code class="js">// &lt;h2 id="demo3">This text makes a complete rotation no matter how long it is. &lt;/h2&gt;
+new CircleType(document.getElementById('demo3'));</code></pre>
       <h3 class="puffy" id="fluid">Fluid</h3>
       <p>Update the radius when the window is resized to create a fluid effect (try resizing your window).</p>
       <div class="demo-box" id="demo-box4">
         <h2 id="demo4" class="demo strong">This curved type shrinks and expands to fit inside its container. </h2>
       </div>
-      <code>&lt;h2 id="demo4"&gt;This curved type shrinks and expands to fit inside its container. &lt;/h2&gt;
+      <pre><code class="js">// &lt;h2 id="demo4">This curved type shrinks and expands to fit inside its container. &lt;/h2&gt;
 var demo4 = new CircleType(document.getElementById('demo4'));
 window.addEventListener('resize', function updateRadius() {
   demo4.radius(demo4.element.offsetWidth / 2);
 });
-updateRadius();</code>
-
-      <ins
-        class="adsbygoogle"
-        style="display:block"
-        data-ad-format="fluid"
-        data-ad-layout="text-only"
-        data-ad-layout-key="-gw-c+2p-30-2w"
-        data-ad-client="ca-pub-2609593449239823"
-        data-ad-slot="9041076570">
-      </ins>
-      <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
-
+updateRadius();</code></pre>
       <h3 class="puffy" id="fitText">Using FitText.js</h3>
-      <p>Here’s how you can use <a href="http://fittextjs.com" target="_blank">FitText.js</a> to make the text scale (try resizing your window)</p>
+      <p>Here’s how you can use <a href="http://fittextjs.com" target="_blank">FitText.js</a> to make the text scale (try resizing your window).</p>
       <div class="demo-box" id="demo-box5">
         <h2 id="demo5" class="demo strong">I play well with FitText.js too! </h2>
       </div>
-      <code>&lt;h2 id="demo5"&gt;I play well with FitText.js too! &lt;/h2&gt;
-var demo5 = new CircleType(document.getElementById('demo5')).radius(180);
-$(demo5.element).fitText();</code>
-
-      <ins
-        class="adsbygoogle"
-        style="display:block"
-        data-ad-format="fluid"
-        data-ad-layout="text-only"
-        data-ad-layout-key="-gw-c+2p-30-2w"
-        data-ad-client="ca-pub-2609593449239823"
-        data-ad-slot="9041076570">
-      </ins>
-      <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
-
+      <pre><code class="js">// &lt;h2 id="demo5">I play well with FitText.js too! &lt;/h2&gt;
+var demo5 = new CircleType(document.getElementById('demo5'))
+  .radius(180);
+$(demo5.element).fitText();</code></pre>
       <h3 class="puffy" id="fitText">Destroy</h3>
       <p>Here’s how you can remove the effect from an element.</p>
       <div class="demo-box" id="demo-box6">
         <p><a href="#" class="btn" id="destroyButton">Destroy Me</a></p>
         <h2 id="demo6" class="demo strong">Easily remove the effect.</h2>
       </div>
-      <code>&lt;button id="destroyButton">Destroy Me&lt;/button&gt;
-&lt;h2 id="demo6"&gt;Easily remove the effect.&lt;/h2&gt;
-var demo6 = new CircleType(document.getElementById('demo6')).radius(180);
-document.getElementById('destroyButton').addEventListener('click', demo6.destroy.bind(demo6));</code>
-
-      <ins
-        class="adsbygoogle"
-        style="display:block"
-        data-ad-format="fluid"
-        data-ad-layout="text-only"
-        data-ad-layout-key="-gw-c+2p-30-2w"
-        data-ad-client="ca-pub-2609593449239823"
-        data-ad-slot="9041076570">
-      </ins>
-      <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
-
+      <pre><code class="js">// &lt;button id="destroyButton"&gt;Destroy Me&lt;/button&gt;
+// &lt;h2 id="demo6"&gt;Easily remove the effect.&lt;/h2&gt;
+var demo6 = new CircleType(document.getElementById('demo6'))
+  .radius(180);
+document.getElementById('destroyButton')
+  .addEventListener('click', demo6.destroy.bind(demo6));</code></pre>
       <h3 class="puffy" id="emoji">Emojis</h3>
-      <p>I work with emojis!</p>
+      <p>I work with emojis but you’ll need to provide your own splitter function. Here is an example that uses GraphemeSplitter:</p>
       <div class="demo-box" id="demo-box7">
-        <h2 id="demo7" class="demo strong">🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩</h2>
+        <h2 id="demo7" class="demo strong">👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦</h2>
       </div>
-      <code>&lt;h2 id="demo7"&gt;🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩&lt;/h2&gt;
-var demo7 = new CircleType(document.getElementById('demo7'));</code>
-
-      <ins
-        class="adsbygoogle"
-        style="display:block"
-        data-ad-format="fluid"
-        data-ad-layout="text-only"
-        data-ad-layout-key="-gw-c+2p-30-2w"
-        data-ad-client="ca-pub-2609593449239823"
-        data-ad-slot="9041076570">
-      </ins>
-      <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
-
+      <pre><code class="js">// &lt;script src="https://cdn.rawgit.com/orling/grapheme-splitter/b4500feb/index.js"&gt;&lt;/script&gt;
+// &lt;h2 id="demo7"&gt;👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦&lt;/h2&gt;
+var splitter = new GraphemeSplitter()
+var demo7 = new CircleType(
+  document.getElementById('demo7'),
+  splitter.splitGraphemes.bind(splitter)
+);</code></pre>
       <h2 class="strong">Browser Support</h2>
       <ul class="bullets">
         <li>Chrome, Firefox, Safari, Opera, Edge (last 2 versions)</li>
@@ -213,6 +115,7 @@ var demo7 = new CircleType(document.getElementById('demo7'));</code>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FitText.js/1.2.0/jquery.fittext.min.js"></script>
+    <script src="https://cdn.rawgit.com/orling/grapheme-splitter/b4500feb/index.js"></script>
     <script src="dist/circletype.min.js"></script>
     <script>
       try {
@@ -280,7 +183,11 @@ var demo7 = new CircleType(document.getElementById('demo7'));</code>
         /**
          * Emojis
          */
-        var demo7 = new CircleType(document.getElementById('demo7'));
+        var splitter = new GraphemeSplitter()
+        var demo7 = new CircleType(
+          document.getElementById('demo7'),
+          splitter.splitGraphemes.bind(splitter)
+        );
       }
    </script>
     <script type="text/javascript">
@@ -297,5 +204,6 @@ var demo7 = new CircleType(document.getElementById('demo7'));</code>
     <script
       async
       src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
   </body>
 </html>
