@@ -34,7 +34,7 @@ A CircleType instance creates a circular text element.
 **Kind**: global class  
 
 * [CircleType](#CircleType)
-    * [new CircleType(elem)](#new_CircleType_new)
+    * [new CircleType(elem, [splitter])](#new_CircleType_new)
     * [.radius(value)](#CircleType+radius) ⇒ [<code>CircleType</code>](#CircleType)
     * [.radius()](#CircleType+radius) ⇒ <code>number</code>
     * [.dir(value)](#CircleType+dir) ⇒ [<code>CircleType</code>](#CircleType)
@@ -48,11 +48,12 @@ A CircleType instance creates a circular text element.
 
 <a name="new_CircleType_new"></a>
 
-### new CircleType(elem)
+### new CircleType(elem, [splitter])
 
 | Param | Type | Description |
 | --- | --- | --- |
 | elem | <code>HTMLElement</code> | A target HTML element. |
+| [splitter] | <code>function</code> | An optional function used to split the element's                              text content into individual characters |
 
 **Example**  
 ```js
@@ -61,6 +62,14 @@ const circleType = new CircleType(document.getElementById('myElement'));
 
 // Set the text radius and direction. Note: setter methods are chainable.
 circleType.radius(200).dir(-1);
+
+// Provide your own splitter function to handle emojis
+// @see https://github.com/orling/grapheme-splitter
+const splitter = new GraphemeSplitter()
+new CircleType(
+  document.getElementById('myElement'),
+  splitter.splitGraphemes.bind(splitter)
+);
 ```
 <a name="CircleType+radius"></a>
 

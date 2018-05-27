@@ -10,6 +10,8 @@ const { PI, max, min } = Math;
  * A CircleType instance creates a circular text element.
  *
  * @param  {HTMLElement} elem A target HTML element.
+ * @param {Function} [splitter] An optional function used to split the element's
+ *                              text content into individual characters
  *
  * @example
  * // Instantiate `CircleType` with an HTML element.
@@ -17,19 +19,30 @@ const { PI, max, min } = Math;
  *
  * // Set the text radius and direction. Note: setter methods are chainable.
  * circleType.radius(200).dir(-1);
+ *
+ * // Provide your own splitter function to handle emojis
+ * // @see https://github.com/orling/grapheme-splitter
+ * const splitter = new GraphemeSplitter()
+ * new CircleType(
+ *   document.getElementById('myElement'),
+ *   splitter.splitGraphemes.bind(splitter)
+ * );
+ *
  */
 class CircleType {
-  constructor(elem) {
+  constructor(elem, splitter) {
     this.element = elem;
     this.originalHTML = this.element.innerHTML;
 
     const container = document.createElement('div');
+    const fragment = document.createDocumentFragment();
     container.setAttribute('aria-label', elem.innerText);
     container.style.position = 'relative';
     this.container = container;
 
-    this._letters = splitNode(elem);
-    this._letters.forEach(letter => container.appendChild(letter));
+    this._letters = splitNode(elem, splitter);
+    this._letters.forEach(letter => fragment.appendChild(letter));
+    container.appendChild(fragment);
 
     this.element.innerHTML = '';
     this.element.appendChild(container);
