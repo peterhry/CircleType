@@ -45,15 +45,6 @@ describe('splitNode', () => {
     });
   });
 
-  it('handles any node', () => {
-    const testText = 'Some test text.';
-    const { length } = testText;
-    const nodeTypes = [ 'div', 'a', 'time', 'asdf' ];
-    const nodes = nodeTypes.map(type => createNode(testText, type));
-
-    nodes.forEach(node => expect(splitNode(node)).toHaveLength(length));
-  });
-
   it('handles nodes with no text content', () => {
     expect(splitNode(createNode(''))).toHaveLength(0);
   });
@@ -62,18 +53,12 @@ describe('splitNode', () => {
     expect(splitNode(createNode('   '))).toHaveLength(0);
   });
 
-  it('allows chars to be wrapped by any tag', () => {
-    const testText = 'X';
-    const node = createNode(testText);
-    const [ anchor ] = splitNode(node, 'a');
-    const [ div ] = splitNode(node, 'div');
-    const [ button ] = splitNode(node, 'button');
-    const [ unknown ] = splitNode(node, 'asdf');
-
-    expect(anchor).toBeInstanceOf(HTMLAnchorElement);
-    expect(div).toBeInstanceOf(HTMLDivElement);
-    expect(button).toBeInstanceOf(HTMLButtonElement);
-    expect(unknown).toBeInstanceOf(HTMLUnknownElement);
+  it('accepts a custom splitter function', () => {
+    const spans = splitNode(
+      createNode('one-two-three-four'),
+      string => string.split('-'),
+    );
+    expect(spans).toHaveLength(4);
   });
 
   it('handles all emojis (chars whose length might be `2`)', () => {

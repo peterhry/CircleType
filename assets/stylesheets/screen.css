@@ -51,13 +51,9 @@ h3 {
 
 code {
   display: block;
-  background: #101010;
-  color: #fff;
-  font-family: "Andale Mono", AndaleMono, monospace;
-  font-size: 12px;
-  padding: 1em;
+  font-size: 14px;
+  padding: 1em !important;
   margin: 0 0 4em;
-  white-space: pre;
 }
 
 footer {
