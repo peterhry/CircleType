@@ -1,4 +1,4 @@
-import 'core-js/fn/array/from';
-import CircleType from './class';
+require('core-js/fn/array/from');
+const CircleType = require('./class').default;
 
 module.exports = CircleType;
