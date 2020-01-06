@@ -1,5 +1,5 @@
-import webpack from 'webpack';
-import PACKAGE from './package.json';
+const webpack = require('webpack');
+const PACKAGE = require('./package.json');
 
 const banner = `${PACKAGE.name} ${PACKAGE.version}
 ${PACKAGE.description}
@@ -27,7 +27,7 @@ module.exports = {
   },
 
   output: {
-    filename: './dist/[name].min.js',
+    filename: './[name].min.js',
     library: 'CircleType',
     libraryTarget: 'umd',
   },
