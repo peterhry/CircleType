@@ -35,16 +35,17 @@ A CircleType instance creates a circular text element.
 
 * [CircleType](#CircleType)
     * [new CircleType(elem, [splitter])](#new_CircleType_new)
-    * [.radius(value)](#CircleType+radius) ⇒ [<code>CircleType</code>](#CircleType)
     * [.radius()](#CircleType+radius) ⇒ <code>number</code>
-    * [.dir(value)](#CircleType+dir) ⇒ [<code>CircleType</code>](#CircleType)
+    * [.radius(value)](#CircleType+radius) ⇒ [<code>CircleType</code>](#CircleType)
     * [.dir()](#CircleType+dir) ⇒ <code>number</code>
-    * [.forceWidth(value)](#CircleType+forceWidth) ⇒ [<code>CircleType</code>](#CircleType)
+    * [.dir(value)](#CircleType+dir) ⇒ [<code>CircleType</code>](#CircleType)
     * [.forceWidth()](#CircleType+forceWidth) ⇒ <code>boolean</code>
-    * [.forceHeight(value)](#CircleType+forceHeight) ⇒ [<code>CircleType</code>](#CircleType)
+    * [.forceWidth(value)](#CircleType+forceWidth) ⇒ [<code>CircleType</code>](#CircleType)
     * [.forceHeight()](#CircleType+forceHeight) ⇒ <code>boolean</code>
+    * [.forceHeight(value)](#CircleType+forceHeight) ⇒ [<code>CircleType</code>](#CircleType)
     * [.refresh()](#CircleType+refresh) ⇒ [<code>CircleType</code>](#CircleType)
     * [.destroy()](#CircleType+destroy) ⇒ [<code>CircleType</code>](#CircleType)
+    * [.transform()](#CircleType+transform) ⇒ <code>Array.&lt;{number, number}&gt;</code>
 
 <a name="new_CircleType_new"></a>
 
@@ -73,6 +74,21 @@ new CircleType(
 ```
 <a name="CircleType+radius"></a>
 
+### circleType.radius() ⇒ <code>number</code>
+Gets the text radius in pixels. The default radius is the radius required
+for the text to form a complete circle.
+
+**Kind**: instance method of [<code>CircleType</code>](#CircleType)  
+**Returns**: <code>number</code> - The current text radius.  
+**Example**  
+```js
+const circleType = new CircleType(document.getElementById('myElement'));
+
+circleType.radius();
+//=> 150
+```
+<a name="CircleType+radius"></a>
+
 ### circleType.radius(value) ⇒ [<code>CircleType</code>](#CircleType)
 Sets the desired text radius. The minimum radius is the radius required
 for the text to form a complete circle. If `value` is less than the minimum
@@ -92,11 +108,10 @@ const circleType = new CircleType(document.getElementById('myElement'));
 // Set the radius to 150 pixels.
 circleType.radius(150);
 ```
-<a name="CircleType+radius"></a>
+<a name="CircleType+dir"></a>
 
-### circleType.radius() ⇒ <code>number</code>
-Gets the text radius in pixels. The default radius is the radius required
-for the text to form a complete circle.
+### circleType.dir() ⇒ <code>number</code>
+Gets the text direction. `1` is clockwise, `-1` is counter-clockwise.
 
 **Kind**: instance method of [<code>CircleType</code>](#CircleType)  
 **Returns**: <code>number</code> - The current text radius.  
@@ -104,8 +119,8 @@ for the text to form a complete circle.
 ```js
 const circleType = new CircleType(document.getElementById('myElement'));
 
-circleType.radius();
-//=> 150
+circleType.dir();
+//=> 1 (clockwise)
 ```
 <a name="CircleType+dir"></a>
 
@@ -129,19 +144,20 @@ circleType.dir(-1);
 // Set the direction to clockwise.
 circleType.dir(1);
 ```
-<a name="CircleType+dir"></a>
+<a name="CircleType+forceWidth"></a>
 
-### circleType.dir() ⇒ <code>number</code>
-Gets the text direction. `1` is clockwise, `-1` is counter-clockwise.
+### circleType.forceWidth() ⇒ <code>boolean</code>
+Gets the `forceWidth` option. If `true` the width of the arc is calculated
+and applied to the element as an inline style. Defaults to `false`.
 
 **Kind**: instance method of [<code>CircleType</code>](#CircleType)  
-**Returns**: <code>number</code> - The current text radius.  
+**Returns**: <code>boolean</code> - The current `forceWidth` value  
 **Example**  
 ```js
 const circleType = new CircleType(document.getElementById('myElement'));
 
-circleType.dir();
-//=> 1 (clockwise)
+circleType.forceWidth();
+//=> false
 ```
 <a name="CircleType+forceWidth"></a>
 
@@ -171,20 +187,20 @@ circleType.forceWidth(true);
 console.log(circleType.container);
 //=> <div style="position: relative; height: 3.18275em; width: 12.7473em;">...</div>
 ```
-<a name="CircleType+forceWidth"></a>
+<a name="CircleType+forceHeight"></a>
 
-### circleType.forceWidth() ⇒ <code>boolean</code>
-Gets the `forceWidth` option. If `true` the width of the arc is calculated
-and applied to the element as an inline style. Defaults to `false`.
+### circleType.forceHeight() ⇒ <code>boolean</code>
+Gets the `forceHeight` option. If `true` the height of the arc is calculated
+and applied to the element as an inline style. Defaults to `true`.
 
 **Kind**: instance method of [<code>CircleType</code>](#CircleType)  
-**Returns**: <code>boolean</code> - The current `forceWidth` value  
+**Returns**: <code>boolean</code> - The current `forceHeight` value  
 **Example**  
 ```js
 const circleType = new CircleType(document.getElementById('myElement'));
 
-circleType.forceWidth();
-//=> false
+circleType.forceHeight();
+//=> true
 ```
 <a name="CircleType+forceHeight"></a>
 
@@ -214,21 +230,6 @@ circleType.forceHeight(false);
 console.log(circleType.container);
 //=> <div style="position: relative;">...</div>
 ```
-<a name="CircleType+forceHeight"></a>
-
-### circleType.forceHeight() ⇒ <code>boolean</code>
-Gets the `forceHeight` option. If `true` the height of the arc is calculated
-and applied to the element as an inline style. Defaults to `true`.
-
-**Kind**: instance method of [<code>CircleType</code>](#CircleType)  
-**Returns**: <code>boolean</code> - The current `forceHeight` value  
-**Example**  
-```js
-const circleType = new CircleType(document.getElementById('myElement'));
-
-circleType.forceHeight();
-//=> true
-```
 <a name="CircleType+refresh"></a>
 
 ### circleType.refresh() ⇒ [<code>CircleType</code>](#CircleType)
@@ -257,6 +258,20 @@ const circleType = new CircleType(document.getElementById('myElement'));
 
 // Restore `myElement` to its original state.
 circleType.destroy();
+```
+<a name="CircleType+transform"></a>
+
+### circleType.transform() ⇒ <code>Array.&lt;{number, number}&gt;</code>
+Gets the transform (rotation and translation) of a character by index.
+
+**Kind**: instance method of [<code>CircleType</code>](#CircleType)  
+**Returns**: <code>Array.&lt;{number, number}&gt;</code> - The current rotation and translation.  
+**Example**  
+```js
+const circleType = new CircleType(document.getElementById('myElement'));
+
+circleType.transform(0);
+//=> {rotate: 3.7904, translateX: -0.176758}
 ```
 
 ## Development Commands

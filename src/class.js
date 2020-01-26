@@ -318,6 +318,38 @@ class CircleType {
   }
 
   /**
+   * Gets the transform (rotation and translation) of a character by index.
+   *
+   * @name transform
+   * @function
+   * @instance
+   * @memberof CircleType
+   * @return {Array.<{number, number}>} The current rotation and translation.
+   *
+   * @example
+   * const circleType = new CircleType(document.getElementById('myElement'));
+   *
+   * circleType.transform(0);
+   * //=> {rotate: 3.7904, translateX: -0.176758}
+   */
+  transform(index) {
+    if (index !== undefined) {
+      const { _radius, _dir } = this;
+      const innerRadius = _radius - this._lineHeight;
+      const { rotations, θ } = getLetterRotations(this._metrics, innerRadius);
+
+      return {
+        rotate: ((θ * -0.5) + rotations[index]) * _dir,
+        translateX: (this._metrics[index].width * -0.5) / this._fontSize,
+      };
+    }
+    return {
+      rotate: 0,
+      translateX: 0,
+    };
+  }
+
+  /**
    * Rotates and positions the letters.
    *
    * @private
