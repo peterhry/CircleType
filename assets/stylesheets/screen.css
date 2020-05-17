@@ -1,0 +1,161 @@
+/**
+ * Base styles
+ */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 100%;
+  line-height: 1.5em;
+}
+
+body {
+  font-family: 'ff-meta-web-pro', sans-serif;
+  margin: 0;
+}
+
+img {
+  border: none;
+}
+
+p, ul {
+  margin: 0 0 1.5em;
+}
+
+a {
+  color: #ff3300;
+}
+
+h1, h2, h3 {
+  font-weight: normal;
+}
+
+h1 {
+  font-size: 3em;
+  line-height: 1em;
+  margin: 0 0 0.5em;
+}
+
+h2 {
+  font-size: 2.25em;
+  line-height: 1.33333em;
+  margin: 0;
+}
+
+h3 {
+  font-size: 1.75em;
+  line-height: 1.71429em;
+  margin: 0;
+}
+
+pre {
+  margin: 0;
+}
+
+code {
+  display: block;
+  font-size: 14px;
+  padding: 1em !important;
+  margin: 0 0 4em;
+}
+
+footer {
+  font-size: .875em;
+  color: #666;
+}
+
+/**
+ * Text styles
+ */
+.strong {
+  font-family: 'franklin-gothic-ext-comp-urw', sans-serif;
+  text-transform: uppercase;
+}
+
+.puffy {
+  font-family: 'cooper-black-std', serif;
+  color: #ff3300;
+}
+
+/**
+ * Container
+ */
+.container {
+  margin: 1.5em auto;
+  max-width: 1200px;
+  overflow: hidden;
+  position: relative;
+  width: 90%;
+}
+
+.title {
+  margin-top: 1em;
+  text-align: center;
+}
+
+.social {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+/**
+ * List
+ */
+.bullets {
+  list-style: disc;
+  padding: 0;
+}
+
+.bullets li {
+  margin-left: 1.5em;
+}
+
+/**
+ * Button
+ */
+.btn {
+  background-color: #ff3300;
+  display: inline-block;
+  color: #fff;
+  text-decoration: none;
+  padding: 0.375em 0.75em;
+}
+
+.btn:hover {
+  background-color: #e62e00;
+}
+
+/**
+ * Demo
+ */
+.demo-box {
+  border: 1px solid #23241f;
+  position: relative;
+  padding: 1.5em 0;
+  text-align: center;
+}
+
+.demo {
+  color: #ff3300;
+  display:flex;
+  justify-content: center;
+  margin: 0;
+  word-break: keep-all;
+}
+
+/**
+ * Hide circletype instances until fonts are loaded.
+ */
+.title,
+.demo {
+  visibility: hidden;
+}
+
+.wf-active .title,
+.wf-active .demo,
+.wf-inactive .title,
+.wf-inactive .demo {
+  visibility: visible;
+}

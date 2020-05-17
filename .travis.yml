@@ -1,0 +1,34 @@
+sudo: required
+
+services:
+  - docker
+
+addons:
+  chrome: beta
+
+language: node_js
+
+node_js:
+  - node
+
+script: eslint src && npm t
+
+cache:
+  yarn: true
+  directories:
+    - node_modules
+
+branches:
+  only:
+    - master
+
+deploy:
+  - provider: pages
+    skip_cleanup: true
+    fqdn: circletype.labwire.ca
+    github_token: $GITHUB_TOKEN
+    on:
+      branch: master
+
+env:
+  - CHROME_PATH=/usr/bin/google-chrome-beta

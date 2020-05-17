@@ -1,0 +1,6 @@
+.sass-cache
+.DS_Store
+node_modules
+backstop_data/*
+!backstop_data/bitmaps_reference
+demo/sftp-config.json

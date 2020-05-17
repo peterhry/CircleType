@@ -1,0 +1,209 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>CircleType.js lets you curve type on the web</title>
+    <meta name="description" content="CircleType.js is a tiny (4kb) JavaScript library that lets you set type on a circle">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <script src="https://use.typekit.net/fbl0lhq.js"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="stylesheet" href="assets/stylesheets/screen.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai-sublime.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="puffy title" id="title">CircleType.js</h1>
+      <div class="social">
+        <a href="https://twitter.com/share" class="twitter-share-button" data-via="peterhry" data-size="large" data-url="http://circletype.labwire.ca/">Tweet</a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+      </div>
+      <p>CircleType.js is a tiny (4kb) JavaScript library that lets you curve type on the web.</p>
+      <h2 class="strong">Features</h2>
+      <ul class="bullets">
+        <li>Use any font</li>
+        <li>Adjust letter-spacing as usual with CSS</li>
+        <li><a href="#reverse">Flip it</a> around so it reads counter-clockwise instead</li>
+        <li>Set the radius manually or <a href="#auto">let CircleType.js figure it out for you</a></li>
+        <li>Works in <a href="#fluid">fluid and responsive</a> layouts</li>
+        <li>Plays well with <a href="#fitText">FitText.js</a></li>
+      </ul>
+      <p>
+        <a href="https://github.com/peterhry/circletype" class="btn">Download on GitHub</a>
+      </p>
+
+      <h2 class="strong">Demos</h2>
+      <h3 class="puffy">Basic Arc</h3>
+      <p>Here’s some curved text that flows clockwise.</p>
+      <div class="demo-box" id="demo-box1">
+        <h2 id="demo1" class="demo strong">Here’s some curved text flowing clockwise.</h2>
+      </div>
+      <pre><code class="javascript">// &lt;h2 id="demo1">Here’s some curved text flowing clockwise.&lt;/h2&gt;
+new CircleType(document.getElementById('demo1'))
+  .radius(384);</code></pre>
+      <h3 class="puffy" id="reverse">Reversed Arc</h3>
+      <p>By setting dir to -1, the text will flow counter-clockwise instead.</p>
+      <div class="demo-box" id="demo-box2">
+        <h2 id="demo2" class="demo strong">Here’s some curved text flowing counter-clockwise.</h2>
+      </div>
+      <pre><code class="js">// &lt;h2 id="demo2">Here’s some curved text flowing counter-clockwise.&lt;/h2&gt;
+new CircleType(document.getElementById('demo2'))
+  .dir(-1)
+  .radius(384);</code></pre>
+      <h3 class="puffy" id="auto">Auto Radius</h3>
+      <p>By leaving the radius empty, CircleType.js will find the perfect radius so the text makes a complete rotation.</p>
+      <div class="demo-box" id="demo-box3">
+        <h2 id="demo3" class="demo strong">This text makes a complete rotation no matter how long it is. </h2>
+      </div>
+      <pre><code class="js">// &lt;h2 id="demo3">This text makes a complete rotation no matter how long it is. &lt;/h2&gt;
+new CircleType(document.getElementById('demo3'));</code></pre>
+      <h3 class="puffy" id="fluid">Fluid</h3>
+      <p>Update the radius when the window is resized to create a fluid effect (try resizing your window).</p>
+      <div class="demo-box" id="demo-box4">
+        <h2 id="demo4" class="demo strong">This curved type shrinks and expands to fit inside its container. </h2>
+      </div>
+      <pre><code class="js">// &lt;h2 id="demo4">This curved type shrinks and expands to fit inside its container. &lt;/h2&gt;
+var demo4 = new CircleType(document.getElementById('demo4'));
+window.addEventListener('resize', function updateRadius() {
+  demo4.radius(demo4.element.offsetWidth / 2);
+});
+updateRadius();</code></pre>
+      <h3 class="puffy" id="fitText">Using FitText.js</h3>
+      <p>Here’s how you can use <a href="http://fittextjs.com" target="_blank">FitText.js</a> to make the text scale (try resizing your window).</p>
+      <div class="demo-box" id="demo-box5">
+        <h2 id="demo5" class="demo strong">I play well with FitText.js too! </h2>
+      </div>
+      <pre><code class="js">// &lt;h2 id="demo5">I play well with FitText.js too! &lt;/h2&gt;
+var demo5 = new CircleType(document.getElementById('demo5'))
+  .radius(180);
+$(demo5.element).fitText();</code></pre>
+      <h3 class="puffy" id="fitText">Destroy</h3>
+      <p>Here’s how you can remove the effect from an element.</p>
+      <div class="demo-box" id="demo-box6">
+        <p><a href="#" class="btn" id="destroyButton">Destroy Me</a></p>
+        <h2 id="demo6" class="demo strong">Easily remove the effect.</h2>
+      </div>
+      <pre><code class="js">// &lt;button id="destroyButton"&gt;Destroy Me&lt;/button&gt;
+// &lt;h2 id="demo6"&gt;Easily remove the effect.&lt;/h2&gt;
+var demo6 = new CircleType(document.getElementById('demo6'))
+  .radius(180);
+document.getElementById('destroyButton')
+  .addEventListener('click', demo6.destroy.bind(demo6));</code></pre>
+      <h3 class="puffy" id="emoji">Emojis</h3>
+      <p>I work with emojis but you’ll need to provide your own splitter function. Here is an example that uses GraphemeSplitter:</p>
+      <div class="demo-box" id="demo-box7">
+        <h2 id="demo7" class="demo strong">👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦</h2>
+      </div>
+      <pre><code class="js">// &lt;script src="https://cdn.rawgit.com/orling/grapheme-splitter/b4500feb/index.js"&gt;&lt;/script&gt;
+// &lt;h2 id="demo7"&gt;👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦&lt;/h2&gt;
+var splitter = new GraphemeSplitter()
+var demo7 = new CircleType(
+  document.getElementById('demo7'),
+  splitter.splitGraphemes.bind(splitter)
+);</code></pre>
+      <h2 class="strong">Browser Support</h2>
+      <ul class="bullets">
+        <li>Chrome, Firefox, Safari, Opera, Edge (last 2 versions)</li>
+        <li>IE 10+</li>
+      </ul>
+      <footer>
+        <a href="https://twitter.com/peterhry" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @peterhry</a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+        <p>CircleType.js is © 2014-2017 <a href="http://peterhrynkow.com">Peter Hrynkow</a> and is licensed under MIT.</p>
+      </footer>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FitText.js/1.2.0/jquery.fittext.min.js"></script>
+    <script src="https://cdn.rawgit.com/orling/grapheme-splitter/b4500feb/index.js"></script>
+    <script src="dist/circletype.min.js"></script>
+    <script>
+      try {
+        Typekit.load({
+          active: renderDemo
+        })
+      } catch (e) {
+        // Error loading fonts
+      }
+
+      function renderDemo() {
+        /**
+         * Title
+         */
+        var titleDemo = new CircleType(document.getElementById('title')).radius(500);
+        function updateTitleDemoRadius() {
+          titleDemo.radius(titleDemo.element.offsetWidth / 2);
+        }
+        window.addEventListener('resize', updateTitleDemoRadius);
+        updateTitleDemoRadius();
+
+        /**
+         * Basic Arc
+         */
+        new CircleType(document.getElementById('demo1'))
+          .radius(384);
+
+        /**
+         * Reversed Arc
+         */
+        new CircleType(document.getElementById('demo2'))
+          .dir(-1)
+          .radius(384);
+
+        /**
+         * Auto Radius
+         */
+        new CircleType(document.getElementById('demo3'));
+
+        /**
+         * Fluid
+         */
+        var demo4 = new CircleType(document.getElementById('demo4'));
+        function updateRadius() {
+          demo4.radius(demo4.element.offsetWidth / 2);
+        }
+        window.addEventListener('resize', updateRadius);
+        updateRadius();
+
+        /**
+         * FitText
+         */
+        var demo5 = new CircleType(document.getElementById('demo5')).radius(180);
+        $(demo5.element).fitText();
+
+        /**
+         * Destroy
+         */
+        var demo6 = new CircleType(document.getElementById('demo6')).radius(180);
+        document.getElementById('destroyButton').addEventListener('click', function(event) {
+          demo6.destroy();
+          event.preventDefault();
+        });
+
+        /**
+         * Emojis
+         */
+        var splitter = new GraphemeSplitter()
+        var demo7 = new CircleType(
+          document.getElementById('demo7'),
+          splitter.splitGraphemes.bind(splitter)
+        );
+      }
+   </script>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-1581384-27']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    <script
+      async
+      src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>

@@ -1,0 +1,49 @@
+{
+  "name": "circletype",
+  "version": "2.3.2",
+  "description": "A JavaScript library that lets you curve type on the web.",
+  "main": "dist/circletype.min.js",
+  "files": [
+    "dist"
+  ],
+  "repository": "peterhry/CircleType",
+  "scripts": {
+    "dev": "webpack-dev-server --open",
+    "start": "eslint src && npm t && npm run docs && webpack -p",
+    "test": "jest src && webpack -p && docker run -w /usr/data -v \"$PWD\":/usr/data tenjaa/java-chrome-nodejs npm run backstop-test",
+    "reference": "docker run -w /usr/data -v \"$PWD\":/usr/data tenjaa/java-chrome-nodejs npm run backstop-reference",
+    "backstop-test": "backstop test",
+    "backstop-reference": "backstop reference",
+    "docs": "jsdoc2md --heading-depth 2 --template README.hbs --files src/class.js > README.md"
+  },
+  "keywords": [
+    "circletype",
+    "circular text",
+    "curved text",
+    "curved type",
+    "typography"
+  ],
+  "author": "Peter Hrynkow",
+  "license": "MIT",
+  "bugs": "https://github.com/peterhry/CircleType/issues",
+  "homepage": "https://github.com/peterhry/CircleType#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.7.7",
+    "@babel/core": "^7.7.7",
+    "@babel/preset-env": "^7.7.7",
+    "babel-loader": "^8.0.6",
+    "backstopjs": "^4.4.2",
+    "eslint": "^4.6.1",
+    "eslint-config-airbnb-base": "^12.0.0",
+    "eslint-loader": "^2.1.2",
+    "eslint-plugin-import": "^2.7.0",
+    "jest": "^25.0.0",
+    "jsdoc-to-markdown": "^5.0.3",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.1.11"
+  },
+  "dependencies": {
+    "core-js": "^2.5.6"
+  }
+}
