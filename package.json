@@ -1,6 +1,6 @@
 {
   "name": "circletype",
-  "version": "2.3.1",
+  "version": "2.3.2",
   "description": "A JavaScript library that lets you curve type on the web.",
   "main": "dist/circletype.min.js",
   "files": [

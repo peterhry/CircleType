@@ -10,6 +10,8 @@
  */
 export default (node, splitter) => {
   const wrapperElement = document.createElement('span');
+  wrapperElement.style.display = 'inline-block';
+
   const text = node.innerText.trim();
   const chars = splitter ? splitter(text) : [ ...text ];
 
