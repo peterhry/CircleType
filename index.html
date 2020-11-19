@@ -58,48 +58,57 @@ new CircleType(document.getElementById('demo2'))
       </div>
       <pre><code class="js">// &lt;h2 id="demo3">This text makes a complete rotation no matter how long it is. &lt;/h2&gt;
 new CircleType(document.getElementById('demo3'));</code></pre>
+      <h3 class="puffy" id="auto">Full Circle</h3>
+      <p>By calling the fullCircle method after declaring the radius, the letters will be equally spaced to make a complete rotation.</p>
+      <div class="demo-box" id="demo-box4">
+        <h2 id="demo4" class="demo strong">This text makes a complete rotation for any given radius. </h2>
+      </div>
+      <pre><code class="js">// &lt;h2 id="demo4">This text makes a complete rotation for any given radius. &lt;/h2&gt;
+new CircleType(document.getElementById('demo4'));
+  .radius(200)
+  .fullCircle();</code></pre>
       <h3 class="puffy" id="fluid">Fluid</h3>
       <p>Update the radius when the window is resized to create a fluid effect (try resizing your window).</p>
-      <div class="demo-box" id="demo-box4">
-        <h2 id="demo4" class="demo strong">This curved type shrinks and expands to fit inside its container. </h2>
+      <div class="demo-box" id="demo-box5">
+        <h2 id="demo5" class="demo strong">This curved type shrinks and expands to fit inside its container. </h2>
       </div>
-      <pre><code class="js">// &lt;h2 id="demo4">This curved type shrinks and expands to fit inside its container. &lt;/h2&gt;
-var demo4 = new CircleType(document.getElementById('demo4'));
+      <pre><code class="js">// &lt;h2 id="demo5">This curved type shrinks and expands to fit inside its container. &lt;/h2&gt;
+var demo5 = new CircleType(document.getElementById('demo5'));
 window.addEventListener('resize', function updateRadius() {
-  demo4.radius(demo4.element.offsetWidth / 2);
+  demo5.radius(demo5.element.offsetWidth / 2);
 });
 updateRadius();</code></pre>
       <h3 class="puffy" id="fitText">Using FitText.js</h3>
       <p>Here’s how you can use <a href="http://fittextjs.com" target="_blank">FitText.js</a> to make the text scale (try resizing your window).</p>
-      <div class="demo-box" id="demo-box5">
-        <h2 id="demo5" class="demo strong">I play well with FitText.js too! </h2>
-      </div>
-      <pre><code class="js">// &lt;h2 id="demo5">I play well with FitText.js too! &lt;/h2&gt;
-var demo5 = new CircleType(document.getElementById('demo5'))
-  .radius(180);
-$(demo5.element).fitText();</code></pre>
-      <h3 class="puffy" id="fitText">Destroy</h3>
-      <p>Here’s how you can remove the effect from an element.</p>
       <div class="demo-box" id="demo-box6">
-        <p><a href="#" class="btn" id="destroyButton">Destroy Me</a></p>
-        <h2 id="demo6" class="demo strong">Easily remove the effect.</h2>
+        <h2 id="demo6" class="demo strong">I play well with FitText.js too! </h2>
       </div>
-      <pre><code class="js">// &lt;button id="destroyButton"&gt;Destroy Me&lt;/button&gt;
-// &lt;h2 id="demo6"&gt;Easily remove the effect.&lt;/h2&gt;
+      <pre><code class="js">// &lt;h2 id="demo6">I play well with FitText.js too! &lt;/h2&gt;
 var demo6 = new CircleType(document.getElementById('demo6'))
   .radius(180);
+$(demo6.element).fitText();</code></pre>
+      <h3 class="puffy" id="fitText">Destroy</h3>
+      <p>Here’s how you can remove the effect from an element.</p>
+      <div class="demo-box" id="demo-box7">
+        <p><a href="#" class="btn" id="destroyButton">Destroy Me</a></p>
+        <h2 id="demo7" class="demo strong">Easily remove the effect.</h2>
+      </div>
+      <pre><code class="js">// &lt;button id="destroyButton"&gt;Destroy Me&lt;/button&gt;
+// &lt;h2 id="demo7"&gt;Easily remove the effect.&lt;/h2&gt;
+var demo6 = new CircleType(document.getElementById('demo7'))
+  .radius(180);
 document.getElementById('destroyButton')
-  .addEventListener('click', demo6.destroy.bind(demo6));</code></pre>
+  .addEventListener('click', demo7.destroy.bind(demo7));</code></pre>
       <h3 class="puffy" id="emoji">Emojis</h3>
       <p>I work with emojis but you’ll need to provide your own splitter function. Here is an example that uses GraphemeSplitter:</p>
-      <div class="demo-box" id="demo-box7">
-        <h2 id="demo7" class="demo strong">👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦</h2>
+      <div class="demo-box" id="demo-box8">
+        <h2 id="demo8" class="demo strong">👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦</h2>
       </div>
       <pre><code class="js">// &lt;script src="https://cdn.rawgit.com/orling/grapheme-splitter/b4500feb/index.js"&gt;&lt;/script&gt;
-// &lt;h2 id="demo7"&gt;👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦&lt;/h2&gt;
+// &lt;h2 id="demo8"&gt;👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦👨‍👩‍👧‍👦&lt;/h2&gt;
 var splitter = new GraphemeSplitter()
-var demo7 = new CircleType(
-  document.getElementById('demo7'),
+var demo8 = new CircleType(
+  document.getElementById('demo8'),
   splitter.splitGraphemes.bind(splitter)
 );</code></pre>
       <h2 class="strong">Browser Support</h2>
@@ -156,9 +165,16 @@ var demo7 = new CircleType(
         new CircleType(document.getElementById('demo3'));
 
         /**
+         * Full Circle
+         */
+        new CircleType(document.getElementById('demo4'))
+          .radius(200)
+          .fullCircle();
+
+        /**
          * Fluid
          */
-        var demo4 = new CircleType(document.getElementById('demo4'));
+        var demo4 = new CircleType(document.getElementById('demo5'));
         function updateRadius() {
           demo4.radius(demo4.element.offsetWidth / 2);
         }
@@ -168,13 +184,13 @@ var demo7 = new CircleType(
         /**
          * FitText
          */
-        var demo5 = new CircleType(document.getElementById('demo5')).radius(180);
+        var demo5 = new CircleType(document.getElementById('demo6')).radius(180);
         $(demo5.element).fitText();
 
         /**
          * Destroy
          */
-        var demo6 = new CircleType(document.getElementById('demo6')).radius(180);
+        var demo6 = new CircleType(document.getElementById('demo7')).radius(180);
         document.getElementById('destroyButton').addEventListener('click', function(event) {
           demo6.destroy();
           event.preventDefault();
@@ -185,7 +201,7 @@ var demo7 = new CircleType(
          */
         var splitter = new GraphemeSplitter()
         var demo7 = new CircleType(
-          document.getElementById('demo7'),
+          document.getElementById('demo8'),
           splitter.splitGraphemes.bind(splitter)
         );
       }
