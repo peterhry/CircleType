@@ -34,10 +34,11 @@ class CircleType {
     this.element = elem;
     this.originalHTML = this.element.innerHTML;
 
-    const container = document.createElement('div');
+    const container = document.createElement('span');
     const fragment = document.createDocumentFragment();
     container.setAttribute('aria-label', elem.innerText);
     container.style.position = 'relative';
+    container.style.display = 'block';
     this.container = container;
 
     this._letters = splitNode(elem, splitter);
