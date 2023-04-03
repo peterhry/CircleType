@@ -13,6 +13,11 @@ In a browser:
 <script src="circletype.min.js"></script>
 ```
 
+Using CDN:
+```html
+<script src="https://cdn.jsdelivr.net/gh/peterhry/CircleType@2.3.1/dist/circletype.min.js"></script>
+```
+
 Using npm:
 
 ```shell
