@@ -112,6 +112,35 @@ class CircleType {
   }
 
   /**
+   * Adds equal spacing between letters to make a complete circle
+   * regardless of the radius.
+   *
+   * @name fullCircle
+   * @function
+   * @instance
+   * @memberof CircleType
+   * @return {CircleType}   The current instance.
+   *
+   * @example
+   * const circleType = new CircleType(document.getElementById('myElement'));
+   *
+   * circleType.radius(200);
+   *
+   * // Adds spacing between letters to make a full rotation
+   * circleType.fullCircle();
+   */
+  fullCircle() {
+    const diff = (2 * PI * (this._radius - this._minRadius));
+    const buffer = diff / this._letters.length;
+
+    this._metrics = this._metrics.map(m => ({ ...m, width: m.width + buffer }));
+
+    this._invalidate();
+
+    return this;
+  }
+
+  /**
    * Gets the text direction. `1` is clockwise, `-1` is counter-clockwise.
    *
    * @name dir
